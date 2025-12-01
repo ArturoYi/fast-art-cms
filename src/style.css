@@ -1,0 +1,233 @@
+/* Material Design 3 Theme System
+   ------------------------------------------------------------------
+   1. 基础色板：Primary / Secondary / Tertiary / Neutral / Neutral Variant
+   2. 功能色板：Success / Error / Warning / Info
+   3. 主题角色映射：明亮模式 (:root) 与黑暗模式 (:root[data-theme="dark"])
+   4. 基础应用示例：利用系统角色变量进行布局与文本着色
+*/
+
+:root {
+  color-scheme: light;
+
+  /* ----------------------------------------------------------------
+   * 基础色板（Primary / Secondary / Tertiary）
+   * ---------------------------------------------------------------- */
+  --palette-primary-50: #f5edff;
+  --palette-primary-100: #eaddff;
+  --palette-primary-200: #d0bcff;
+  --palette-primary-300: #bea9ff;
+  --palette-primary-400: #9a82db;
+  --palette-primary-500: #7f67be;
+  --palette-primary-600: #6750a4;
+  --palette-primary-700: #4f378b;
+  --palette-primary-800: #381e72;
+  --palette-primary-900: #21005d;
+
+  --palette-secondary-50: #fdf7ff;
+  --palette-secondary-100: #e8def8;
+  --palette-secondary-200: #ccc2dc;
+  --palette-secondary-300: #b0a7c0;
+  --palette-secondary-400: #958da5;
+  --palette-secondary-500: #7a7289;
+  --palette-secondary-600: #625b71;
+  --palette-secondary-700: #4a4458;
+  --palette-secondary-800: #332d41;
+  --palette-secondary-900: #1d192b;
+
+  --palette-tertiary-50: #ffecf1;
+  --palette-tertiary-100: #ffd9e4;
+  --palette-tertiary-200: #efb8c8;
+  --palette-tertiary-300: #d29dae;
+  --palette-tertiary-400: #b58395;
+  --palette-tertiary-500: #995b74;
+  --palette-tertiary-600: #7d5260;
+  --palette-tertiary-700: #633b48;
+  --palette-tertiary-800: #4a2533;
+  --palette-tertiary-900: #31111d;
+
+  /* ----------------------------------------------------------------
+   * 中性色板（Neutral / Neutral Variant）支持表面与分割线
+   * ---------------------------------------------------------------- */
+  --palette-neutral-50: #fffbff;
+  --palette-neutral-100: #f5f2f7;
+  --palette-neutral-200: #ece6f2;
+  --palette-neutral-300: #e3dfe9;
+  --palette-neutral-400: #c9c6d0;
+  --palette-neutral-500: #afacb8;
+  --palette-neutral-600: #95919f;
+  --palette-neutral-700: #7c7887;
+  --palette-neutral-800: #625f6f;
+  --palette-neutral-900: #494656;
+
+  --palette-neutral-variant-50: #f5eff7;
+  --palette-neutral-variant-100: #e7e0ec;
+  --palette-neutral-variant-200: #cbc4d5;
+  --palette-neutral-variant-300: #b0a7b9;
+  --palette-neutral-variant-400: #958da4;
+  --palette-neutral-variant-500: #7b748b;
+  --palette-neutral-variant-600: #625b71;
+  --palette-neutral-variant-700: #4a4458;
+  --palette-neutral-variant-800: #332d41;
+  --palette-neutral-variant-900: #1d192b;
+
+  /* ----------------------------------------------------------------
+   * 功能色板（Success / Error / Warning / Info）
+   * ---------------------------------------------------------------- */
+  --palette-success-50: #e7f6ec;
+  --palette-success-100: #ccefd7;
+  --palette-success-200: #a0e0b5;
+  --palette-success-300: #72d294;
+  --palette-success-400: #46c372;
+  --palette-success-500: #2aad59;
+  --palette-success-600: #1f8d47;
+  --palette-success-700: #166c37;
+  --palette-success-800: #0c4c26;
+  --palette-success-900: #062f16;
+
+  --palette-error-50: #ffedea;
+  --palette-error-100: #ffdad6;
+  --palette-error-200: #ffb4ab;
+  --palette-error-300: #ff897d;
+  --palette-error-400: #ff5449;
+  --palette-error-500: #dd3730;
+  --palette-error-600: #ba1a1a;
+  --palette-error-700: #93000a;
+  --palette-error-800: #680003;
+  --palette-error-900: #410001;
+
+  --palette-warning-50: #fff7e1;
+  --palette-warning-100: #ffeab4;
+  --palette-warning-200: #ffd980;
+  --palette-warning-300: #ffc447;
+
+  --palette-warning-400: #feb019;
+  --palette-warning-500: #e28d00;
+  --palette-warning-600: #b56900;
+  --palette-warning-700: #874d00;
+  --palette-warning-800: #5a3200;
+  --palette-warning-900: #321d00;
+
+  --palette-info-50: #e6f3ff;
+  --palette-info-100: #cce6ff;
+  --palette-info-200: #99ceff;
+  --palette-info-300: #66b7ff;
+  --palette-info-400: #339eff;
+  --palette-info-500: #0d83ff;
+  --palette-info-600: #0065d6;
+  --palette-info-700: #004c9f;
+  --palette-info-800: #003568;
+  --palette-info-900: #001d38;
+
+  /* ----------------------------------------------------------------
+   * 主题角色映射（Light）Primary / Secondary / Tertiary / Neutral
+   * ---------------------------------------------------------------- */
+  --sys-color-primary: var(--palette-primary-600);
+  --sys-color-on-primary: #ffffff;
+  --sys-color-primary-container: var(--palette-primary-100);
+  --sys-color-on-primary-container: var(--palette-primary-800);
+
+  --sys-color-secondary: var(--palette-secondary-600);
+  --sys-color-on-secondary: #ffffff;
+  --sys-color-secondary-container: var(--palette-secondary-100);
+  --sys-color-on-secondary-container: var(--palette-secondary-800);
+
+  --sys-color-tertiary: var(--palette-tertiary-600);
+  --sys-color-on-tertiary: #ffffff;
+  --sys-color-tertiary-container: var(--palette-tertiary-100);
+  --sys-color-on-tertiary-container: var(--palette-tertiary-800);
+
+  --sys-color-background: var(--palette-neutral-50);
+  --sys-color-on-background: var(--palette-neutral-900);
+  --sys-color-surface: var(--palette-neutral-50);
+  --sys-color-surface-dim: var(--palette-neutral-100);
+  --sys-color-surface-bright: var(--palette-neutral-200);
+  --sys-color-surface-variant: var(--palette-neutral-variant-200);
+  --sys-color-on-surface: var(--palette-neutral-900);
+  --sys-color-on-surface-variant: var(--palette-neutral-variant-700);
+  --sys-color-outline: var(--palette-neutral-variant-500);
+  --sys-color-outline-variant: var(--palette-neutral-variant-300);
+  --sys-color-inverse-surface: var(--palette-neutral-900);
+  --sys-color-inverse-on-surface: var(--palette-neutral-50);
+  --sys-color-inverse-primary: var(--palette-primary-200);
+  --sys-color-shadow: rgba(0, 0, 0, 0.25);
+
+  /* ----------------------------------------------------------------
+   * 功能角色映射（Light）Success / Error / Warning / Info
+   * ---------------------------------------------------------------- */
+  --sys-color-success: var(--palette-success-600);
+  --sys-color-on-success: #ffffff;
+  --sys-color-success-container: var(--palette-success-100);
+  --sys-color-on-success-container: var(--palette-success-800);
+
+  --sys-color-error: var(--palette-error-600);
+  --sys-color-on-error: #ffffff;
+  --sys-color-error-container: var(--palette-error-100);
+  --sys-color-on-error-container: var(--palette-error-800);
+
+  --sys-color-warning: var(--palette-warning-500);
+  --sys-color-on-warning: #1f1300;
+  --sys-color-warning-container: var(--palette-warning-100);
+  --sys-color-on-warning-container: var(--palette-warning-800);
+
+  --sys-color-info: var(--palette-info-600);
+  --sys-color-on-info: #ffffff;
+  --sys-color-info-container: var(--palette-info-100);
+  --sys-color-on-info-container: var(--palette-info-800);
+}
+
+/* --------------------------------------------------------------------
+ * 黑暗主题角色映射，通过 data-theme="dark" 激活
+ * ------------------------------------------------------------------ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --sys-color-primary: var(--palette-primary-200);
+  --sys-color-on-primary: var(--palette-primary-800);
+  --sys-color-primary-container: var(--palette-primary-800);
+  --sys-color-on-primary-container: var(--palette-primary-100);
+
+  --sys-color-secondary: var(--palette-secondary-200);
+  --sys-color-on-secondary: var(--palette-secondary-800);
+  --sys-color-secondary-container: var(--palette-secondary-800);
+  --sys-color-on-secondary-container: var(--palette-secondary-100);
+
+  --sys-color-tertiary: var(--palette-tertiary-200);
+  --sys-color-on-tertiary: var(--palette-tertiary-800);
+  --sys-color-tertiary-container: var(--palette-tertiary-800);
+  --sys-color-on-tertiary-container: var(--palette-tertiary-100);
+
+  --sys-color-background: var(--palette-neutral-900);
+  --sys-color-on-background: var(--palette-neutral-50);
+  --sys-color-surface: var(--palette-neutral-900);
+  --sys-color-surface-dim: #101019;
+  --sys-color-surface-bright: #2a2933;
+  --sys-color-surface-variant: var(--palette-neutral-variant-800);
+  --sys-color-on-surface: var(--palette-neutral-50);
+  --sys-color-on-surface-variant: var(--palette-neutral-variant-300);
+  --sys-color-outline: var(--palette-neutral-variant-600);
+  --sys-color-outline-variant: var(--palette-neutral-variant-700);
+  --sys-color-inverse-surface: var(--palette-neutral-50);
+  --sys-color-inverse-on-surface: var(--palette-neutral-900);
+  --sys-color-inverse-primary: var(--palette-primary-600);
+  --sys-color-shadow: rgba(0, 0, 0, 0.4);
+
+  --sys-color-success: var(--palette-success-200);
+  --sys-color-on-success: var(--palette-success-800);
+  --sys-color-success-container: var(--palette-success-800);
+  --sys-color-on-success-container: var(--palette-success-100);
+
+  --sys-color-error: var(--palette-error-200);
+  --sys-color-on-error: var(--palette-error-800);
+  --sys-color-error-container: var(--palette-error-800);
+  --sys-color-on-error-container: var(--palette-error-100);
+
+  --sys-color-warning: var(--palette-warning-200);
+  --sys-color-on-warning: var(--palette-warning-900);
+  --sys-color-warning-container: var(--palette-warning-800);
+  --sys-color-on-warning-container: var(--palette-warning-100);
+
+  --sys-color-info: var(--palette-info-200);
+  --sys-color-on-info: var(--palette-info-900);
+  --sys-color-info-container: var(--palette-info-800);
+  --sys-color-on-info-container: var(--palette-info-100);
+}

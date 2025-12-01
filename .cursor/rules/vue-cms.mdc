@@ -1,0 +1,149 @@
+---
+alwaysApply: true
+---
+
+## 适用范围
+
+- **技术栈**: Vue 3、Vite、TypeScript
+- **文件类型**: `.vue` 单文件组件、`.ts`/`.d.ts` 工具与类型定义、全局样式与静态资源
+- **目标**: 生成可读、类型安全、性能友好且一致的代码；默认使用 Composition API 与 `<script setup lang="ts">`
+
+## 总体原则
+
+- **可读性优先**：清晰命名、短小函数、单一职责；避免深层嵌套
+- **类型安全**：不使用 `any`；导出函数的参数与返回值显式标注类型
+- **组合式思维**：优先 `computed` 表达派生状态，其次 `watchEffect`，最后 `watch`
+- **早返回**：使用守卫式返回减少嵌套
+- **最小副作用**：副作用集中且易测；避免在模板中进行复杂计算
+- **无冗余依赖**：不假定存在路由、Pinia、CSS 预处理器或别名，未配置前不要使用
+
+## 目录与命名
+
+- `src/components` 下的通用组件使用 `PascalCase.vue` 命名，例如 `UserCard.vue`
+- 同一组件的相关文件可同级放置，命名以组件名为前缀：`UserCard.types.ts`、`UserCard.utils.ts`
+- 工具与类型：`src/utils`、`src/types`，文件使用 `kebab-case.ts`；导出使用具名导出
+- 静态资源：
+  - 可哈希或不变资源放 `public/`，通过绝对路径引用（如 `/vite.svg`）
+  - 组件私有资源放 `src/assets/`，通过 `import` 使用（便于构建优化）
+- 引用路径：未配置别名前一律使用相对路径；避免跨越过多层级，必要时重组目录
+
+## Vue SFC 模板规范
+
+- 单根节点；使用语义化标签；图片必须提供 `alt`
+- 属性绑定使用简写：`:prop`、`@event`；布尔属性使用存在即真：`<Comp disabled />`
+- 列表渲染：
+  - 必须提供稳定的 `:key`（业务 ID 优先）
+  - 禁止在同一元素上同时使用 `v-if` 与 `v-for`，拆分为包裹层
+- 条件渲染：优先 `v-if/v-else` 而不是三元表达式塞入模板
+- 避免在模板中调用复杂函数；将计算提取为 `computed` 或常量
+
+## `<script setup lang="ts">` 规范
+
+- 强制使用 `<script setup lang="ts">`；禁止 Options API
+- 导入顺序：内建模块 → 第三方 → 本地（先样式/资源、再工具、再组件）
+- 变量与函数：
+  - 不变值 `const`，响应式使用 `ref`/`reactive`，避免不必要的响应式
+  - 函数参数与返回值显式类型；不要省略对外导出函数的类型
+- Props / Emits：
+  - 使用 `defineProps<Type>()` 与 `withDefaults` 提供默认值
+  - 使用 `defineEmits<{ (e: 'change', value: string): void }>()` 显式约束事件
+  - 事件命名使用小写短横线：`'update:model-value'`、`'submit'`
+- 暴露：谨慎使用 `defineExpose`，仅暴露必须的最小 API
+- 引用命名：
+  - `ref` 变量以名词命名：`count`, `dialogVisible`
+  - `computed` 以名词或 `xxxText`、`xxxList` 结尾
+  - 布尔值以 `is/has/can/should` 前缀
+
+## 状态与副作用
+
+- `ref` 用于原始值，`reactive` 用于对象集合；避免双重解包
+- 派生值使用 `computed`，不要用方法每次计算
+- 副作用优先 `watchEffect`（自动依赖收集）；`watch` 明确依赖并指定 `flush: 'post'` 处理 DOM
+- 清理副作用：在回调中返回清理函数，或使用 `onUnmounted`/`try...finally`
+
+## 异步与错误处理
+
+- `async/await` 配合显式错误处理；只在必要时使用 `try/catch`，并进行有意义的处理或上抛
+- UI 相关的加载/错误状态使用最小可见状态管理，不持久化到全局
+- 与 Vite 相关的环境变量通过 `import.meta.env` 访问，避免 `process.env`
+
+## 样式规范
+
+- 默认使用 `<style scoped>`；覆盖第三方样式时使用 `:deep()`，谨慎范围
+- 命名推荐 BEM：`.user-card`、`.user-card__avatar`、`.user-card--selected`
+- 优先 CSS 变量与层叠：主题或可配置值使用 `--var-name`
+- 单位：字号 `rem`，间距与尺寸 `rem`/`px` 按设计需要；禁止魔法数
+- 禁止内联样式（除非动态计算确实必要）
+- 全局样式仅放在 `src/style.css`，明确注释用途
+
+## 资源与性能
+
+- 图片/图标：优先 SVG；大型图片懒加载；为 `<img>` 指定明确的 `width/height`
+- 列表优化：提供稳定 `key`；大列表视情况虚拟化（后续引入库再使用）
+- 事件处理：避免在模板内创建内联函数，提取为已绑定的方法（除非简单且无闭包成本）
+- 避免不必要的 `watch` 与深度监听；必要时指定 `{ deep: false }`
+
+## 可访问性与语义化
+
+- 交互元素必须有可达焦点与键盘操作；按钮使用 `<button>` 而非 `<div role="button">`
+- 图片/图标含义性内容必须提供 `alt` 或 `aria-label`
+- 表单控件配对 `<label for>` 与 `id`；状态变化具有可见或可听到的反馈
+
+## 提交与说明
+
+- 提交信息简洁明确：`feat: ...`、`fix: ...`、`refactor: ...`、`docs: ...`、`chore: ...`
+- 组件/工具导出要有顶层注释说明用途与边界条件（非冗余、避免陈述显然的内容）
+
+## 示例
+
+示例：组件 Props/Emits/样式与计算
+
+```vue
+<script setup lang="ts">
+import { computed } from 'vue'
+
+type Props = {
+  title: string
+  disabled?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  disabled: false,
+})
+
+const emit = defineEmits<{
+  (e: 'submit'): void
+  (e: 'update:title', value: string): void
+}>()
+
+const canSubmit = computed(() => !props.disabled && props.title.trim().length > 0)
+
+function onClick() {
+  if (!canSubmit.value) return
+  emit('submit')
+}
+</script>
+
+<template>
+  <button
+    class="primary-button"
+    type="button"
+    :disabled="!canSubmit"
+    @click="onClick"
+    aria-live="polite"
+  >
+    {{ title }}
+  </button>
+</template>
+
+<style scoped>
+.primary-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</style>
+```
