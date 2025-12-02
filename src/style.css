@@ -178,7 +178,7 @@
 /* --------------------------------------------------------------------
  * 黑暗主题角色映射，通过 data-theme="dark" 激活
  * ------------------------------------------------------------------ */
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   color-scheme: dark;
 
   --sys-color-primary: var(--palette-primary-200);

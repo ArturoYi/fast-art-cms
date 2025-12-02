@@ -2,7 +2,14 @@
 import { reactive, ref, computed } from "vue";
 import { useRequest } from "@/api/hook/useRequest";
 import { loginService } from "@/api/client";
-
+import { useTheme } from "@/hooks/core/useTheme";
+const { setSystemTheme } = useTheme();
+import { themeAnimation } from "@/utils/ui/animation";
+import {
+  SYSTEM_THEME_AUTO,
+  SYSTEM_THEME_DARK,
+  SYSTEM_THEME_LIGHT,
+} from "@/enums/appEnum";
 const form = reactive({
   username: "",
   password: "",
@@ -34,10 +41,10 @@ async function handleLogin() {
 
 <template>
   <div
-    class="login-container flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4"
+    class="login-container flex items-center justify-center min-h-screen bg-wgite-100 dark:bg-black-900 px-4"
   >
     <div
-      class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
+      class="w-full max-w-md p-8 space-y-6 bg-wgite-100 dark:bg-black-900 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl"
     >
       <div class="text-center space-y-2">
         <div class="flex justify-center mb-4">
@@ -119,6 +126,42 @@ async function handleLogin() {
           >立即注册</a
         >
       </div>
+      <button
+        type="button"
+        class="mt-2 w-full text-sm text-gray-600 dark:text-gray-300 rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        @click="setSystemTheme(SYSTEM_THEME_AUTO)"
+      >
+        切换主题<span class="text-gray-500 dark:text-gray-400">{{
+          SYSTEM_THEME_AUTO
+        }}</span>
+      </button>
+      <button
+        type="button"
+        class="mt-2 w-full text-sm text-gray-600 dark:text-gray-300 rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        @click="setSystemTheme(SYSTEM_THEME_DARK)"
+      >
+        切换主题<span class="text-gray-500 dark:text-gray-400">{{
+          SYSTEM_THEME_DARK
+        }}</span>
+      </button>
+      <button
+        type="button"
+        class="mt-2 w-full text-sm text-gray-600 dark:text-gray-300 rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        @click="setSystemTheme(SYSTEM_THEME_LIGHT)"
+      >
+        切换主题<span class="text-gray-500 dark:text-gray-400">{{
+          SYSTEM_THEME_LIGHT
+        }}</span>
+      </button>
+      <button
+        type="button"
+        class="mt-2 w-full text-sm text-gray-600 dark:text-gray-300 rounded-lg px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        @click="themeAnimation"
+      >
+        切换主题<span class="text-gray-500 dark:text-gray-400">{{
+          SYSTEM_THEME_AUTO
+        }}</span>
+      </button>
     </div>
   </div>
 </template>

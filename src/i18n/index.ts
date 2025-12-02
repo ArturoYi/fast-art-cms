@@ -7,7 +7,7 @@ import {
   LANGUAGE_EN_US,
   LANGUAGE_ZH_CN,
   LanguageConstants,
-  type LanguageEnum,
+  type LanguageType,
 } from "../enums/appEnum";
 import { enUSDatetimeFormats } from "./langs/en-US/datetimeFormats";
 import { zhCNDatetimeFormats } from "./langs/zh-CN/datetimeFormats";
@@ -28,7 +28,7 @@ const messages = {
  * 从存储中获取语言设置
  * @returns 语言设置，如果获取失败则返回默认语言
  */
-const getDefaultLanguage = (): LanguageEnum => {
+const getDefaultLanguage = (): LanguageType => {
   let result = LANGUAGE_ZH_CN;
   try {
     const key = StorageKeyManager.getStorageKey(STORAGE_KEY_USER_INFO);
@@ -45,7 +45,7 @@ const getDefaultLanguage = (): LanguageEnum => {
   document
     .getElementsByTagName("html")[0]
     ?.setAttribute("lang", getLanguageCode(result));
-  return result as LanguageEnum;
+  return result;
 };
 
 const i18nOptions: I18nOptions = {
