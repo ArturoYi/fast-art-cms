@@ -2,5 +2,43 @@
   "common": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "description": "Please enter your account and password to log in",
+      "username": {
+        "label": "Username",
+        "placeholder": "Please enter username"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Please enter password"
+      },
+      "button": {
+        "login": "Log In",
+        "loggingIn": "Logging in..."
+      },
+      "register": {
+        "text": "Don't have an account yet?",
+        "link": "Sign up now"
+      },
+      "validation": {
+        "username": {
+          "required": "Please enter username",
+          "minLength": "Username must be at least 3 characters",
+          "maxLength": "Username can be up to 20 characters",
+          "pattern": "Username can only contain letters, numbers, and underscores"
+        },
+        "password": {
+          "required": "Please enter password",
+          "minLength": "Password must be at least 6 characters",
+          "maxLength": "Password can be up to 32 characters"
+        }
+      },
+      "error": {
+        "loginFailed": "Login failed, please check your account and password"
+      }
+    }
   }
 }

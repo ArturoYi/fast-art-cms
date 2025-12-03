@@ -16,6 +16,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     server: {
       // 开发服务器相关配置
       port: Number(VITE_PORT), // 指定本地开发端口
+      host: "0.0.0.0",
       open: VITE_OPEN, // 设为 true 时自动打开浏览器
       strictPort: false, // 设为 true 时若端口已被占用则会直接退出，而不是尝试下一个可用端口
     }, // 结束 server 配置

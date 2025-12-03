@@ -1,5 +1,5 @@
 import { createI18n } from "vue-i18n";
-import type { I18n, I18nOptions } from "vue-i18n";
+import type { I18n } from "vue-i18n";
 
 // 导入多语言资源
 import {
@@ -23,6 +23,9 @@ const messages = {
   [LANGUAGE_EN_US]: enMessages,
   [LANGUAGE_ZH_CN]: zhMessages,
 };
+
+type enMessagesType = typeof enMessages;
+type zhMessagesType = typeof zhMessages;
 
 /**
  * 从存储中获取语言设置
@@ -48,11 +51,11 @@ const getDefaultLanguage = (): LanguageType => {
   return result;
 };
 
-const i18nOptions: I18nOptions = {
+const i18n: I18n = createI18n<[enMessagesType, zhMessagesType], LanguageType>({
   legacy: false,
   locale: getDefaultLanguage(),
   fallbackLocale: LANGUAGE_ZH_CN,
-  messages: messages,
+  messages,
   datetimeFormats: {
     [LANGUAGE_EN_US]: enUSDatetimeFormats,
     [LANGUAGE_ZH_CN]: zhCNDatetimeFormats,
@@ -61,9 +64,7 @@ const i18nOptions: I18nOptions = {
     [LANGUAGE_EN_US]: enUSNumberFormats,
     [LANGUAGE_ZH_CN]: zhCNNumberFormats,
   },
-};
-
-const i18n: I18n = createI18n(i18nOptions);
+});
 
 /**
  * 翻译函数类型

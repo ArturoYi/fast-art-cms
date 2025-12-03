@@ -2,5 +2,43 @@
   "common": {
     "confirm": "确认",
     "cancel": "取消"
+  },
+  "auth": {
+    "login": {
+      "title": "欢迎回来",
+      "description": "请输入您的账号和密码登录系统",
+      "username": {
+        "label": "账号",
+        "placeholder": "请输入用户名"
+      },
+      "password": {
+        "label": "密码",
+        "placeholder": "请输入密码"
+      },
+      "button": {
+        "login": "登 录",
+        "loggingIn": "登录中..."
+      },
+      "register": {
+        "text": "还没有账号？",
+        "link": "立即注册"
+      },
+      "validation": {
+        "username": {
+          "required": "请输入用户名",
+          "minLength": "用户名至少3个字符",
+          "maxLength": "用户名最多20个字符",
+          "pattern": "用户名只能包含字母、数字和下划线"
+        },
+        "password": {
+          "required": "请输入密码",
+          "minLength": "密码至少6个字符",
+          "maxLength": "密码最多32个字符"
+        }
+      },
+      "error": {
+        "loginFailed": "登录失败，请检查账号密码"
+      }
+    }
   }
 }

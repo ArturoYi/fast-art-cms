@@ -35,5 +35,8 @@ export const useUserStore = defineStore(key, {
     setSystemThemeStyle(theme: SystemThemeType) {
       this.systemThemeStyle = theme;
     },
+    setLanguage(language: LanguageType) {
+      this.language = language;
+    },
   },
 });
