@@ -56,7 +56,7 @@ class FetchRequest {
    * @param config 请求配置
    * @returns Promise<T>
    */
-  private async request<T = any>(config: RequestConfig): Promise<T> {
+  async request<T = any>(config: RequestConfig): Promise<T> {
     // 1. 合并配置 & 执行请求拦截器
     const mergedConfig = this.invokeRequestInterceptors({
       ...this.config,

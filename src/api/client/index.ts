@@ -71,7 +71,7 @@ const request = new FetchRequest(
  * 登录请求
  */
 export const loginService = (data: any) => {
-  return request.safeRequest({
+  return request.request({
     url: RequestUrl.login,
     method: "POST",
     body: data,

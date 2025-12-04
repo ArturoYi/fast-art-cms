@@ -74,10 +74,10 @@ const validationRules: Record<keyof typeof form, ValidationRule> = {
     maxLength: 20,
     pattern: /^[a-zA-Z0-9_]+$/,
     messages: {
-      required: $t("auth.login.validation.username.required"),
-      minLength: $t("auth.login.validation.username.minLength"),
-      maxLength: $t("auth.login.validation.username.maxLength"),
-      pattern: $t("auth.login.validation.username.pattern"),
+      required: "auth.login.validation.username.required",
+      minLength: "auth.login.validation.username.minLength",
+      maxLength: "auth.login.validation.username.maxLength",
+      pattern: "auth.login.validation.username.pattern",
     },
   },
   password: {
@@ -85,9 +85,9 @@ const validationRules: Record<keyof typeof form, ValidationRule> = {
     minLength: 6,
     maxLength: 32,
     messages: {
-      required: $t("auth.login.validation.password.required"),
-      minLength: $t("auth.login.validation.password.minLength"),
-      maxLength: $t("auth.login.validation.password.maxLength"),
+      required: "auth.login.validation.password.required",
+      minLength: "auth.login.validation.password.minLength",
+      maxLength: "auth.login.validation.password.maxLength",
     },
   },
 };
@@ -170,7 +170,7 @@ const { run, loading } = useRequest(loginService, {
   },
   onError: (error) => {
     console.error("Login Error:", error);
-    errorMsg.value = $t("auth.login.error.loginFailed");
+    errorMsg.value = "auth.login.error.loginFailed";
   },
 });
 
@@ -208,7 +208,7 @@ function validateOnBlur(field: keyof typeof validationRules) {
         <button
           class="p-2.5 rounded-full text-gray-500 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800 transition-all duration-300 focus:outline-none"
           @click.stop="toggleLanguageMenu"
-          title="切换语言"
+          :title="$t('common.language')"
         >
           <!-- 语言图标 -->
           <span class="text-xl">🌐</span>
@@ -240,7 +240,7 @@ function validateOnBlur(field: keyof typeof validationRules) {
       <button
         class="p-2.5 rounded-full text-gray-500 hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-800 transition-all duration-300 focus:outline-none"
         @click="themeAnimation"
-        title="切换主题"
+        :title="$t('common.theme')"
       >
         <!-- 太阳图标 (亮色模式显示) -->
         <div class="i-tabler-sun text-xl dark:hidden" />
@@ -298,7 +298,7 @@ function validateOnBlur(field: keyof typeof validationRules) {
                     : 'opacity-0 -translate-y-1'
                 "
               >
-                {{ fieldErrors.username }}
+                {{ fieldErrors.username ? $t(fieldErrors.username) : "" }}
               </div>
             </div>
           </div>
@@ -335,7 +335,7 @@ function validateOnBlur(field: keyof typeof validationRules) {
                     : 'opacity-0 -translate-y-1'
                 "
               >
-                {{ fieldErrors.password }}
+                {{ fieldErrors.password ? $t(fieldErrors.password) : "" }}
               </div>
             </div>
           </div>
@@ -345,7 +345,7 @@ function validateOnBlur(field: keyof typeof validationRules) {
           v-if="errorMsg"
           class="text-red-500 text-sm text-center animate-shake bg-red-50 dark:bg-red-900/20 py-2 rounded"
         >
-          {{ errorMsg }}
+          {{ errorMsg ? $t(errorMsg) : "" }}
         </div>
 
         <button

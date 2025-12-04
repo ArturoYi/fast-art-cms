@@ -1,13 +1,17 @@
 import {
   defineConfig,
   presetIcons,
-  presetWind3,
+  presetWind4,
   transformerDirectives,
 } from "unocss";
 
 export default defineConfig({
   presets: [
-    presetWind3(),
+    presetWind4({
+      preflights: {
+        reset: true,
+      },
+    }),
     presetIcons({
       collections: {
         tabler: () =>
@@ -23,7 +27,7 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives()],
   theme: {
-    breakpoints: {
+    breakpoint: {
       sm: "640px",
       md: "768px",
       lg: "1024px",

@@ -1,7 +1,9 @@
 {
   "common": {
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "theme": "Switch Theme",
+    "language": "Switch Language"
   },
   "auth": {
     "login": {
