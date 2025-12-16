@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import HelloWorld from "./components/HelloWorld.vue";
 import { NConfigProvider } from "naive-ui";
+import { utilsInitialize } from "@/utils";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  utilsInitialize();
+});
 </script>
 
 <template>

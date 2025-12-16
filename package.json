@@ -8,7 +8,7 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "lint": "oxlint src --fix-suggestions",
-    "format": "oxfmt src --list-different",
+    "format": "oxfmt src",
     "commit": "git-cz",
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm"

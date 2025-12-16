@@ -8,7 +8,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const { VITE_PORT, VITE_OPEN, VITE_VERSION } = loadEnv(mode, process.cwd());
   return defineConfig({
     define: {
-      __VERSION__: JSON.stringify(VITE_VERSION)
+      __APP_VERSION__: JSON.stringify(VITE_VERSION)
     },
     plugins: [vue()],
     resolve: {
