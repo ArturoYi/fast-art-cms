@@ -79,10 +79,6 @@ export default defineConfig({
     allowCustomIssuePrefix: true,
     allowEmptyIssuePrefix: true,
     confirmColorize: true,
-    scopeOverrides: undefined,
-    defaultBody: '',
-    defaultIssues: '',
-    defaultScope: '',
-    defaultSubject: ''
+    scopeOverrides: undefined
   }
 });
