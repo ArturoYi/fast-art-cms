@@ -12,5 +12,11 @@ export const staticRoutes: AppRouteRecordRaw[] = [
       title: '登录',
       isHide: true
     }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Exception404',
+    component: () => import('@/view/exception/404/404.vue'),
+    meta: { title: '404' }
   }
 ];
