@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv, type ConfigEnv, type UserConfig } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
+import UnoCSS from 'unocss/vite';
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -10,7 +11,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     define: {
       __APP_VERSION__: JSON.stringify(VITE_VERSION)
     },
-    plugins: [vue()],
+    plugins: [vue(), UnoCSS()],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))

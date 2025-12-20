@@ -95,6 +95,19 @@ export class StorageConfig {
   }
 
   /**
+   * 删除非当前版本的存储内容
+   * @description 删除非当前版本的存储内容
+   */
+  static deleteNonCurrentVersionData(): void {
+    const storageKeys = Object.keys(localStorage);
+    storageKeys.forEach(key => {
+      if (!this.isCurrentVersionedKey(key) && this.isVersionedKey(key)) {
+        localStorage.removeItem(key);
+      }
+    });
+  }
+
+  /**
    * 存储键统一前缀
    * @description 命名空间标识，避免与其他应用或第三方库冲突（修改会导致历史数据无法访问）
    */
@@ -119,6 +132,7 @@ export class StorageConfig {
   static readonly USER_KEY = this.getStorageKey('user');
 
   static initialize(): void {
-    this.migrateAllData();
+    //  不做迁移，删除旧存储内容
+    this.deleteNonCurrentVersionData();
   }
 }

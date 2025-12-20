@@ -1,3 +1,5 @@
+import { LANGUAGE } from '@/locale';
+import { ThemeEnum } from '@/theme/index';
 import { StorageConfig } from '@/utils';
 import { useLocalStorage } from '@vueuse/core';
 import { defineStore } from 'pinia';
@@ -7,7 +9,10 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
     useLocalStorage(
       StorageConfig.USER_KEY,
       {
-        accessToken: ''
+        accessToken: '',
+        currentTheme: ThemeEnum.LIGHT,
+        currentThemeModel: ThemeEnum.SYSTEM,
+        currentLocale: LANGUAGE.ZH_CN
       },
       {
         listenToStorageChanges: true,
@@ -15,14 +20,23 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
       }
     ),
   getters: {
-    isLogin: state => state.accessToken !== ''
+    isLogin: state => state.accessToken !== '',
+    getCurrentTheme: state => state.currentTheme,
+    getCurrentThemeModel: state => state.currentThemeModel,
+    getCurrentLocale: state => state.currentLocale
   },
   actions: {
     setAccessToken(accessToken: string) {
       this.accessToken = accessToken;
     },
-    logout() {
-      this.accessToken = '';
+    setCurrentTheme(theme: ThemeEnum) {
+      this.currentTheme = theme;
+    },
+    setCurrentThemeModel(themeModel: ThemeEnum) {
+      this.currentThemeModel = themeModel;
+    },
+    setCurrentLocale(locale: LANGUAGE) {
+      this.currentLocale = locale;
     }
   }
 });

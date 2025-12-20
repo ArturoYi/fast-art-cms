@@ -1,0 +1,79 @@
+/*
+ * 主题颜色变量定义
+ * 注意：这些 CSS 变量在 uno.config.ts 中被引用为 UnoCSS 颜色类
+ * 如：bg-primary, text-primary-hover 等
+ */
+
+/* 亮色主题变量 (默认) */
+:root[data-theme='light'] {
+  /* 基础背景色，防止闪白 */
+  --neutral-base: #fff;
+  /* Primary Colors */
+  --primary-color: #18a058;
+  --primary-color-hover: #36ad6a;
+  --primary-color-pressed: #0c7a43;
+  --primary-color-suppl: #36ad6a;
+
+  /* Info Colors */
+  --info-color: #2080f0;
+  --info-color-hover: #4098fc;
+  --info-color-pressed: #1060c9;
+  --info-color-suppl: #4098fc;
+
+  /* Success Colors */
+  --success-color: #18a058;
+  --success-color-hover: #36ad6a;
+  --success-color-pressed: #0c7a43;
+  --success-color-suppl: #36ad6a;
+
+  /* Warning Colors */
+  --warning-color: #f0a020;
+  --warning-color-hover: #fcb040;
+  --warning-color-pressed: #c97c10;
+  --warning-color-suppl: #fcb040;
+
+  /* Error Colors */
+  --error-color: #d03050;
+  --error-color-hover: #de576d;
+  --error-color-pressed: #ab1f3f;
+  --error-color-suppl: #de576d;
+}
+
+/*
+ * 暗色主题变量
+ * 当 HTML 元素有 .dark 类时，这些变量会覆盖默认值
+ * 实现亮色/暗色主题的自动切换
+ */
+:root[data-theme='dark'] {
+  /* 基础背景色，防止闪白 */
+  --neutral-base: #000;
+  /* Primary Colors */
+  --primary-color: #63e2b7;
+  --primary-color-hover: #7fe7c4;
+  --primary-color-pressed: #5acea7;
+  --primary-color-suppl: rgb(42, 148, 125);
+
+  /* Info Colors */
+  --info-color: #70c0e8;
+  --info-color-hover: #8acbec;
+  --info-color-pressed: #66afd3;
+  --info-color-suppl: rgb(56, 137, 197);
+
+  /* Success Colors */
+  --success-color: #63e2b7;
+  --success-color-hover: #7fe7c4;
+  --success-color-pressed: #5acea7;
+  --success-color-suppl: rgb(42, 148, 125);
+
+  /* Warning Colors */
+  --warning-color: #f2c97d;
+  --warning-color-hover: #f5d599;
+  --warning-color-pressed: #e6c260;
+  --warning-color-suppl: rgb(240, 138, 0);
+
+  /* Error Colors */
+  --error-color: #e88080;
+  --error-color-hover: #e98b8b;
+  --error-color-pressed: #e57272;
+  --error-color-suppl: rgb(208, 58, 82);
+}
