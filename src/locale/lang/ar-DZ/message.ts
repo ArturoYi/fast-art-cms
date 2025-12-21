@@ -6,6 +6,10 @@ export default {
     forgotPassword: 'هل نسيت كلمة المرور',
     resetPassword: 'إعادة تعيين كلمة المرور',
     confirm: 'تأكيد',
-    cancel: 'إلغاء'
+    cancel: 'إلغاء',
+    switchTheme: 'تبديل السمة',
+    themeLight: 'سمة فاتحة',
+    themeDark: 'سمة داكنة',
+    themeSystem: 'سمة النظام'
   }
 };

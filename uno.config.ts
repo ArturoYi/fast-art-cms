@@ -12,6 +12,12 @@ export default defineConfig({
     colors: {
       // Neutral Base
       'neutral-base': 'var(--neutral-base)',
+      'neutral-invert-base': 'var(--neutral-invert-base)',
+      'neutral-text-base': 'var(--neutral-text-base)',
+      'neutral-popover': 'var(--neutral-popover)',
+      'neutral-card': 'var(--neutral-card)',
+      'neutral-modal': 'var(--neutral-modal)',
+      'neutral-body': 'var(--neutral-body)',
       // Primary Colors
       primary: 'var(--primary-color)',
       'primary-hover': 'var(--primary-color-hover)',
@@ -46,6 +52,12 @@ export default defineConfig({
   // 安全列表，确保颜色类被生成
   safelist: [
     'bg-neutral-base',
+    'bg-neutral-popover',
+    'bg-neutral-card',
+    'bg-neutral-modal',
+    'bg-neutral-body',
+    'text-neutral-text-base',
+    'text-neutral-invert-base',
     'bg-primary',
     'bg-primary-hover',
     'bg-primary-pressed',

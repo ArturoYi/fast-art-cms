@@ -9,9 +9,9 @@
 
 /* 基础背景色，防止闪白 */
 html[data-theme='light'] {
-  background-color: #fff;
+  background-color: var(--page-background-color);
 }
 
 html[data-theme='dark'] {
-  background-color: #000;
+  background-color: var(--page-background-color);
 }

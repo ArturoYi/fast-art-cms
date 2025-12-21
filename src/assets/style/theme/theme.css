@@ -6,8 +6,17 @@
 
 /* 亮色主题变量 (默认) */
 :root[data-theme='light'] {
+  /* 页面背景色 */
+  --page-background-color: #f5f7fa;
   /* 基础背景色，防止闪白 */
   --neutral-base: #fff;
+  /* Neutral (来自 src/theme/light/light.ts) */
+  --neutral-invert-base: #000;
+  --neutral-text-base: #000;
+  --neutral-popover: #fff;
+  --neutral-card: #fff;
+  --neutral-modal: #fff;
+  --neutral-body: #fff;
   /* Primary Colors */
   --primary-color: #18a058;
   --primary-color-hover: #36ad6a;
@@ -45,8 +54,17 @@
  * 实现亮色/暗色主题的自动切换
  */
 :root[data-theme='dark'] {
+  /* 页面背景色 */
+  --page-background-color: #1e1e2e;
   /* 基础背景色，防止闪白 */
   --neutral-base: #000;
+  /* Neutral (来自 src/theme/dark/dark.ts) */
+  --neutral-invert-base: #fff;
+  --neutral-text-base: #fff;
+  --neutral-popover: rgb(72, 72, 78);
+  --neutral-card: rgb(24, 24, 28);
+  --neutral-modal: rgb(44, 44, 50);
+  --neutral-body: rgb(16, 16, 20);
   /* Primary Colors */
   --primary-color: #63e2b7;
   --primary-color-hover: #7fe7c4;

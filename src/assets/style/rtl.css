@@ -1,0 +1,35 @@
+/* --------------------------------------------------------------------
+ * RTL (从右到左) 语言支持
+ * ------------------------------------------------------------------ */
+
+[dir='rtl'] {
+  direction: rtl;
+}
+
+/* RTL 文本对齐 */
+[dir='rtl'] * {
+  text-align: right;
+}
+
+/* 覆盖特定元素的文本对齐 */
+[dir='rtl'] .text-left {
+  text-align: right;
+}
+
+[dir='rtl'] .text-right {
+  text-align: left;
+}
+
+/* RTL 表单元素 */
+[dir='rtl'] input[type='text'],
+[dir='rtl'] input[type='password'],
+[dir='rtl'] input[type='email'],
+[dir='rtl'] textarea {
+  text-align: right;
+}
+
+/* RTL 占位符文本 */
+[dir='rtl'] input::placeholder,
+[dir='rtl'] textarea::placeholder {
+  text-align: right;
+}

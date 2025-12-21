@@ -1,14 +1,11 @@
 import { createI18n, type I18n, type I18nOptions } from 'vue-i18n';
 import enUSMessage from '@/locale/lang/en-US/message';
 import zhCNMessage from '@/locale/lang/zh-CN/message';
-import arSAMessage from '@/locale/lang/ar-SA/message';
 import arDZMessage from '@/locale/lang/ar-DZ/message';
 import { enUSDatetimeFormats } from '@/locale/lang/en-US/datetimeFormats';
 import { zhCNDatetimeFormats } from '@/locale/lang/zh-CN/datetimeFormats';
-import { arSADatetimeFormats } from '@/locale/lang/ar-SA/datetimeFormats';
 import { arDZDatetimeFormats } from '@/locale/lang/ar-DZ/datetimeFormats';
 import { zhCNNumberFormats } from '@/locale/lang/zh-CN/numberFormats';
-import { arSANumberFormats } from '@/locale/lang/ar-SA/numberFormats';
 import { arDZNumberFormats } from '@/locale/lang/ar-DZ/numberFormats';
 import { enUSNumberFormats } from '@/locale/lang/en-US/numberFormats';
 /**
@@ -17,7 +14,6 @@ import { enUSNumberFormats } from '@/locale/lang/en-US/numberFormats';
 export enum LANGUAGE {
   EN_US = 'en-US',
   ZH_CN = 'zh-CN',
-  AR_SA = 'ar-SA',
   AR_DZ = 'ar-DZ'
 }
 /**
@@ -26,7 +22,6 @@ export enum LANGUAGE {
 const messages = {
   [LANGUAGE.EN_US]: enUSMessage,
   [LANGUAGE.ZH_CN]: zhCNMessage,
-  [LANGUAGE.AR_SA]: arSAMessage,
   [LANGUAGE.AR_DZ]: arDZMessage
 };
 /**
@@ -35,7 +30,6 @@ const messages = {
 const datetimeFormats = {
   [LANGUAGE.EN_US]: enUSDatetimeFormats,
   [LANGUAGE.ZH_CN]: zhCNDatetimeFormats,
-  [LANGUAGE.AR_SA]: arSADatetimeFormats,
   [LANGUAGE.AR_DZ]: arDZDatetimeFormats
 };
 
@@ -45,7 +39,6 @@ const datetimeFormats = {
 const numberFormats = {
   [LANGUAGE.EN_US]: enUSNumberFormats,
   [LANGUAGE.ZH_CN]: zhCNNumberFormats,
-  [LANGUAGE.AR_SA]: arSANumberFormats,
   [LANGUAGE.AR_DZ]: arDZNumberFormats
 };
 
@@ -104,5 +97,23 @@ export const $n = i18n.global.n as NumberFormat;
 export const isRTLLanguage = (language: LANGUAGE): boolean => {
   return language.startsWith('ar');
 };
+
+/**
+ * 至此的语言列表option
+ */
+export const languageOptions = [
+  {
+    label: 'English',
+    value: LANGUAGE.EN_US
+  },
+  {
+    label: '中文(简体)',
+    value: LANGUAGE.ZH_CN
+  },
+  {
+    label: '阿拉伯语(阿尔及利亚)',
+    value: LANGUAGE.AR_DZ
+  }
+];
 
 export default i18n;

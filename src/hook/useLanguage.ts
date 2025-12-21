@@ -1,4 +1,4 @@
-import { isRTLLanguage, LANGUAGE } from '@/locale';
+import { LANGUAGE } from '@/locale';
 import { useUserStore } from '@/store/modules/user';
 import { arDZ, dateArDZ, dateEnUS, dateZhCN, enUS, zhCN, type NDateLocale, type NLocale } from 'naive-ui';
 import { storeToRefs } from 'pinia';
@@ -21,7 +21,7 @@ export function useLanguage() {
     setCurrentLocale(newLocale);
     const htmlElement = document.documentElement;
     htmlElement.setAttribute('lang', newLocale);
-    htmlElement.setAttribute('dir', isRTLLanguage(newLocale) ? 'rtl' : 'ltr');
+    // htmlElement.setAttribute("dir", isRTLLanguage(newLocale) ? "rtl" : "ltr");
   };
 
   /**
@@ -35,7 +35,6 @@ export function useLanguage() {
       case LANGUAGE.ZH_CN:
         return zhCN;
       case LANGUAGE.AR_DZ:
-      case LANGUAGE.AR_SA:
         return arDZ;
       default:
         return zhCN;
@@ -53,7 +52,6 @@ export function useLanguage() {
       case LANGUAGE.ZH_CN:
         return dateZhCN;
       case LANGUAGE.AR_DZ:
-      case LANGUAGE.AR_SA:
         return dateArDZ;
       default:
         return dateZhCN;

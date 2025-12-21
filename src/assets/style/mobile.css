@@ -1,0 +1,55 @@
+/* --------------------------------------------------------------------
+ * 全局移动端优化
+ * ------------------------------------------------------------------ */
+
+/* 移动端视口高度处理 */
+@media (max-width: 768px) {
+  /* 使用动态视口高度单位，避免移动端地址栏影响 */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    /* 优先使用动态/小视口高度单位 */
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  /* 防止 iOS Safari 的输入框缩放 */
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='number'],
+  textarea {
+    font-size: 16px;
+  }
+}
+
+/* 处理不同浏览器的视口高度支持 */
+@supports (height: 100dvh) {
+  @media (max-width: 768px) {
+    html,
+    body {
+      min-height: 100dvh;
+    }
+  }
+}
+
+@supports not (height: 100dvh) {
+  @media (max-width: 768px) {
+    html,
+    body {
+      min-height: 100vh;
+    }
+  }
+}
+
+/* 表单元素默认样式重置（按需使用 .appearance-none） */
+input.appearance-none,
+button.appearance-none,
+textarea.appearance-none,
+select.appearance-none {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}

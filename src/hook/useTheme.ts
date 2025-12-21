@@ -4,8 +4,8 @@ import { usePreferredDark } from '@vueuse/core';
 import { storeToRefs } from 'pinia';
 import { computed, watch } from 'vue';
 import { darkTheme, lightTheme } from 'naive-ui';
-import { darkThemeOverrides } from '@/theme/dark/dark';
-import { lightThemeOverrides } from '@/theme/light/light';
+import darkThemeOverrides from '@/theme/dark/dark';
+import lightThemeOverrides from '@/theme/light/light';
 
 export function useTheme() {
   const userStore = useUserStore();
@@ -73,9 +73,9 @@ export function useTheme() {
    */
   const getCurrentThemeOverrides = computed(() => {
     if (getCurrentTheme.value === ThemeEnum.SYSTEM) {
-      return prefersDark.value ? darkThemeOverrides() : lightThemeOverrides();
+      return prefersDark.value ? darkThemeOverrides : lightThemeOverrides;
     }
-    return getCurrentTheme.value === ThemeEnum.DARK ? darkThemeOverrides() : lightThemeOverrides();
+    return getCurrentTheme.value === ThemeEnum.DARK ? darkThemeOverrides : lightThemeOverrides;
   });
 
   return {
