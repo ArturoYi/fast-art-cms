@@ -1,14 +1,14 @@
 <script setup lang="ts"></script>
 <template>
   <div
-    uno:fixed
-    uno:inset-0
-    uno:flex
-    uno:items-center
-    uno:justify-center
-    uno:h-screen
-    uno:w-screen
-    uno:overflow-hidden>
+    fixed
+    inset-0
+    flex
+    items-center
+    justify-center
+    h-screen
+    w-screen
+    overflow-hidden>
     <slot />
   </div>
 </template>

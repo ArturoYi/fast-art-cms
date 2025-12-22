@@ -109,11 +109,11 @@ export const languageOptions = [
   {
     label: '中文(简体)',
     value: LANGUAGE.ZH_CN
-  },
-  {
-    label: '阿拉伯语(阿尔及利亚)',
-    value: LANGUAGE.AR_DZ
   }
+  // {
+  //   label: '阿拉伯语(阿尔及利亚)',
+  //   value: LANGUAGE.AR_DZ
+  // }
 ];
 
 export default i18n;

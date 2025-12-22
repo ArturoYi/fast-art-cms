@@ -8,6 +8,7 @@ export default {
     confirm: 'Confirm',
     cancel: 'Cancel',
     switchTheme: 'Switch Theme',
+    switchLanguage: 'Switch Language',
     themeLight: 'Light Theme',
     themeDark: 'Dark Theme',
     themeSystem: 'System Theme'

@@ -38,7 +38,7 @@ watch(langModel, (newVal) => {
           :options="languageOptions"
           trigger="click">
           <NIcon
-            size="40"
+            size="1.6rem"
             :hidden="isMobile"
             block
             text-neutral-text-base>
@@ -47,7 +47,7 @@ watch(langModel, (newVal) => {
         </NPopselect>
         <NIcon
           @click="showModal = true"
-          size="40"
+          size="1.6rem"
           :hidden="!isMobile"
           block
           text-neutral-text-base>
@@ -55,7 +55,7 @@ watch(langModel, (newVal) => {
         </NIcon>
       </div>
     </template>
-    切换语言
+    {{ $t("common.switchLanguage") }}
   </NTooltip>
   <NModal v-model:show="showModal">
     <div class="flex items-center justify-center">

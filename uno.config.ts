@@ -4,7 +4,6 @@ export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify({
-      prefix: 'uno:',
       ignoreAttributes: []
     })
   ],

@@ -7,11 +7,12 @@ import {
   NRadioGroup,
   NRadio,
   NCard,
+  type SelectOption,
 } from "naive-ui";
 import { Moon, Sun } from "@vicons/tabler";
 import { useTheme } from "@/hook/useTheme";
 import { ThemeEnum } from "@/theme";
-import { computed, ref, watch } from "vue";
+import { computed, h, ref, watch, type VNodeChild } from "vue";
 import { useDeviceStore } from "@/store/modules/device";
 import { storeToRefs } from "pinia";
 import { $t } from "@/locale";
@@ -45,10 +46,16 @@ const themeOptions = computed(() => [
     value: ThemeEnum.DARK,
   },
   {
-    label: "common.systemTheme",
+    label: "common.themeSystem",
     value: ThemeEnum.SYSTEM,
   },
 ]);
+
+function renderLabel(option: SelectOption): VNodeChild {
+  return h("div", [
+    h("span", $t(typeof option.label === "string" ? option.label : "")),
+  ]);
+}
 </script>
 <template>
   <NTooltip
@@ -60,9 +67,10 @@ const themeOptions = computed(() => [
         <NPopselect
           v-model:value="themeModel"
           :options="themeOptions"
-          trigger="click">
+          trigger="click"
+          :render-label="renderLabel">
           <NIcon
-            size="40"
+            size="1.6rem"
             :hidden="isMobile"
             block
             text-neutral-text-base>
@@ -71,7 +79,7 @@ const themeOptions = computed(() => [
         </NPopselect>
         <NIcon
           @click="showModal = true"
-          size="40"
+          size="1.6rem"
           :hidden="!isMobile"
           block
           text-neutral-text-base>

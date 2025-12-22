@@ -8,6 +8,7 @@ export default {
     confirm: 'تأكيد',
     cancel: 'إلغاء',
     switchTheme: 'تبديل السمة',
+    switchLanguage: 'تبديل اللغة',
     themeLight: 'سمة فاتحة',
     themeDark: 'سمة داكنة',
     themeSystem: 'سمة النظام'
