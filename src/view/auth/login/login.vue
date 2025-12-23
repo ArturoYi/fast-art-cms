@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { NCard, NForm, NFormItem, NInput, NButton } from "naive-ui";
+import { NCard, NForm, NFormItem, NInput, NButton, NIcon, useMessage } from "naive-ui";
+import { UserCircle, ShieldLock } from "@vicons/tabler";
 import AuthBackground from "@/view/auth/components/AuthBackground.vue";
 import { ref, reactive } from "vue";
 import ChangeLang from "@/components/change-lang/ChangeLang.vue";
 import ChangeTheme from "@/components/change-theme/ChangeTheme.vue";
-// import { useDeviceStore } from "@/store/modules/device";
-// import { storeToRefs } from "pinia";
-// const deviceStore = useDeviceStore();
-// const { isMobile } = storeToRefs(deviceStore);
-
+import { useRequest } from "@/api/feachHook/useRequest";
+import { loginService } from "@/api/client";
+const message = useMessage()
 // 表单数据
 const loginForm = reactive({
   username: "",
@@ -48,25 +47,29 @@ const formRules = {
 // 表单引用
 const formRef = ref();
 
-// 提交状态
-const loading = ref(false);
+// API请求
+const { run, loading } = useRequest(loginService, {
+  manual: true,
+  defaultParams: [loginForm],
+  loadingKeep: 1000,
+  onSuccess: (data) => {
+    message.success("登录成功: " + data.message);
+  },
+  onError: (error) => {
+    message.error("登录失败: " + error.message);
+  },
+});
 
 // 登录提交方法
 const handleLogin = async (e: MouseEvent) => {
-  try {
-    e.preventDefault();
-    formRef.value?.validate((errors: any) => {
-      if (!errors) {
-        //正确
-      }
-    });
-    loading.value = true;
-    await formRef.value?.validate();
-  } catch (error) {
-    // 表单验证失败，错误信息由 naive-ui 处理
-  } finally {
-    loading.value = false;
-  }
+  e.preventDefault();
+  formRef.value?.validate((errors: any) => {
+    if (!errors) {
+      run(loginForm);
+    }else{
+      message.error(errors[0].message);
+    }
+  });
 };
 </script>
 <template>
@@ -74,7 +77,7 @@ const handleLogin = async (e: MouseEvent) => {
     <NCard
       shadow-lg
       rounded-4
-      w-98
+      w-88
       m-7
       flex
       flex-col
@@ -101,9 +104,16 @@ const handleLogin = async (e: MouseEvent) => {
           path="username">
           <NInput
             clearable
-            v-model:value="loginForm.username" />
+            v-model:value="loginForm.username">
+            <template #prefix>
+              <NIcon
+                size="20"
+                :component="UserCircle" />
+            </template>
+          </NInput>
         </NFormItem>
         <NFormItem
+          mt-2
           label="密码"
           path="password">
           <NInput
@@ -113,24 +123,39 @@ const handleLogin = async (e: MouseEvent) => {
             clearable
             type="password"
             show-password-on="click"
-            v-model:value="loginForm.password" />
+            v-model:value="loginForm.password">
+            <template #prefix>
+              <NIcon
+                size="20"
+                :component="ShieldLock" />
+            </template>
+          </NInput>
         </NFormItem>
         <!-- 去注册，忘记密码 -->
         <div
           flex
-          justify-between>
-          <NButton>去注册</NButton>
-          <NButton>忘记密码</NButton>
-        </div>
-        <NFormItem>
+          justify-between
+          mt-8>
           <NButton
-            attr-type="button"
-            block
+            text
             type="primary"
-            @click.native="handleLogin"
-            >登录</NButton
+            >去注册</NButton
           >
-        </NFormItem>
+          <NButton
+            text
+            type="primary"
+            >忘记密码</NButton
+          >
+        </div>
+        <NButton
+          attr-type="button"
+          :loading="loading"
+          mt-4
+          block
+          type="primary"
+          @click.native="handleLogin"
+          >登录</NButton
+        >
       </NForm>
     </NCard>
   </AuthBackground>

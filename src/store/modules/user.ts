@@ -21,6 +21,7 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
     ),
   getters: {
     isLogin: state => state.accessToken !== '',
+    getAccessToken: state => state.accessToken,
     getCurrentTheme: state => state.currentTheme,
     getCurrentThemeModel: state => state.currentThemeModel,
     getCurrentLocale: state => state.currentLocale
