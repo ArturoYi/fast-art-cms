@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { NCard, NForm, NFormItem, NInput, NButton, NIcon, useMessage } from "naive-ui";
+import {
+  NCard,
+  NForm,
+  NFormItem,
+  NInput,
+  NButton,
+  NIcon,
+  useMessage,
+} from "naive-ui";
 import { UserCircle, ShieldLock } from "@vicons/tabler";
 import AuthBackground from "@/view/auth/components/AuthBackground.vue";
 import { ref, reactive } from "vue";
@@ -7,7 +15,7 @@ import ChangeLang from "@/components/change-lang/ChangeLang.vue";
 import ChangeTheme from "@/components/change-theme/ChangeTheme.vue";
 import { useRequest } from "@/api/feachHook/useRequest";
 import { loginService } from "@/api/client";
-const message = useMessage()
+const message = useMessage();
 // 表单数据
 const loginForm = reactive({
   username: "",
@@ -53,10 +61,10 @@ const { run, loading } = useRequest(loginService, {
   defaultParams: [loginForm],
   loadingKeep: 1000,
   onSuccess: (data) => {
-    message.success("登录成功: " + data.message);
+    message.success("登录成功: " + data.toString());
   },
   onError: (error) => {
-    message.error("登录失败: " + error.message);
+    message.error(error.text());
   },
 });
 
@@ -66,8 +74,6 @@ const handleLogin = async (e: MouseEvent) => {
   formRef.value?.validate((errors: any) => {
     if (!errors) {
       run(loginForm);
-    }else{
-      message.error(errors[0].message);
     }
   });
 };

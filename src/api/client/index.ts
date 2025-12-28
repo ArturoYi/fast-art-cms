@@ -51,6 +51,14 @@ const request = new FetchRequest(
         }
         return config;
       }
+    ],
+    responseInterceptors: [
+      (response: Response): Response => {
+        if (!response.ok) {
+          throw new FetchClientError('OTHER_ERROR', 'Response is not ok');
+        }
+        return response;
+      }
     ]
   }
 );

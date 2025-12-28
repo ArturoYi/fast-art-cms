@@ -12,5 +12,13 @@ export default {
     themeLight: 'سمة فاتحة',
     themeDark: 'سمة داكنة',
     themeSystem: 'سمة النظام'
+  },
+  error: {
+    networkError: 'خطأ في الشبكة',
+    serverError: 'خطأ في الخادم',
+    timeoutError: 'انتهت مهلة الطلب',
+    abortError: 'تم إلغاء الطلب',
+    securityError: 'فشل في المصادقة',
+    otherError: 'خطأ في الشبكة'
   }
 };

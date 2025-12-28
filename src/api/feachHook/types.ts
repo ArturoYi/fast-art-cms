@@ -1,4 +1,5 @@
 import type { Ref } from 'vue';
+import { $t } from '@/locale';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -58,6 +59,25 @@ export class FetchClientError extends Error {
     this.type = type;
   }
   public readonly type: FetchClientErrorType;
+
+  public text(): string {
+    switch (this.type) {
+      case 'NETWORK_ERROR':
+        return $t('error.networkError');
+      case 'SERVER_ERROR':
+        return $t('error.serverError');
+      case 'TIMEOUT_ERROR':
+        return $t('error.timeoutError');
+      case 'ABORT_ERROR':
+        return $t('error.abortError');
+      case 'SECURITY_ERROR':
+        return $t('error.securityError');
+      case 'OTHER_ERROR':
+        return $t('error.otherError');
+      default:
+        return $t('error.networkError');
+    }
+  }
 }
 
 /**

@@ -12,5 +12,13 @@ export default {
     themeLight: 'Light Theme',
     themeDark: 'Dark Theme',
     themeSystem: 'System Theme'
+  },
+  error: {
+    networkError: 'Network Error',
+    serverError: 'Server Error',
+    timeoutError: 'Request Timeout',
+    abortError: 'Request Cancelled',
+    securityError: 'Authentication Failed',
+    otherError: 'Network Error'
   }
 };
