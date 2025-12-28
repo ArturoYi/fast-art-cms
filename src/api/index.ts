@@ -73,15 +73,19 @@ class FetchRequest {
     try {
       // 5. 发起请求
       const response = await fetch(url, mergedConfig);
-
-      // 6. 执行响应拦截器链
-      const processedResponse = await this.invokeResponseInterceptors(response);
-
-      // 7. 返回响应数据
-      return processedResponse.json();
-    } catch (error) {
-      // 统一错误处理
-      throw this.handleError(error, mergedConfig);
+      if (!response.ok) {
+        throw await this.handleError(response, mergedConfig);
+      } else {
+        // 6. 执行响应拦截器链
+        const processedResponse = await this.invokeResponseInterceptors(response);
+        return await processedResponse.json();
+      }
+    } catch (e) {
+      if (e instanceof FetchClientError) {
+        throw e;
+      } else {
+        throw new FetchClientError('OTHER_ERROR', String(e));
+      }
     } finally {
       // 清理超时定时器
       if (timeoutId !== undefined) {
@@ -136,29 +140,17 @@ class FetchRequest {
   /**
    * 统一错误处理
    */
-  private handleError(error: unknown, config: RequestConfig): Error {
-    if (error instanceof DOMException) {
-      // 超时错误
-      if (error.name === 'TimeoutError') {
-        return new FetchClientError('TIMEOUT_ERROR', `Request timeout after ${config.timeout}ms`);
+  private async handleError(errorResponse: Response, _: RequestConfig): Promise<Error> {
+    try {
+      const errorData = await errorResponse.json();
+      if (errorResponse.status < 500) {
+        return new FetchClientError('CLIENT_ERROR', String(errorData.message));
+      } else {
+        return new FetchClientError('SERVER_ERROR');
       }
-      // 手动取消
-      if (error.name === 'AbortError') {
-        return new FetchClientError('ABORT_ERROR', 'Request aborted');
-      }
+    } catch (error) {
+      return new FetchClientError('OTHER_ERROR', String(error));
     }
-
-    // 网络错误（如 DNS 失败、无网络等）
-    if (error instanceof TypeError) {
-      return new FetchClientError('NETWORK_ERROR', error.message);
-    }
-
-    // 其他错误直接返回
-    if (error instanceof Error) {
-      return error;
-    }
-
-    return new FetchClientError('OTHER_ERROR', String(error));
   }
 
   /**

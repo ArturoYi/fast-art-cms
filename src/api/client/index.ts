@@ -12,6 +12,7 @@ import FetchRequest from '@/api/index';
 import { ContentType, FetchClientError, type RequestConfig } from '@/api/feachHook/types';
 import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
+import type { LoginDTO } from './DTO/loginDTO';
 
 /**
  * 实例化请求类并配置拦截器
@@ -67,7 +68,7 @@ const request = new FetchRequest(
  * 登录请求
  */
 export const loginService = (data: any) => {
-  return request.request({
+  return request.request<LoginDTO>({
     url: RequestUrl.login,
     method: 'POST',
     body: data

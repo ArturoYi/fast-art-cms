@@ -1,4 +1,5 @@
 import 'vue-router';
+import 'vue';
 declare module 'vue-router' {
   interface RouteMeta {
     // 根据实际需求定义字段
@@ -9,5 +10,11 @@ declare module 'vue-router' {
     isAffixTab?: boolean; // 是否固定在标签栏
     isIframeTab?: boolean; // 是否为iframe嵌套
     permission?: string[]; // 权限列表
+  }
+}
+
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $t: (key: string) => string;
   }
 }

@@ -10,50 +10,85 @@ import {
 } from "naive-ui";
 import { UserCircle, ShieldLock } from "@vicons/tabler";
 import AuthBackground from "@/view/auth/components/AuthBackground.vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 import ChangeLang from "@/components/change-lang/ChangeLang.vue";
 import ChangeTheme from "@/components/change-theme/ChangeTheme.vue";
 import { useRequest } from "@/api/feachHook/useRequest";
 import { loginService } from "@/api/client";
+import { $t } from "@/locale";
+import { useLanguage } from "@/hook/useLanguage";
 const message = useMessage();
+
+//监听语言切换
+const { getCurrentLocale } = useLanguage();
+
+watch(getCurrentLocale, (_) => {
+  //清除表单验证
+  formRef.value?.restoreValidation()
+});
+
 // 表单数据
 const loginForm = reactive({
-  username: "",
-  password: "",
+  username: "chenyiren",
+  password: "cyr68611",
+  captchaId: "9f1c2a3b4d5e6f7g",
+  verifyCode: "A1B2",
 });
 
 // 表单验证规则
 const formRules = {
   username: [
     {
-      required: true,
-      message: "请输入用户名",
+      asyncValidator: async (_rule: any, value: string) => {
+        // 模拟异步验证延迟
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        if (!value || value.trim() === "") {
+          return Promise.reject(new Error($t("login.usernameRequired")));
+        }
+        return Promise.resolve();
+      },
       trigger: ["blur", "input"],
     },
     {
-      min: 3,
-      max: 20,
-      message: "用户名长度应在 3-20 个字符之间",
+      asyncValidator: async (_rule: any, value: string) => {
+        // 模拟异步验证延迟
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        if (value && (value.length < 3 || value.length > 20)) {
+          return Promise.reject(new Error($t("login.usernameLength")));
+        }
+        return Promise.resolve();
+      },
       trigger: ["blur", "input"],
     },
   ],
   password: [
     {
-      required: true,
-      message: "请输入密码",
+      asyncValidator: async (_rule: any, value: string) => {
+        // 模拟异步验证延迟
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        if (!value || value.trim() === "") {
+          return Promise.reject(new Error($t("login.passwordRequired")));
+        }
+        return Promise.resolve();
+      },
       trigger: ["blur", "input"],
     },
     {
-      min: 6,
-      max: 20,
-      message: "密码长度应在 6-20 个字符之间",
+      asyncValidator: async (_rule: any, value: string) => {
+        // 模拟异步验证延迟
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        if (value && (value.length < 6 || value.length > 20)) {
+          return Promise.reject(new Error($t("login.passwordLength")));
+        }
+        return Promise.resolve();
+      },
       trigger: ["blur", "input"],
     },
   ],
 };
 
 // 表单引用
-const formRef = ref();
+const formRef = ref<InstanceType<typeof NForm>>();
 
 // API请求
 const { run, loading } = useRequest(loginService, {
@@ -61,7 +96,7 @@ const { run, loading } = useRequest(loginService, {
   defaultParams: [loginForm],
   loadingKeep: 1000,
   onSuccess: (data) => {
-    message.success("登录成功: " + data.toString());
+    message.success($t("login.loginSuccess") + data.data.token);
   },
   onError: (error) => {
     message.error(error.text());
@@ -106,7 +141,7 @@ const handleLogin = async (e: MouseEvent) => {
         :model="loginForm"
         :rules="formRules">
         <NFormItem
-          label="用户名"
+          :label="$t('login.username')"
           path="username">
           <NInput
             clearable
@@ -120,7 +155,7 @@ const handleLogin = async (e: MouseEvent) => {
         </NFormItem>
         <NFormItem
           mt-2
-          label="密码"
+          :label="$t('login.password')"
           path="password">
           <NInput
             :input-props="{
@@ -145,12 +180,14 @@ const handleLogin = async (e: MouseEvent) => {
           <NButton
             text
             type="primary"
-            >去注册</NButton
+            >{{ $t("common.register") }}</NButton
           >
           <NButton
             text
             type="primary"
-            >忘记密码</NButton
+            >{{
+            $t("common.forgotPassword")
+            }}</NButton
           >
         </div>
         <NButton
@@ -160,7 +197,7 @@ const handleLogin = async (e: MouseEvent) => {
           block
           type="primary"
           @click.native="handleLogin"
-          >登录</NButton
+          >{{ $t("common.login") }}</NButton
         >
       </NForm>
     </NCard>

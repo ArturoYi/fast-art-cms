@@ -43,6 +43,7 @@ export interface FetchInterceptors {
  * 使用联合类型以兼容 'erasableSyntaxOnly' 配置
  */
 export type FetchClientErrorType =
+  | 'CLIENT_ERROR'
   | 'NETWORK_ERROR'
   | 'SERVER_ERROR'
   | 'TIMEOUT_ERROR'
@@ -53,7 +54,7 @@ export type FetchClientErrorType =
  * 请求客户端错误
  */
 export class FetchClientError extends Error {
-  constructor(type: FetchClientErrorType, message: string = type.toLowerCase()) {
+  constructor(type: FetchClientErrorType, message: string = '') {
     super(message);
     this.name = type.toLowerCase();
     this.type = type;
@@ -61,7 +62,12 @@ export class FetchClientError extends Error {
   public readonly type: FetchClientErrorType;
 
   public text(): string {
+    if (this.message) {
+      return this.message;
+    }
     switch (this.type) {
+      case 'CLIENT_ERROR':
+        return $t('error.clientError');
       case 'NETWORK_ERROR':
         return $t('error.networkError');
       case 'SERVER_ERROR':
