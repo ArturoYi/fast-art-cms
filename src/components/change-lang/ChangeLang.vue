@@ -9,14 +9,14 @@ import {
   NModal,
 } from "naive-ui";
 import { Language } from "@vicons/tabler";
-import { useDeviceStore } from "@/store/modules/device";
-import { storeToRefs } from "pinia";
 import { languageOptions } from "@/locale";
+import { useInjection } from "@/hook/useInjection";
 import { useLanguage } from "@/hook/useLanguage";
 import { ref, watch } from "vue";
+import { mediaQueryInjectionKey } from "@/injection";
 
-const deviceStore = useDeviceStore();
-const { isMobile } = storeToRefs(deviceStore);
+const { isMaxSm } = useInjection(mediaQueryInjectionKey);
+
 const { getCurrentLocale, setLanguage } = useLanguage();
 
 const showModal = ref(false);
@@ -29,7 +29,7 @@ watch(langModel, (newVal) => {
 <template>
   <NTooltip
     trigger="hover"
-    :disabled="isMobile"
+    :disabled="isMaxSm"
     placement="bottom">
     <template #trigger>
       <div>
@@ -39,7 +39,7 @@ watch(langModel, (newVal) => {
           trigger="click">
           <NIcon
             size="1.6rem"
-            :hidden="isMobile"
+            :hidden="isMaxSm"
             block
             text-neutral-text-base>
             <Language />
@@ -48,7 +48,7 @@ watch(langModel, (newVal) => {
         <NIcon
           @click="showModal = true"
           size="1.6rem"
-          :hidden="!isMobile"
+          :hidden="!isMaxSm"
           block
           text-neutral-text-base>
           <Language />

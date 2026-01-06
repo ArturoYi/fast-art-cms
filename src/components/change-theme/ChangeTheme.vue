@@ -13,12 +13,12 @@ import { Moon, Sun } from "@vicons/tabler";
 import { useTheme } from "@/hook/useTheme";
 import { ThemeEnum } from "@/theme";
 import { computed, h, ref, watch, type VNodeChild } from "vue";
-import { useDeviceStore } from "@/store/modules/device";
-import { storeToRefs } from "pinia";
+import { useInjection } from "@/hook/useInjection";
+import { mediaQueryInjectionKey } from "@/injection";
 import { $t } from "@/locale";
 
-const deviceStore = useDeviceStore();
-const { isMobile } = storeToRefs(deviceStore);
+const { isMaxSm } = useInjection(mediaQueryInjectionKey);
+
 const { getCurrentTheme, getCurrentThemeModel, toggleTheme } = useTheme();
 
 const themeModel = ref(getCurrentThemeModel.value);
@@ -60,7 +60,7 @@ function renderLabel(option: SelectOption): VNodeChild {
 <template>
   <NTooltip
     trigger="hover"
-    :disabled="isMobile"
+    :disabled="isMaxSm"
     placement="bottom">
     <template #trigger>
       <div>
@@ -71,7 +71,7 @@ function renderLabel(option: SelectOption): VNodeChild {
           :render-label="renderLabel">
           <NIcon
             size="1.6rem"
-            :hidden="isMobile"
+            :hidden="isMaxSm"
             block
             text-neutral-text-base>
             <component :is="currentThemeIcon" />
@@ -80,7 +80,7 @@ function renderLabel(option: SelectOption): VNodeChild {
         <NIcon
           @click="showModal = true"
           size="1.6rem"
-          :hidden="!isMobile"
+          :hidden="!isMaxSm"
           block
           text-neutral-text-base>
           <component :is="currentThemeIcon" />

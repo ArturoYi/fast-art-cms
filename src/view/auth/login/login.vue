@@ -17,14 +17,18 @@ import { useRequest } from "@/api/feachHook/useRequest";
 import { loginService } from "@/api/client";
 import { $t } from "@/locale";
 import { useLanguage } from "@/hook/useLanguage";
+import { useUserStore } from "@/store/modules/user";
+import { useRouter, useRoute } from "vue-router";
 const message = useMessage();
-
+const store = useUserStore();
+const router = useRouter();
+const route = useRoute();
 //监听语言切换
 const { getCurrentLocale } = useLanguage();
 
 watch(getCurrentLocale, (_) => {
   //清除表单验证
-  formRef.value?.restoreValidation()
+  formRef.value?.restoreValidation();
 });
 
 // 表单数据
@@ -96,7 +100,10 @@ const { run, loading } = useRequest(loginService, {
   defaultParams: [loginForm],
   loadingKeep: 1000,
   onSuccess: (data) => {
-    message.success($t("login.loginSuccess") + data.data.token);
+    store.setAccessToken(data.data.token);
+    // 获取 redirect 参数，如果存在则跳转到指定页面，否则跳转到首页
+    const redirect = route.query.redirect as string;
+    router.push(redirect || "/");
   },
   onError: (error) => {
     message.error(error.text());

@@ -11,6 +11,9 @@ import { onMounted } from "vue";
 import { RouterView } from "vue-router";
 import { useTheme } from "@/hook/useTheme";
 import { useLanguage } from "@/hook/useLanguage";
+import { appProvide } from "@/provide/appProvide";
+
+appProvide();
 
 const { setSystemThemeModel, getCurrentNaiveTheme, getCurrentThemeOverrides } =
   useTheme();
