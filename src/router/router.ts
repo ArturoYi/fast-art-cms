@@ -19,6 +19,8 @@ export type AppRouteRecordRaw = RouteRecordRaw & {
  * 定义路由的各种配置属性
  */
 export interface RouteMeta extends Record<string | number | symbol, unknown> {
+  /** 路由类型 */
+  type?: 'item' | 'group' | 'divider';
   /** 路由标题 */
   title: string;
   /** 路由图标 */

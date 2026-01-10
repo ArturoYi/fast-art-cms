@@ -1,0 +1,83 @@
+import type { AppRouteRecord } from '@/router/router';
+import type { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
+import { h } from 'vue';
+
+export class MenuProcessor {
+  private registered = false;
+
+  private menuList: MenuMixedOption[] = [];
+
+  /**
+   * 将 AppRouteRecord 转换为 MenuMixedOption
+   * @param route AppRouteRecord
+   * @returns MenuMixedOption
+   */
+  private convertToMenuMixedOption(route: AppRouteRecord): MenuMixedOption {
+    const { icon, type } = route.meta;
+
+    /**
+     * 判断是否有icon，如果有，则转换为函数
+     */
+    const renderIcon = icon ? () => h('NIcon', { icon }) : undefined;
+
+    /**
+     * 如果有children，children转换为MenuMixedOption
+     */
+    const children = route.children ? route.children.map(child => this.convertToMenuMixedOption(child)) : undefined;
+
+    /**
+     * label转换为函数
+     */
+    const renderLabel = () => h('span', { class: 'menu-label' }, route.meta.title);
+
+    return {
+      type: type,
+      label: route.meta.title,
+      key: typeof route.name === 'string' || typeof route.name === 'number' ? route.name : String(route.name),
+      icon: renderIcon,
+      children: children
+    };
+  }
+
+  /**
+   * 注册菜单列表
+   * 因为routes都是本地配置，所以不需要更多验证，如果要动态下发，需要添加验证
+   * @param routes 路由配置
+   */
+  registerMenuList(routes: AppRouteRecord[]) {
+    // 1. 如果已经注册过，则直接返回
+    if (this.registered) {
+      return;
+    }
+    this.menuList.length = 0;
+
+    routes.forEach(route => {
+      this.menuList.push(this.convertToMenuMixedOption(route));
+    });
+    this.registered = true;
+  }
+
+  /**
+   * 获取菜单列表
+   * @returns MenuMixedOption[]
+   */
+  getMenuList() {
+    return this.menuList;
+  }
+
+  /**
+   * 注销菜单列表
+   */
+  unregisterMenuList() {
+    this.menuList = [];
+    this.registered = false;
+  }
+
+  /**
+   * 检查是否已经注册过
+   * @returns boolean
+   */
+  isRegistered() {
+    return this.registered;
+  }
+}

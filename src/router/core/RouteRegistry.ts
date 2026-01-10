@@ -14,7 +14,7 @@ export class RouteRegistry {
    * @param appRoute AppRouteRecord
    * @returns RouteRecordRaw
    */
-  convertToRouteRecordRaw(appRoute: AppRouteRecord): RouteRecordRaw {
+  private convertToRouteRecordRaw(appRoute: AppRouteRecord): RouteRecordRaw {
     const route: RouteRecordRaw = {
       path: appRoute.path,
       name: appRoute.name,
