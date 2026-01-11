@@ -1,6 +1,8 @@
+import { isFunction } from '@/api/feachHook/utils';
 import type { AppRouteRecord } from '@/router/router';
 import type { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
 import { h } from 'vue';
+import { RouterLink } from 'vue-router';
 
 export class MenuProcessor {
   private registered = false;
@@ -13,7 +15,7 @@ export class MenuProcessor {
    * @returns MenuMixedOption
    */
   private convertToMenuMixedOption(route: AppRouteRecord): MenuMixedOption {
-    const { icon, type } = route.meta;
+    const { icon, type, title } = route.meta;
 
     /**
      * 判断是否有icon，如果有，则转换为函数
@@ -26,15 +28,16 @@ export class MenuProcessor {
     const children = route.children ? route.children.map(child => this.convertToMenuMixedOption(child)) : undefined;
 
     /**
-     * label转换为函数
+     * label转换为函数，使用RouterLink包裹
      */
-    const renderLabel = () => h('span', { class: 'menu-label' }, route.meta.title);
+    const renderLabel = () => h(RouterLink, { to: route.path }, { default: () => title });
 
     return {
-      type: type,
-      label: route.meta.title,
-      key: typeof route.name === 'string' || typeof route.name === 'number' ? route.name : String(route.name),
+      type: type || 'item',
+      label: renderLabel,
+      key: String(route.path) + String(route.name),
       icon: renderIcon,
+      meta: {},
       children: children
     };
   }

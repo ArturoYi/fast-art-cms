@@ -41,7 +41,7 @@ export function setupBeforeEach(router: Router) {
  * @param to 目标路由
  * @param from 来源路由
  * @param next 下一步
- * @param router 路由实例
+ * @param userStore 用户状态管理
  * @returns boolean 是否允许访问
  */
 function checkLoginStatus(
@@ -50,17 +50,25 @@ function checkLoginStatus(
   next: NavigationGuardNext,
   userStore: ReturnType<typeof useUserStore>
 ): boolean {
-  if (userStore.isLogin || to.path === RoutesAlias.Login) {
-    return true;
-  } else {
-    next({
-      path: RoutesAlias.Login,
-      query: {
-        redirect: to.fullPath
-      }
-    });
+  // 已登录用户访问登录页面时重定向到首页
+  if (userStore.isLogin && to.path === RoutesAlias.Login) {
+    next({ path: '/' });
     return false;
   }
+
+  // 已登录用户访问其他页面或未登录用户访问登录页面时允许通过
+  if (userStore.isLogin || to.path === RoutesAlias.Login) {
+    return true;
+  }
+
+  // 未登录用户访问其他页面时重定向到登录页
+  next({
+    path: RoutesAlias.Login,
+    query: {
+      redirect: to.fullPath
+    }
+  });
+  return false;
 }
 
 /**
