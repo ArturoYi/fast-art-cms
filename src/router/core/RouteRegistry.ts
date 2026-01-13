@@ -2,10 +2,11 @@ import type { Router, RouteRecordRaw } from 'vue-router';
 import type { AppRouteRecord } from '@/router/router';
 
 export class RouteRegistry {
+  private static instance: RouteRegistry | null = null;
   private router: Router;
   private registered = false;
 
-  constructor(router: Router) {
+  private constructor(router: Router) {
     this.router = router;
   }
 
@@ -62,5 +63,17 @@ export class RouteRegistry {
    */
   isRegistered() {
     return this.registered;
+  }
+
+  /**
+   * 获取单例实例
+   * @param router 路由实例
+   * @returns RouteRegistry
+   */
+  static getInstance(router: Router): RouteRegistry {
+    if (!RouteRegistry.instance) {
+      RouteRegistry.instance = new RouteRegistry(router);
+    }
+    return RouteRegistry.instance;
   }
 }

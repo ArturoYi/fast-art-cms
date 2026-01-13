@@ -1,13 +1,14 @@
-import { isFunction } from '@/api/feachHook/utils';
 import type { AppRouteRecord } from '@/router/router';
 import type { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
 import { h } from 'vue';
 import { RouterLink } from 'vue-router';
 
 export class MenuProcessor {
+  private static instance: MenuProcessor | null = null;
   private registered = false;
-
   private menuList: MenuMixedOption[] = [];
+
+  private constructor() {}
 
   /**
    * 将 AppRouteRecord 转换为 MenuMixedOption
@@ -82,5 +83,16 @@ export class MenuProcessor {
    */
   isRegistered() {
     return this.registered;
+  }
+
+  /**
+   * 获取单例实例
+   * @returns MenuProcessor
+   */
+  static getInstance(): MenuProcessor {
+    if (!MenuProcessor.instance) {
+      MenuProcessor.instance = new MenuProcessor();
+    }
+    return MenuProcessor.instance;
   }
 }

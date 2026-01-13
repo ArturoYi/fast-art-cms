@@ -3,8 +3,7 @@ import type { NavigationGuardNext, RouteLocationNormalized, Router } from 'vue-r
 import { RoutesAlias } from '@/router/router';
 import { RouteRegistry } from '@/router/core/RouteRegistry';
 import { asyncRoutes } from '@/router/routes/asyncRoutes';
-
-let routeRegistry: RouteRegistry | null = null;
+import { MenuProcessor } from '@/router/core/MenuProcessor';
 
 /** 路由全局前置守卫 */
 export function setupBeforeEach(router: Router) {
@@ -17,7 +16,7 @@ export function setupBeforeEach(router: Router) {
     }
 
     // 2. 能走到这里说明已经登录，注册动态路由
-    if (!routeRegistry?.isRegistered()) {
+    if (!RouteRegistry.getInstance(router).isRegistered()) {
       registerDynamicRoutes(router);
       // 3. 注册后重新跳转，使用 fullPath 确保重新匹配且不带旧的 name
       next({ path: to.fullPath, replace: true });
@@ -76,8 +75,6 @@ function checkLoginStatus(
  * @param router 路由实例
  */
 function registerDynamicRoutes(router: Router) {
-  if (routeRegistry === null) {
-    routeRegistry = new RouteRegistry(router);
-  }
-  routeRegistry.registerRoutes(asyncRoutes);
+  RouteRegistry.getInstance(router).registerRoutes(asyncRoutes);
+  MenuProcessor.getInstance().registerMenuList(asyncRoutes);
 }
