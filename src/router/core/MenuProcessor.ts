@@ -1,5 +1,6 @@
 import type { AppRouteRecord } from '@/router/router';
 import type { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
+import { NIcon, NEllipsis } from 'naive-ui';
 import { h } from 'vue';
 import { RouterLink } from 'vue-router';
 
@@ -21,7 +22,7 @@ export class MenuProcessor {
     /**
      * 判断是否有icon，如果有，则转换为函数
      */
-    const renderIcon = icon ? () => h('NIcon', { icon }) : undefined;
+    const renderIcon = icon ? () => h(NIcon, null, { default: () => h(icon) }) : undefined;
 
     /**
      * 如果有children，children转换为MenuMixedOption
@@ -29,9 +30,19 @@ export class MenuProcessor {
     const children = route.children ? route.children.map(child => this.convertToMenuMixedOption(child)) : undefined;
 
     /**
-     * label转换为函数，使用RouterLink包裹
+     * label转换为函数，使用RouterLink包裹，并使用NEllipsis处理文本溢出
      */
-    const renderLabel = () => h(RouterLink, { to: route.path }, { default: () => title });
+    const renderLabel = () =>
+      h(NEllipsis, null, {
+        default: () =>
+          h(
+            RouterLink,
+            { to: route.path },
+            {
+              default: () => title
+            }
+          )
+      });
 
     return {
       type: type || 'item',

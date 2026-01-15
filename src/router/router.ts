@@ -1,3 +1,4 @@
+import type { Component } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 /**
@@ -24,7 +25,7 @@ export interface RouteMeta extends Record<string | number | symbol, unknown> {
   /** 路由标题 */
   title: string;
   /** 路由图标 */
-  icon?: string;
+  icon?: Component;
   /** 是否隐藏 */
   hidden?: boolean;
   /** 是否缓存 */

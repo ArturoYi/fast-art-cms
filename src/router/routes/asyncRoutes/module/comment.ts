@@ -1,8 +1,10 @@
 import type { AppRouteRecord } from '@/router/router';
+import { InfoCircle, AlertCircle } from '@vicons/tabler';
 
 export const aboutRoutes: AppRouteRecord = {
   meta: {
-    title: 'About'
+    title: 'About',
+    icon: InfoCircle
   },
   path: '/about',
   name: 'About',
@@ -11,7 +13,8 @@ export const aboutRoutes: AppRouteRecord = {
 
 export const errorRoutes: AppRouteRecord = {
   meta: {
-    title: 'Error'
+    title: 'Error',
+    icon: AlertCircle
   },
   path: '/error',
   name: 'Error',
