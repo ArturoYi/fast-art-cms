@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   NIcon,
+  NButton,
   NPopselect,
   NTooltip,
   NModal,
@@ -69,22 +70,28 @@ function renderLabel(option: SelectOption): VNodeChild {
           :options="themeOptions"
           trigger="click"
           :render-label="renderLabel">
-          <NIcon
-            size="1.6rem"
-            :hidden="isMaxSm"
-            block
-            text-neutral-text-base>
-            <component :is="currentThemeIcon" />
-          </NIcon>
+          <NButton
+            tertiary
+            circle
+            :hidden="isMaxSm">
+            <template #icon>
+              <NIcon>
+                <component :is="currentThemeIcon" />
+              </NIcon>
+            </template>
+          </NButton>
         </NPopselect>
-        <NIcon
-          @click="showModal = true"
-          size="1.6rem"
+        <NButton
+          tertiary
+          circle
           :hidden="!isMaxSm"
-          block
-          text-neutral-text-base>
-          <component :is="currentThemeIcon" />
-        </NIcon>
+          @click="showModal = true">
+          <template #icon>
+            <NIcon>
+              <component :is="currentThemeIcon" />
+            </NIcon>
+          </template>
+        </NButton>
       </div>
     </template>
     {{ $t("common.switchTheme") }}

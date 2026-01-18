@@ -2,6 +2,8 @@ export default {
   common: {
     login: '登录',
     logout: '退出',
+    logoutTitle: '退出登录',
+    logoutConfirm: '确认退出登录？',
     register: '注册',
     forgotPassword: '忘记密码',
     resetPassword: '重置密码',
@@ -9,9 +11,14 @@ export default {
     cancel: '取消',
     switchTheme: '切换主题',
     switchLanguage: '切换语言',
+    fullscreen: '全屏',
+    exitFullscreen: '退出全屏',
+    navigationBack: '返回',
+    navigationForward: '前进',
     themeLight: '亮色主题',
     themeDark: '暗色主题',
-    themeSystem: '系统主题'
+    themeSystem: '系统主题',
+    settings: '设置'
   },
   login: {
     username: '用户名',

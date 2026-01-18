@@ -1,35 +1,25 @@
 <script setup lang="ts">
-import { NLayoutSider, NMenu } from "naive-ui";
-import { computed, ref, watch } from "vue";
-import { useRoute } from "vue-router";
-import { MenuProcessor } from "@/router/core/MenuProcessor";
-const menuOptions = computed(() => MenuProcessor.getInstance().getMenuList());
-const menuActiveKey = ref("");
-const collapsed = ref(false);
-const route = useRoute();
-watch(
-  () => route.path,
-  (newPath: string) => {
-    menuActiveKey.value = String(newPath) + String(route.name);
-  },
-  { immediate: true }
+import { defineAsyncComponent } from "vue";
+import { useInjection } from "@/hook/useInjection";
+import { mediaQueryInjectionKey } from "@/injection";
+
+// 获取媒体查询信息，用于判断屏幕尺寸
+const { isMaxSm } = useInjection(mediaQueryInjectionKey);
+
+// 懒加载桌面端侧边栏菜单组件
+const SideBarMenuDesktop = defineAsyncComponent(
+  () => import("@/layout/aside/component/SideBarMenuDesktop.vue")
+);
+
+// 懒加载移动端侧边栏菜单组件
+const SideBarMenuMobile = defineAsyncComponent(
+  () => import("@/layout/aside/component/SideBarMenuMobile.vue")
 );
 </script>
+
 <template>
-  <NLayoutSider
-    collapse-mode="width"
-    :collapsed-width="64"
-    :collapsed-icon-size="22"
-    v-model:collapsed="collapsed"
-    :width="240"
-    show-trigger="arrow-circle"
-    :native-scrollbar="false"
-    bordered>
-    <NMenu
-      :options="menuOptions"
-      :value="menuActiveKey"
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22" />
-  </NLayoutSider>
+  <!-- 桌面端：当屏幕宽度大于 sm（640px）时显示 -->
+  <SideBarMenuDesktop v-if="!isMaxSm" />
+  <!-- 移动端：当屏幕宽度小于等于 sm（640px）时显示 -->
+  <SideBarMenuMobile v-else />
 </template>

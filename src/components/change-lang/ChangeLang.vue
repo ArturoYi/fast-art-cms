@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   NIcon,
+  NButton,
   NTooltip,
   NPopselect,
   NRadioGroup,
@@ -37,22 +38,28 @@ watch(langModel, (newVal) => {
           v-model:value="langModel"
           :options="languageOptions"
           trigger="click">
-          <NIcon
-            size="1.6rem"
-            :hidden="isMaxSm"
-            block
-            text-neutral-text-base>
-            <Language />
-          </NIcon>
+          <NButton
+            tertiary
+            circle
+            :hidden="isMaxSm">
+            <template #icon>
+              <NIcon>
+                <Language />
+              </NIcon>
+            </template>
+          </NButton>
         </NPopselect>
-        <NIcon
-          @click="showModal = true"
-          size="1.6rem"
+        <NButton
+          tertiary
+          circle
           :hidden="!isMaxSm"
-          block
-          text-neutral-text-base>
-          <Language />
-        </NIcon>
+          @click="showModal = true">
+          <template #icon>
+            <NIcon>
+              <Language />
+            </NIcon>
+          </template>
+        </NButton>
       </div>
     </template>
     {{ $t("common.switchLanguage") }}

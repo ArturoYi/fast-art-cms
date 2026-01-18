@@ -2,6 +2,8 @@ export default {
   common: {
     login: 'Login',
     logout: 'Logout',
+    logoutTitle: 'Log out',
+    logoutConfirm: 'Are you sure you want to log out?',
     register: 'Register',
     forgotPassword: 'Forgot Password',
     resetPassword: 'Reset Password',
@@ -9,9 +11,14 @@ export default {
     cancel: 'Cancel',
     switchTheme: 'Switch Theme',
     switchLanguage: 'Switch Language',
+    fullscreen: 'Full screen',
+    exitFullscreen: 'Exit full screen',
+    navigationBack: 'Back',
+    navigationForward: 'Forward',
     themeLight: 'Light Theme',
     themeDark: 'Dark Theme',
-    themeSystem: 'System Theme'
+    themeSystem: 'System Theme',
+    settings: 'Settings'
   },
   login: {
     username: 'Username',

@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
-import { useInjection } from "@/hook/useInjection";
-import { mediaQueryInjectionKey } from "@/injection";
-import { NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NLayoutFooter } from "naive-ui";
+import { RouterView } from "vue-router";
+import { NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter } from "naive-ui";
 import Aside from "@/layout/aside/index.vue";
-const route = useRoute();
-const { isMaxSm } = useInjection(mediaQueryInjectionKey);
+import Header from "@/layout/header/index.vue";
+import Footer from "@/layout/footer/index.vue";
+// 引入layout store,保留响应式
+import { useLayoutStore } from "@/store/modules/layout";
+
+const layoutStore = useLayoutStore();
 </script>
 
 <template>
@@ -17,13 +19,17 @@ const { isMaxSm } = useInjection(mediaQueryInjectionKey);
       <NLayout
         class="h-full"
         content-style="display: flex; flex-direction: column;">
-        <NLayoutHeader>颐和园路</NLayoutHeader>
+        <NLayoutHeader bordered>
+          <Header />
+        </NLayoutHeader>
         <NLayoutContent
           class="flex-1"
           content-style="overflow: hidden;">
-          平山道
+          <RouterView />
         </NLayoutContent>
-        <NLayoutFooter>成府路</NLayoutFooter>
+        <NLayoutFooter bordered>
+          <Footer />
+        </NLayoutFooter>
       </NLayout>
     </NLayout>
   </div>
