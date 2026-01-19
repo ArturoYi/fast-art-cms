@@ -13,6 +13,7 @@ import { ContentType, FetchClientError, type RequestConfig } from '@/api/feachHo
 import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
 import type { LoginDTO } from './DTO/loginDTO';
+import type { BaseDTO } from './DTO/baseDTO';
 
 /**
  * 实例化请求类并配置拦截器
@@ -27,6 +28,17 @@ const request = new FetchRequest(
   {
     // 改为数组形式，可支持多个拦截器
     requestInterceptors: [
+      // 添加语言请求头
+      (config: RequestConfig): RequestConfig => {
+        const userStore = useUserStore();
+        const currentLocale = userStore.getCurrentLocale;
+        config.headers = {
+          ...config.headers,
+          'Accept-Language': currentLocale
+        };
+        return config;
+      },
+      // Token 拦截器
       (config: RequestConfig): RequestConfig => {
         /**
          * 判断请求路径是否需要token
@@ -54,10 +66,30 @@ const request = new FetchRequest(
       }
     ],
     responseInterceptors: [
-      (response: Response): Response => {
+      async (response: Response): Promise<Response> => {
         if (!response.ok) {
           throw new FetchClientError('OTHER_ERROR', 'Response is not ok');
+        } else {
+          // 克隆响应，因为 Response 只能读取一次
+          const clonedResponse = response.clone();
+          try {
+            // 解析响应体为 BaseDTO
+            const responseData: BaseDTO = await clonedResponse.json();
+
+            // 验证 code，如果 code > 200，抛出异常
+            if (responseData.code > 200) {
+              throw new FetchClientError('SERVER_ERROR', responseData.message || '请求失败');
+            }
+          } catch (error) {
+            // 如果解析失败或验证失败，抛出异常
+            if (error instanceof FetchClientError) {
+              throw error;
+            }
+            // 如果 JSON 解析失败，可能是响应格式不正确，但不影响正常流程
+            // 让后续的 json() 调用处理
+          }
         }
+
         return response;
       }
     ]
