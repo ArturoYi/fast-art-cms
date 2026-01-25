@@ -4,10 +4,6 @@ import { NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter } from "naive-ui"
 import Aside from "@/layout/aside/index.vue";
 import Header from "@/layout/header/index.vue";
 import Footer from "@/layout/footer/index.vue";
-// 引入layout store,保留响应式
-import { useLayoutStore } from "@/store/modules/layout";
-
-const layoutStore = useLayoutStore();
 </script>
 
 <template>

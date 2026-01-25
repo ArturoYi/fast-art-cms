@@ -3,7 +3,7 @@ import { LayoutBoard } from '@vicons/tabler';
 
 export const dashboardRoutes: AppRouteRecord = {
   meta: {
-    title: 'Dashboard',
+    title: 'route.dashboard',
     icon: LayoutBoard
   },
   path: '/dashboard',

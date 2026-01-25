@@ -1,5 +1,6 @@
 import type { Ref } from 'vue';
 import { $t } from '@/locale';
+import { showErrorMessage, showWarningMessage } from '@/utils/message';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -49,7 +50,8 @@ export type FetchClientErrorType =
   | 'TIMEOUT_ERROR'
   | 'ABORT_ERROR'
   | 'SECURITY_ERROR'
-  | 'OTHER_ERROR';
+  | 'OTHER_ERROR'
+  | 'HANDLED_ERROR'; // 错误已在拦截器处理，业务处不需要处理错误和提示用户
 /**
  * 请求客户端错误
  */
@@ -80,8 +82,45 @@ export class FetchClientError extends Error {
         return $t('error.securityError');
       case 'OTHER_ERROR':
         return $t('error.otherError');
+      case 'HANDLED_ERROR':
+        // 错误已在拦截器处理，返回空字符串，业务处不需要再次提示
+        return '';
       default:
         return $t('error.networkError');
+    }
+  }
+
+  /**
+   * 使用 NaiveUI 显示错误消息
+   * @param duration 消息显示时长（毫秒），默认不设置（使用 NaiveUI 默认值）
+   */
+  public showMessage(duration?: number): void {
+    // HANDLED_ERROR 类型已在拦截器处理，不需要再次显示
+    if (this.type === 'HANDLED_ERROR') {
+      return;
+    }
+    const messageText = this.text();
+    if (!messageText) {
+      return;
+    }
+    // 根据错误类型选择不同的消息类型
+    switch (this.type) {
+      case 'CLIENT_ERROR':
+      case 'NETWORK_ERROR':
+      case 'SERVER_ERROR':
+      case 'TIMEOUT_ERROR':
+      case 'SECURITY_ERROR':
+      case 'OTHER_ERROR':
+        // 这些错误类型使用错误消息
+        showErrorMessage(messageText, duration);
+        break;
+      case 'ABORT_ERROR':
+        // 取消请求使用警告消息
+        showWarningMessage(messageText, duration);
+        break;
+      default:
+        // 默认使用错误消息
+        showErrorMessage(messageText, duration);
     }
   }
 }

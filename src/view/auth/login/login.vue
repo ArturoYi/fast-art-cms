@@ -6,7 +6,6 @@ import {
   NInput,
   NButton,
   NIcon,
-  useMessage,
 } from "naive-ui";
 import { UserCircle, ShieldLock } from "@vicons/tabler";
 import AuthBackground from "@/view/auth/components/AuthBackground.vue";
@@ -19,7 +18,6 @@ import { $t } from "@/locale";
 import { useLanguage } from "@/hook/useLanguage";
 import { useUserStore } from "@/store/modules/user";
 import { useRouter, useRoute } from "vue-router";
-const message = useMessage();
 const store = useUserStore();
 const router = useRouter();
 const route = useRoute();
@@ -100,13 +98,16 @@ const { run, loading } = useRequest(loginService, {
   defaultParams: [loginForm],
   loadingKeep: 1000,
   onSuccess: (data) => {
-    store.setAccessToken(data.data.token);
-    // 获取 redirect 参数，如果存在则跳转到指定页面，否则跳转到首页
-    const redirect = route.query.redirect as string;
-    router.push(redirect || "/");
+    const token = data?.data?.token;
+    if (token) {
+      store.setAccessToken(token);
+      // 获取 redirect 参数，如果存在则跳转到指定页面，否则跳转到首页
+      const redirect = route.query.redirect as string;
+      router.push(redirect || "/");
+    }
   },
   onError: (error) => {
-    message.error(error.text());
+    error.showMessage();
   },
 });
 
@@ -130,12 +131,9 @@ const handleLogin = async (e: MouseEvent) => {
       flex
       flex-col
       justify-between>
-      <div
-        w-full
-        flex
-        gap-x-4
-        justify-end>
-        <ChangeLang /> <ChangeTheme />
+      <div class="flex justify-end gap-x-4 w-full">
+        <ChangeLang />
+        <ChangeTheme />
       </div>
       <h1
         text-3xl
@@ -166,8 +164,8 @@ const handleLogin = async (e: MouseEvent) => {
           path="password">
           <NInput
             :input-props="{
-              autocomplete: 'password',
-            }"
+            autocomplete: 'password',
+          }"
             clearable
             type="password"
             show-password-on="click"
@@ -204,7 +202,8 @@ const handleLogin = async (e: MouseEvent) => {
           block
           type="primary"
           @click.native="handleLogin"
-          >{{ $t("common.login") }}</NButton
+          >{{
+          $t("common.login") }}</NButton
         >
       </NForm>
     </NCard>

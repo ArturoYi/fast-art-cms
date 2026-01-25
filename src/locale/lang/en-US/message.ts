@@ -37,5 +37,37 @@ export default {
     abortError: 'Request Cancelled',
     securityError: 'Authentication Failed',
     otherError: 'Network Error'
+  },
+  route: {
+    dashboard: 'Dashboard',
+    about: 'About',
+    error: 'Error'
+  },
+  dashboard: {
+    cpu: {
+      title: 'CPU Information',
+      manufacturer: 'Manufacturer',
+      brand: 'Brand',
+      speed: 'Speed',
+      physicalCores: 'Physical Cores',
+      averageUsage: 'Average Usage',
+      cpuUsage: 'CPU Usage',
+      noCoreData: 'No core data available',
+      core: 'Core'
+    },
+    disk: {
+      title: 'Disk Information',
+      totalSize: 'Total Size',
+      used: 'Used',
+      available: 'Available',
+      usage: 'Disk Usage'
+    },
+    memory: {
+      title: 'Memory Information',
+      total: 'Total Memory',
+      available: 'Available Memory',
+      used: 'Used',
+      usage: 'Memory Usage'
+    }
   }
 };

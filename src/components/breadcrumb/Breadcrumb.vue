@@ -8,6 +8,7 @@ import {
   NBreadcrumbItem,
 } from "naive-ui";
 import { useRoute, useRouter, type RouteLocationMatched, type RouteRecordRaw } from "vue-router";
+import { $t } from "@/locale";
 
 const router = useRoute();
 const route = useRouter();
@@ -62,7 +63,7 @@ const handleSelect = (key: string) => {
             v-if="breadcrumbItem.meta && breadcrumbItem.meta.icon"
             :component="breadcrumbItem.meta.icon" />
           <span class="mx-1"></span>
-          <span>{{ breadcrumbItem.meta.title }}</span>
+          <span>{{ $t(breadcrumbItem.meta?.title as string) }}</span>
         </span>
         <RouterLink
           v-else
@@ -71,7 +72,7 @@ const handleSelect = (key: string) => {
             v-if="breadcrumbItem.meta && breadcrumbItem.meta.icon"
             :component="breadcrumbItem.meta.icon" />
           <span class="mx-1"></span>
-          <span>{{ breadcrumbItem.meta.title }}</span>
+          <span>{{ $t(breadcrumbItem.meta?.title as string) }}</span>
         </RouterLink>
       </n-dropdown>
     </NBreadcrumbItem>

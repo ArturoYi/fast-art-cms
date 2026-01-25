@@ -15,6 +15,12 @@ class RequestUrl {
   static readonly login: string = '/api/auth/login';
 
   /**
+   * 获取服务器信息接口
+   * @returns {string} 获取服务器信息接口
+   */
+  static readonly getServerInfo: string = '/api/system/serve/start';
+
+  /**
    * 无需 token 的接口
    */
   static readonly tokenlessRequestUrls: string[] = [RequestUrl.login];

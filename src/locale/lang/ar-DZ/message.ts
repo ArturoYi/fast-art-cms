@@ -37,5 +37,37 @@ export default {
     abortError: 'تم إلغاء الطلب',
     securityError: 'فشل في المصادقة',
     otherError: 'خطأ في الشبكة'
+  },
+  route: {
+    dashboard: 'لوحة التحكم',
+    about: 'حول',
+    error: 'خطأ'
+  },
+  dashboard: {
+    cpu: {
+      title: 'معلومات المعالج',
+      manufacturer: 'الشركة المصنعة',
+      brand: 'العلامة التجارية',
+      speed: 'السرعة',
+      physicalCores: 'النوى الفعلية',
+      averageUsage: 'متوسط الاستخدام',
+      cpuUsage: 'استخدام المعالج',
+      noCoreData: 'لا توجد بيانات للنوى',
+      core: 'النواة'
+    },
+    disk: {
+      title: 'معلومات القرص',
+      totalSize: 'الحجم الإجمالي',
+      used: 'المستخدم',
+      available: 'المتاح',
+      usage: 'استخدام القرص'
+    },
+    memory: {
+      title: 'معلومات الذاكرة',
+      total: 'الذاكرة الإجمالية',
+      available: 'الذاكرة المتاحة',
+      used: 'المستخدم',
+      usage: 'استخدام الذاكرة'
+    }
   }
 };

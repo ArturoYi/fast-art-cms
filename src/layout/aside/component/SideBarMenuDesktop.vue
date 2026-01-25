@@ -4,13 +4,21 @@ import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { MenuProcessor } from "@/router/core/MenuProcessor";
 import { useLayoutStore } from "@/store/modules/layout";
+import { useLanguage } from "@/hook/useLanguage";
 import Logo from "@/components/logo/logo.vue";
 
 // 获取布局 store 实例
 const layoutStore = useLayoutStore();
+// 获取语言相关，用于监听语言变化
+const { getCurrentLocale } = useLanguage();
 
 // 计算属性：获取菜单选项列表，通过 MenuProcessor 单例获取菜单数据
-const menuOptions = computed(() => MenuProcessor.getInstance().getMenuList());
+// 依赖语言变化，确保语言切换时菜单能更新
+const menuOptions = computed(() => {
+  // 访问 getCurrentLocale 以建立响应式依赖
+  void getCurrentLocale.value;
+  return MenuProcessor.getInstance().getMenuList();
+});
 // 响应式引用：当前激活的菜单项的 key 值，初始值为空字符串
 const menuActiveKey = ref("");
 // 计算属性：从 store 获取侧边栏折叠状态（响应式）

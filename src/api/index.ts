@@ -73,12 +73,17 @@ class FetchRequest {
     try {
       // 5. 发起请求
       const response = await fetch(url, mergedConfig);
-      if (!response.ok) {
-        throw await this.handleError(response, mergedConfig);
-      } else {
-        // 6. 执行响应拦截器链
-        const processedResponse = await this.invokeResponseInterceptors(response);
+
+      // 6. 执行响应拦截器链（无论 response.ok 是否为 true，都执行拦截器）
+      // 这样拦截器可以根据 HTTP 状态码和业务错误码进行统一处理
+      const processedResponse = await this.invokeResponseInterceptors(response);
+
+      // 7. 如果拦截器没有抛出异常，且响应正常，解析 JSON
+      if (processedResponse.ok) {
         return await processedResponse.json();
+      } else {
+        // 如果拦截器没有处理错误，使用默认错误处理
+        throw await this.handleError(processedResponse, mergedConfig);
       }
     } catch (e) {
       if (e instanceof FetchClientError) {

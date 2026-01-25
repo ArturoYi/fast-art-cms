@@ -37,5 +37,37 @@ export default {
     abortError: '请求取消',
     securityError: '身份认证失败',
     otherError: '网络错误'
+  },
+  route: {
+    dashboard: '仪表盘',
+    about: '关于',
+    error: '错误'
+  },
+  dashboard: {
+    cpu: {
+      title: 'CPU 信息',
+      manufacturer: '制造商',
+      brand: '型号',
+      speed: '频率',
+      physicalCores: '核心数',
+      averageUsage: '平均使用率',
+      cpuUsage: 'CPU使用率',
+      noCoreData: '暂无核心数据',
+      core: '核心'
+    },
+    disk: {
+      title: '磁盘信息',
+      totalSize: '总大小',
+      used: '已使用',
+      available: '可用空间',
+      usage: '磁盘使用率'
+    },
+    memory: {
+      title: '内存信息',
+      total: '总内存',
+      available: '可用内存',
+      used: '已使用',
+      usage: '内存使用率'
+    }
   }
 };

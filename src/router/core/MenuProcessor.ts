@@ -3,6 +3,7 @@ import type { MenuMixedOption } from 'naive-ui/es/menu/src/interface';
 import { NIcon } from 'naive-ui';
 import { h } from 'vue';
 import { RouterLink } from 'vue-router';
+import i18n, { $t } from '@/locale';
 
 export class MenuProcessor {
   private static instance: MenuProcessor | null = null;
@@ -31,16 +32,20 @@ export class MenuProcessor {
 
     /**
      * label转换为函数，children不存在时使用RouterLink包裹，存在时直接返回title
+     * 在函数内部动态翻译，以支持语言切换
      **/
     const renderLabel = () => {
+      // 在渲染时动态翻译，确保语言切换时能更新
+      const translatedTitle = i18n.global.te(title) ? $t(title) : title;
+
       if (children) {
-        return h('span', {}, title);
+        return h('span', {}, translatedTitle);
       } else {
         return h(
           RouterLink,
           { to: route.path },
           {
-            default: () => title
+            default: () => translatedTitle
           }
         );
       }

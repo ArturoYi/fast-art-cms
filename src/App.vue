@@ -12,6 +12,7 @@ import { RouterView } from "vue-router";
 import { useTheme } from "@/hook/useTheme";
 import { useLanguage } from "@/hook/useLanguage";
 import { appProvide } from "@/provide/appProvide";
+import MessageInitializer from "@/components/MessageInitializer.vue";
 
 appProvide();
 
@@ -35,6 +36,7 @@ onMounted(() => {
     :locale="getNaiveThemeLanguage"
     :date-locale="getNaiveThemeDatetimeFormat">
     <NMessageProvider>
+      <MessageInitializer />
       <NNotificationProvider>
         <NDialogProvider>
           <NModalProvider>
