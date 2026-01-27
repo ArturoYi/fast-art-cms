@@ -12,6 +12,7 @@ export function appProvide() {
     isMaxMd: breakpoints.smaller('md'),
     isMaxLg: breakpoints.smaller('lg'),
     isMaxXl: breakpoints.smaller('xl'),
-    isMax2Xl: breakpoints.smaller('2xl')
+    isMax2Xl: breakpoints.smaller('2xl'),
+    current: breakpoints.current()
   });
 }

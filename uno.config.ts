@@ -1,10 +1,13 @@
-import { defineConfig, presetAttributify, presetWind4 } from 'unocss';
+import { defineConfig, presetAttributify, presetWind, presetTypography } from 'unocss';
 
 export default defineConfig({
   presets: [
-    presetWind4(),
+    presetWind(),
     presetAttributify({
       ignoreAttributes: []
+    }),
+    presetTypography({
+      selectorName: 'tiptap-editor'
     })
   ],
   theme: {

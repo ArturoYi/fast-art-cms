@@ -41,7 +41,10 @@ export default {
   route: {
     dashboard: 'Dashboard',
     about: 'About',
-    error: 'Error'
+    error: 'Error',
+    blog: 'Blog',
+    blogWrite: 'Write Blog',
+    blogList: 'All Blog Posts'
   },
   dashboard: {
     cpu: {

@@ -154,7 +154,10 @@ export function useRequest<TData, TParams extends any[] = []>(
         throw err;
       }
 
-      const fetchError = err instanceof FetchClientError ? err : new FetchClientError('OTHER_ERROR', String(err));
+      const fetchError =
+        err instanceof FetchClientError
+          ? err
+          : new FetchClientError('OTHER_ERROR', err instanceof Error ? err.message : '');
       error.value = fetchError;
 
       // 4. 错误重试机制 (Error Retry Mechanism)

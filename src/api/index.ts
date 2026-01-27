@@ -42,7 +42,10 @@ class FetchRequest {
       const data = await this.request<T>(config);
       return { data, error: null, success: true };
     } catch (error) {
-      const fetchError = error instanceof FetchClientError ? error : new FetchClientError('OTHER_ERROR', String(error));
+      const fetchError =
+        error instanceof FetchClientError
+          ? error
+          : new FetchClientError('OTHER_ERROR', error instanceof Error ? error.message : '');
       return { data: null, error: fetchError, success: false };
     }
   }
@@ -89,7 +92,7 @@ class FetchRequest {
       if (e instanceof FetchClientError) {
         throw e;
       } else {
-        throw new FetchClientError('OTHER_ERROR', String(e));
+        throw new FetchClientError('OTHER_ERROR', e instanceof Error ? e.message : '');
       }
     } finally {
       // 清理超时定时器
@@ -149,12 +152,12 @@ class FetchRequest {
     try {
       const errorData = await errorResponse.json();
       if (errorResponse.status < 500) {
-        return new FetchClientError('CLIENT_ERROR', String(errorData.message));
+        return new FetchClientError('CLIENT_ERROR', errorData?.message ?? '');
       } else {
         return new FetchClientError('SERVER_ERROR');
       }
     } catch (error) {
-      return new FetchClientError('OTHER_ERROR', String(error));
+      return new FetchClientError('OTHER_ERROR', error instanceof Error ? error.message : '');
     }
   }
 

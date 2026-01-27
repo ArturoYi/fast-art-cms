@@ -41,7 +41,10 @@ export default {
   route: {
     dashboard: '仪表盘',
     about: '关于',
-    error: '错误'
+    error: '错误',
+    blog: '博客',
+    blogWrite: '写博客',
+    blogList: '所有博客文章'
   },
   dashboard: {
     cpu: {

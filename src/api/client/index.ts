@@ -217,7 +217,10 @@ const request = new FetchRequest(
                 Authorization: `Bearer ${accessToken}`
               };
             } catch (e) {
-              throw new FetchClientError('OTHER_ERROR', 'Token parse error' + e);
+              throw new FetchClientError(
+                'OTHER_ERROR',
+                'Token parse error' + (e instanceof Error && e.message ? `: ${e.message}` : '')
+              );
             }
           } else {
             throw new FetchClientError('OTHER_ERROR', 'User info not found');

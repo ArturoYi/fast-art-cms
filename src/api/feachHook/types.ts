@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { $t } from '@/locale';
+import i18n, { $t } from '@/locale';
 import { showErrorMessage, showWarningMessage } from '@/utils/message';
 
 export type Method = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -65,6 +65,9 @@ export class FetchClientError extends Error {
 
   public text(): string {
     if (this.message) {
+      if (i18n.global.te(this.message)) {
+        return $t(this.message);
+      }
       return this.message;
     }
     switch (this.type) {

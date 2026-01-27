@@ -28,8 +28,9 @@ const disableDropdown = (breadcrumbItem: RouteLocationMatched) => {
 
 // 获取面包屑选项的子选项
 const getChildrenOptions = (children: RouteRecordRaw[]): DropdownOption[] => children.map((child) => {
+
   return {
-    label:child.meta?.title,
+    label: $t(child.meta?.title as string),
     key: String(child.path),
     children: (child.children && child.children.length > 0) ? getChildrenOptions(child.children) : undefined,
   };
@@ -54,7 +55,7 @@ const handleSelect = (key: string) => {
       clickable
       v-for="breadcrumbItem in routeBreadcrumbList"
       :key="String(breadcrumbItem.path)">
-      <n-dropdown
+      <NDropdown
         :disabled="disableDropdown(breadcrumbItem)"
         :options="getOptions(breadcrumbItem)"
         @select="handleSelect">
@@ -74,7 +75,7 @@ const handleSelect = (key: string) => {
           <span class="mx-1"></span>
           <span>{{ $t(breadcrumbItem.meta?.title as string) }}</span>
         </RouterLink>
-      </n-dropdown>
+      </NDropdown>
     </NBreadcrumbItem>
   </NBreadcrumb>
 </template>

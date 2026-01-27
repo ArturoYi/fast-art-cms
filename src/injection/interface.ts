@@ -6,4 +6,8 @@ export interface MediaQueryProvider {
   isMaxLg: ComputedRef<boolean>;
   isMaxXl: ComputedRef<boolean>;
   isMax2Xl: ComputedRef<boolean>;
+  /**
+   * 当前匹配的断点列表
+   */
+  current: ComputedRef<string[]>;
 }

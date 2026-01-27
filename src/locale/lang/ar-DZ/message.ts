@@ -41,7 +41,10 @@ export default {
   route: {
     dashboard: 'لوحة التحكم',
     about: 'حول',
-    error: 'خطأ'
+    error: 'خطأ',
+    blog: 'مدونة',
+    blogWrite: 'كتابة مدونة',
+    blogList: 'كل مقالات المدونة'
   },
   dashboard: {
     cpu: {
