@@ -57,6 +57,8 @@ function goBack() {
         </template>
       </NButton>
     </template>
-    {{ $t("common.navigationBack") }}
+    <template #default>
+      {{ $t("common.navigationBack") }}
+    </template>
   </NTooltip>
 </template>

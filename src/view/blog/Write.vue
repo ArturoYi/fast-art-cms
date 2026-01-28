@@ -1,142 +1,162 @@
 <script setup lang="ts">
-import { useInjection } from '@/hook/useInjection';
-import { mediaQueryInjectionKey } from '@/injection';
-import { defineAsyncComponent, onMounted, ref } from 'vue';
-import { useEditor } from '@tiptap/vue-3'
+import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import { CharacterCount, Placeholder } from '@tiptap/extensions'
+import Highlight from '@tiptap/extension-highlight';
+import { Color, FontSize, TextStyle } from '@tiptap/extension-text-style';
+import Subscript from '@tiptap/extension-subscript';
+import Superscript from '@tiptap/extension-superscript';
+import Typography from '@tiptap/extension-typography';
+import TextAlign from '@tiptap/extension-text-align';
+import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { Markdown } from '@tiptap/markdown';
-import { TableKit } from '@tiptap/extension-table'
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
-import TableRow from '@tiptap/extension-table-row'
-import { PasteMarkdown } from './extensions/PasteMarkdown'
-
-/**
- * 监听设备类型变化-根据屏幕
- */
-// 获取媒体查询信息，用于判断屏幕尺寸
-const { isMaxLg } = useInjection(mediaQueryInjectionKey);
-
-/**
- * 懒加载编辑器组件
- */
-const WriteMarkdownDesktop = defineAsyncComponent(() => import('./WriteMarkdown/desktop/index.vue'));
-const WriteMarkdownMobile = defineAsyncComponent(() => import('./WriteMarkdown/mobile/index.vue'));
+import { Table, TableHeader, TableRow, TableCell } from '@/view/blog/extensions/table';
+import { InlineMathReplacer } from '@/view/blog/extensions/InlineMathReplacer';
 
 
-/**
- * 编辑器内容
- */
-const value = ref('');
 
 
 
 /**
  * 编辑器实例
+ * https://edra.tsuzat.com/
  */
 const editorRef = useEditor({
   extensions: [
-    StarterKit,
-    Markdown.configure({
-      indentation: {
-        style: 'space',
-        size: 4,
+    // 基础功能套件
+    StarterKit.configure({
+      orderedList: {
+        HTMLAttributes: {
+          class: 'list-decimal'
+        }
       },
-      markedOptions: {
-        gfm: true,
-        breaks: false,
+      bulletList: {
+        HTMLAttributes: {
+          class: 'list-disc'
+        }
       },
+      heading: {
+        levels: [1, 2, 3, 4]
+      },
+      link: {
+        openOnClick: false,
+        autolink: true,
+        linkOnPaste: true,
+        HTMLAttributes: {
+          target: '_tab',
+          rel: 'noopener noreferrer nofollow'
+        }
+      },
+      codeBlock: false
     }),
-    TableKit,
+    CharacterCount, // 字数统计
+    Highlight, // 代码高亮
+    Placeholder.configure({
+      emptyEditorClass: 'is-editor-empty',
+      placeholder: '请输入内容',
+    }), // 空内容占位符
+    Color, // 颜色
+    FontSize, // 字体大小
+    TextStyle, // 文本样式
+    Subscript, // 下标
+    Superscript, // 上标
+    Typography, // 排版
+    TextAlign.configure({
+      types: ['heading', 'paragraph']
+    }), // 文本对齐
+    TaskList, // 任务项
+    TaskItem.configure({
+      nested: true
+    }), // 任务项嵌套
+    Markdown,
+    Table,
+    TableHeader,
+    TableRow,
+    TableCell,
+    InlineMathReplacer,
   ],
   editorProps: {
     attributes: {
       class: 'blog-editor-core markdown-body',
     },
   },
-  onUpdate: ({ editor }) => {
-    value.value = editor.getMarkdown();
-  },
-  contentType: 'markdown',
   injectCSS: false,
 })
 </script>
 
 <template>
   <div class="h-full">
-    <component
-      :is="isMaxLg ? WriteMarkdownMobile : WriteMarkdownDesktop"
-      :editorRef="editorRef"
-      :value="value" />
+    <EditorContent :editor="editorRef" />
   </div>
 </template>
 
 <style>
-.ProseMirror {
-  position: relative;
+.tiptap-editor {
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.ProseMirror {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  white-space: break-spaces;
-  -webkit-font-variant-ligatures: none;
-  font-variant-ligatures: none;
-  font-feature-settings: "liga" 0;
-  /* the above doesn't seem to work in Edge */
+.editor-toolbar {
+  padding: 10px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.ProseMirror pre {
-  white-space: pre-wrap;
+.editor-toolbar button {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.ProseMirror li {
-  position: relative;
+.editor-toolbar button:hover {
+  background: #e9e9e9;
 }
 
-.ProseMirror-hideselection *::selection {
-  background: transparent;
+.editor-toolbar button.active {
+  background: #4299e1;
+  color: white;
+  border-color: #4299e1;
 }
 
-.ProseMirror-hideselection *::-moz-selection {
-  background: transparent;
+.markdown-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
 }
 
-.ProseMirror-hideselection {
-  caret-color: transparent;
+.file-input {
+  display: none;
 }
 
-/* See https://github.com/ProseMirror/prosemirror/issues/1421#issuecomment-1759320191 */
-.ProseMirror [draggable][contenteditable=false] {
-  user-select: text
-}
-
-.ProseMirror-selectednode {
-  outline: 2px solid #8cf;
-}
-
-/* Make sure li selections wrap around markers */
-
-li.ProseMirror-selectednode {
+.editor-content {
+  padding: 20px;
+  min-height: 400px;
   outline: none;
 }
 
-li.ProseMirror-selectednode:after {
-  content: "";
-  position: absolute;
-  left: -32px;
-  right: -2px;
-  top: -2px;
-  bottom: -2px;
-  border: 2px solid #8cf;
-  pointer-events: none;
+.export-result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 4px;
 }
 
-/* Protect against generic img rules */
-
-img.ProseMirror-separator {
-  display: inline !important;
-  border: none !important;
-  margin: 0 !important;
+.export-result pre {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 </style>

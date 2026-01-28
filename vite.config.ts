@@ -23,30 +23,18 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       open: Boolean(VITE_OPEN)
     },
     build: {
+      chunkSizeWarningLimit: 800,
       rolldownOptions: {
         output: {
           advancedChunks: {
             groups: [
-              {
-                name: 'vueuse',
-                test: /\/vueuse/
-              },
-              {
-                name: 'vue',
-                test: /\/vue/
-              },
-              {
-                name: 'naive-ui',
-                test: /\/naive-ui/
-              },
-              {
-                name: 'vue-router',
-                test: /\/vue-router/
-              },
-              {
-                name: 'pinia',
-                test: /\/pinia/
-              }
+              { name: 'vue', test: /[\\/]node_modules[\\/]vue[\\/]/ },
+              { name: 'naive-ui', test: /[\\/]node_modules[\\/]naive-ui[\\/]/ },
+              { name: 'tiptap', test: /[\\/]node_modules[\\/]@tiptap[\\/]/ },
+              { name: 'vueuse', test: /[\\/]node_modules[\\/]@vueuse[\\/]/ },
+              { name: 'vue-router', test: /[\\/]node_modules[\\/]vue-router[\\/]/ },
+              { name: 'pinia', test: /[\\/]node_modules[\\/]pinia[\\/]/ },
+              { name: 'vendor', test: /[\\/]node_modules[\\/]/ }
             ]
           }
         }

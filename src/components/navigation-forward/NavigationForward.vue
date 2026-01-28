@@ -62,6 +62,8 @@ function goForward() {
         </template>
       </NButton>
     </template>
-    {{ $t("common.navigationForward") }}
+    <template #default>
+      {{ $t("common.navigationForward") }}
+    </template>
   </NTooltip>
 </template>

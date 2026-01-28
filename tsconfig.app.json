@@ -5,6 +5,7 @@
     "composite": true, // 启用项目组合模式
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": ["vite/client"],
+    "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"],
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

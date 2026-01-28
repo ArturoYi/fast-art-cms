@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NCard, NSkeleton, NProgress } from 'naive-ui';
+import { NCard, NProgress } from 'naive-ui';
 import { computed } from 'vue';
 import type { Disk } from '@/api/client/DTO/serverInfoDTO';
 import type { FetchClientError } from '@/api/feachHook/types';
