@@ -131,7 +131,7 @@ export class FetchClientError extends Error {
 /**
  * 内容类型枚举，用于设置请求头中的 Content-Type
  */
-export const ContentType = {
+export const ApiContentType = {
   APPLICATION_JSON: 'application/json',
   APPLICATION_X_WWW_FORM_URLENCODED: 'application/x-www-form-urlencoded',
   MULTIPART_FORM_DATA: 'multipart/form-data',

@@ -12,7 +12,7 @@
  */
 
 import {
-  ContentType,
+  ApiContentType,
   FetchClientError,
   type RequestConfig,
   type FetchInterceptors,
@@ -239,8 +239,8 @@ class FetchRequest {
     const contentType = config.headers['Content-Type'];
 
     // 1. JSON (默认)
-    if (!contentType || contentType === ContentType.APPLICATION_JSON) {
-      config.headers['Content-Type'] = ContentType.APPLICATION_JSON;
+    if (!contentType || contentType === ApiContentType.APPLICATION_JSON) {
+      config.headers['Content-Type'] = ApiContentType.APPLICATION_JSON;
       config.body = JSON.stringify(rawData);
     }
     // 2. Form Data (原生 FormData 对象)
@@ -251,7 +251,7 @@ class FetchRequest {
       config.body = rawData;
     }
     // 3. URL Encoded
-    else if (contentType === ContentType.APPLICATION_X_WWW_FORM_URLENCODED) {
+    else if (contentType === ApiContentType.APPLICATION_X_WWW_FORM_URLENCODED) {
       config.body = new URLSearchParams(rawData).toString();
     }
     // 4. 其他情况（如 text/plain 或已序列化的数据）

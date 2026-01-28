@@ -9,7 +9,7 @@
  */
 
 import FetchRequest from '@/api/index';
-import { ContentType, FetchClientError, type RequestConfig } from '@/api/feachHook/types';
+import { ApiContentType, FetchClientError, type RequestConfig } from '@/api/feachHook/types';
 import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
 import type { LoginDTO } from './DTO/loginDTO';
@@ -183,7 +183,7 @@ const request = new FetchRequest(
   {
     baseURL: import.meta.env.VITE_BASE_URL,
     headers: {
-      'Content-Type': ContentType.APPLICATION_JSON
+      'Content-Type': ApiContentType.APPLICATION_JSON
     }
   },
   {

@@ -35,13 +35,13 @@ watch(langModel, (newVal) => {
     <template #trigger>
       <div>
         <NPopselect
+          v-if="!isMaxSm"
           v-model:value="langModel"
           :options="languageOptions"
           trigger="click">
           <NButton
             tertiary
-            circle
-            :hidden="isMaxSm">
+            circle>
             <template #icon>
               <NIcon>
                 <Language />
@@ -52,7 +52,7 @@ watch(langModel, (newVal) => {
         <NButton
           tertiary
           circle
-          :hidden="!isMaxSm"
+          v-if="isMaxSm"
           @click="showModal = true">
           <template #icon>
             <NIcon>

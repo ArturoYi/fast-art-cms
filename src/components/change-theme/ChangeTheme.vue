@@ -66,14 +66,14 @@ function renderLabel(option: SelectOption): VNodeChild {
     <template #trigger>
       <div>
         <NPopselect
+          v-if="!isMaxSm"
           v-model:value="themeModel"
           :options="themeOptions"
           trigger="click"
           :render-label="renderLabel">
           <NButton
             tertiary
-            circle
-            :hidden="isMaxSm">
+            circle>
             <template #icon>
               <NIcon>
                 <component :is="currentThemeIcon" />
@@ -84,7 +84,7 @@ function renderLabel(option: SelectOption): VNodeChild {
         <NButton
           tertiary
           circle
-          :hidden="!isMaxSm"
+          v-if="isMaxSm"
           @click="showModal = true">
           <template #icon>
             <NIcon>
