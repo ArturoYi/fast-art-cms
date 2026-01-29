@@ -14,6 +14,8 @@ import { Table, TableHeader, TableRow, TableCell } from '@/view/blog/extensions/
 import { InlineMathReplacer } from '@/view/blog/extensions/InlineMathReplacer';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import { all, createLowlight } from 'lowlight'
+import { VueNodeViewRenderer } from '@tiptap/vue-3'
+import CodeBlock from '@/view/blog/components/CodeBlock.vue'
 
 
 
@@ -79,9 +81,9 @@ const editorRef = useEditor({
     CodeBlockLowlight.configure({
       lowlight
     }).extend({
-      // addNodeView() {
-      //   return SvelteNodeViewRenderer(CodeBlock);
-      // }
+      addNodeView() {
+        return VueNodeViewRenderer(CodeBlock);
+      }
     }),
   ],
   editorProps: {
