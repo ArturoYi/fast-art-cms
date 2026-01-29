@@ -12,11 +12,13 @@ import { TaskItem, TaskList } from '@tiptap/extension-list';
 import { Markdown } from '@tiptap/markdown';
 import { Table, TableHeader, TableRow, TableCell } from '@/view/blog/extensions/table';
 import { InlineMathReplacer } from '@/view/blog/extensions/InlineMathReplacer';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import { all, createLowlight } from 'lowlight'
 
 
 
-
-
+// create a lowlight instance
+const lowlight = createLowlight(all)
 /**
  * 编辑器实例
  * https://edra.tsuzat.com/
@@ -68,12 +70,19 @@ const editorRef = useEditor({
     TaskItem.configure({
       nested: true
     }), // 任务项嵌套
-    Markdown,
-    Table,
-    TableHeader,
-    TableRow,
-    TableCell,
-    InlineMathReplacer,
+    Markdown, // markdown 语法
+    Table, // 表格
+    TableHeader, // 表格头
+    TableRow, // 表格行
+    TableCell, // 表格单元格
+    InlineMathReplacer, // 行内数学公式替换器
+    CodeBlockLowlight.configure({
+      lowlight
+    }).extend({
+      // addNodeView() {
+      //   return SvelteNodeViewRenderer(CodeBlock);
+      // }
+    }),
   ],
   editorProps: {
     attributes: {
@@ -91,72 +100,10 @@ const editorRef = useEditor({
 </template>
 
 <style>
-.tiptap-editor {
-  max-width: 800px;
-  margin: 20px auto;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.editor-toolbar {
-  padding: 10px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #e0e0e0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.editor-toolbar button {
-  padding: 6px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.editor-toolbar button:hover {
-  background: #e9e9e9;
-}
-
-.editor-toolbar button.active {
-  background: #4299e1;
-  color: white;
-  border-color: #4299e1;
-}
-
-.markdown-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
-}
-
-.file-input {
-  display: none;
-}
-
-.editor-content {
-  padding: 20px;
-  min-height: 400px;
-  outline: none;
-}
-
-.export-result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f8f8f8;
-  border-radius: 4px;
-}
-
-.export-result pre {
-  background: white;
-  padding: 10px;
-  border-radius: 4px;
-  max-height: 300px;
-  overflow-y: auto;
+/* Table Styling */
+.tiptap,
+.ProseMirror {
+  /* ProseMirror 必需的 white-space 属性 */
   white-space: pre-wrap;
-  word-wrap: break-word;
 }
 </style>
