@@ -16,7 +16,9 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import { all, createLowlight } from 'lowlight'
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
 import CodeBlock from '@/view/blog/components/CodeBlock.vue'
-
+import { ImagePlaceholder } from '@/view/blog/extensions/image/ImagePlaceholder';
+import ImagePlaceholderComp from '@/view/blog/components/ImagePlaceholderComp.vue';
+import { ImageExtended } from '@/view/blog/extensions/image/ImageExtended';
 
 
 // create a lowlight instance
@@ -85,6 +87,9 @@ const editorRef = useEditor({
         return VueNodeViewRenderer(CodeBlock);
       }
     }),
+    // 视图级别扩展
+    ImagePlaceholder(ImagePlaceholderComp),
+    ImageExtended(ImageExtendedComp),
   ],
   editorProps: {
     attributes: {

@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import type { NodeViewProps } from '@tiptap/vue-3';
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/vue-3';
-import { computed, ref } from 'vue';
+import { computed, } from 'vue';
 const props = defineProps<NodeViewProps>();
 
-const preRef = ref<HTMLPreElement>();
-
 const defaultLanguage = computed(() => {
-	return props.node.attrs.language || 'plaintext';
+  return props.node.attrs.language || 'plaintext';
 });
 </script>
 
