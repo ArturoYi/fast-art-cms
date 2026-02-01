@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@tiptap/extension-bold": "^3.18.0",
+    "@tiptap/extension-bubble-menu": "^3.18.0",
     "@tiptap/extension-bullet-list": "^3.18.0",
     "@tiptap/extension-code-block-lowlight": "^3.18.0",
     "@tiptap/extension-heading": "^3.18.0",
@@ -39,10 +40,12 @@
     "@tiptap/markdown": "^3.17.1",
     "@tiptap/pm": "^3.17.1",
     "@tiptap/starter-kit": "^3.17.1",
+    "@tiptap/suggestion": "^3.18.0",
     "@tiptap/vue-3": "^3.17.1",
     "@vueuse/core": "^14.1.0",
     "lowlight": "^3.3.0",
     "pinia": "^3.0.4",
+    "unocss-merge": "^0.8.2",
     "vue": "^3.5.24",
     "vue-i18n": "^11.2.2",
     "vue-router": "^4.6.4"

@@ -19,3 +19,5 @@ interface ImportMeta {
 
 // 全局变量声明
 declare const __APP_VERSION__: string; // 应用版本号
+// Vue Runes / Reactivity Transform 宏（供 $state 等使用）
+declare function $state<T>(initial?: T): T;

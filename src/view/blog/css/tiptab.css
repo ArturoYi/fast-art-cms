@@ -1,0 +1,39 @@
+/* Base TipTap Editor Styles with Light/Dark Theme Support */
+
+/* Table Styling */
+.tiptap,
+.ProseMirror {
+  /* ProseMirror 必需的 white-space 属性 */
+  white-space: pre-wrap;
+}
+
+.edra-editor .tiptap.ProseMirror {
+  margin-inline: auto;
+}
+.edra-editor {
+  height: 100%;
+  width: 100%;
+  cursor: auto;
+  outline: none !important;
+}
+
+.tiptap :first-child {
+  margin-top: 0;
+}
+
+.tiptap :last-child {
+  margin-bottom: 0;
+}
+
+.tiptap > p {
+  margin: 0.5rem 0;
+}
+
+/* For Placeholder */
+.tiptap .is-empty:not(blockquote.is-empty)::before {
+  float: left;
+  height: 0;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  content: attr(data-placeholder);
+}

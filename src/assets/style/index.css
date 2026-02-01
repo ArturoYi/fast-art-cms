@@ -1,3 +1,5 @@
 @import './theme/theme.css';
 @import './mobile.css';
 @import './rtl.css';
+@import '../../view/blog/css/tiptab.css';
+@import '../../view/blog/css/onedark.css';

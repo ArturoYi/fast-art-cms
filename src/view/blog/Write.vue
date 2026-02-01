@@ -18,7 +18,9 @@ import { VueNodeViewRenderer } from '@tiptap/vue-3'
 import CodeBlock from '@/view/blog/components/CodeBlock.vue'
 import { ImagePlaceholder } from '@/view/blog/extensions/image/ImagePlaceholder';
 import ImagePlaceholderComp from '@/view/blog/components/ImagePlaceholderComp.vue';
-import { ImageExtended } from '@/view/blog/extensions/image/ImageExtended';
+import { ImageExtended } from '@/view/blog/extensions/image/ImageExtended.ts';
+import ImageExtendedComp from '@/view/blog/components/ImageExtendedComp.vue';
+import { SlashCommands, getSuggestionItems, renderItems } from '@/view/blog/extensions/slash-command'
 
 
 // create a lowlight instance
@@ -90,10 +92,17 @@ const editorRef = useEditor({
     // 视图级别扩展
     ImagePlaceholder(ImagePlaceholderComp),
     ImageExtended(ImageExtendedComp),
+    // 斜杠命令
+    SlashCommands.configure({
+      suggestion: {
+        items: getSuggestionItems,
+        render: renderItems,
+      },
+    }),
   ],
   editorProps: {
     attributes: {
-      class: 'blog-editor-core markdown-body',
+      class: 'edra-editor',
     },
   },
   injectCSS: false,
@@ -101,16 +110,31 @@ const editorRef = useEditor({
 </script>
 
 <template>
-  <div class="h-full">
+  <div class="h-full  write">
+    <!-- <div v-if="editorRef">
+      <BubbleMenu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editorRef">
+        <button @click="editorRef.chain().focus().toggleBold().run()" :class="{ 'is-active': editorRef.isActive('bold') }">
+          Bold
+        </button>
+        <button @click="editorRef.chain().focus().toggleItalic().run()" :class="{ 'is-active': editorRef.isActive('italic') }">
+          Italic
+        </button>
+        <button @click="editorRef.chain().focus().toggleStrike().run()" :class="{ 'is-active': editorRef.isActive('strike') }">
+          Strike
+        </button>
+        <button @click="editorRef.chain().focus().toggleCode().run()" :class="{ 'is-active': editorRef.isActive('code') }">
+          Code
+        </button>
+      </BubbleMenu>
+    </div> -->
     <EditorContent :editor="editorRef" />
   </div>
 </template>
 
-<style>
-/* Table Styling */
-.tiptap,
-.ProseMirror {
-  /* ProseMirror 必需的 white-space 属性 */
-  white-space: pre-wrap;
+<style scoped>
+.write {
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
 }
 </style>
