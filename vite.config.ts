@@ -30,7 +30,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
             groups: [
               { name: 'vue', test: /[\\/]node_modules[\\/]vue[\\/]/ },
               { name: 'naive-ui', test: /[\\/]node_modules[\\/]naive-ui[\\/]/ },
-              { name: 'tiptap', test: /[\\/]node_modules[\\/]@tiptap[\\/]/ },
               { name: 'vueuse', test: /[\\/]node_modules[\\/]@vueuse[\\/]/ },
               { name: 'vue-router', test: /[\\/]node_modules[\\/]vue-router[\\/]/ },
               { name: 'pinia', test: /[\\/]node_modules[\\/]pinia[\\/]/ },

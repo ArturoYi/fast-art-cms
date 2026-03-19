@@ -7,7 +7,7 @@ export default defineConfig({
       ignoreAttributes: []
     }),
     presetTypography({
-      selectorName: 'tiptap-editor'
+      selectorName: 'rich-text-editor'
     })
   ],
   theme: {
