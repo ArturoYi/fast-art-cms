@@ -46,6 +46,11 @@ export default {
     blogWrite: 'Write Blog',
     blogList: 'All Blog Posts'
   },
+  blog: {
+    preview: 'Preview',
+    exitPreview: 'Back to edit',
+    emptyPreview: 'No content yet. Switch to edit mode to write.'
+  },
   dashboard: {
     cpu: {
       title: 'CPU Information',

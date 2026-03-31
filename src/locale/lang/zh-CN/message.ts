@@ -46,6 +46,11 @@ export default {
     blogWrite: '写博客',
     blogList: '所有博客文章'
   },
+  blog: {
+    preview: '预览',
+    exitPreview: '返回编辑',
+    emptyPreview: '暂无正文，请在编辑模式下输入内容'
+  },
   dashboard: {
     cpu: {
       title: 'CPU 信息',

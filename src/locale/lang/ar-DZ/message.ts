@@ -46,6 +46,11 @@ export default {
     blogWrite: 'كتابة مدونة',
     blogList: 'كل مقالات المدونة'
   },
+  blog: {
+    preview: 'معاينة',
+    exitPreview: 'العودة إلى التحرير',
+    emptyPreview: 'لا يوجد محتوى بعد. انتقل إلى وضع التحرير للكتابة.'
+  },
   dashboard: {
     cpu: {
       title: 'معلومات المعالج',
