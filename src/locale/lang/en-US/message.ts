@@ -27,7 +27,12 @@ export default {
     usernameLength: 'Username length should be between 3-20 characters',
     passwordRequired: 'Please enter password',
     passwordLength: 'Password length should be between 6-20 characters',
-    loginSuccess: 'Login successful: '
+    loginSuccess: 'Login successful: ',
+    verifyCode: 'Verification code',
+    verifyCodeRequired: 'Please enter the verification code',
+    verifyCodeLength: 'The code must be 4 characters',
+    captchaMissing: 'Captcha not ready, tap refresh',
+    captchaRefresh: 'Refresh'
   },
   error: {
     networkError: 'Network Error',
@@ -49,7 +54,38 @@ export default {
   blog: {
     preview: 'Preview',
     exitPreview: 'Back to edit',
-    emptyPreview: 'No content yet. Switch to edit mode to write.'
+    emptyPreview: 'No content yet. Switch to edit mode to write.',
+    editorPlaceholder: 'Enter content',
+    title: 'Title',
+    titlePlaceholder: 'Article title',
+    titleRequired: 'Title is required',
+    category: 'Category',
+    categoryPlaceholder: 'Select a category',
+    categoryRequired: 'Please select a category',
+    tags: 'Tags',
+    tagsPlaceholder: 'Optional, multi-select',
+    summary: 'Summary',
+    summaryPlaceholder: 'Optional excerpt',
+    coverImage: 'Cover image',
+    coverPlaceholder: 'Optional full URL with http(s)',
+    status: 'Status',
+    statusDraft: 'Draft',
+    statusPublished: 'Published',
+    pinned: 'Pin',
+    publish: 'Publish',
+    publishSuccess: 'Post submitted',
+    contentRequired: 'Body cannot be empty',
+    listTitle: 'Title',
+    listCategory: 'Category',
+    listStatus: 'Status',
+    listCreatedAt: 'Created',
+    listActions: 'Actions',
+    listKeyword: 'Keyword',
+    listSearch: 'Search',
+    listRefresh: 'Refresh',
+    listTotal: '{n} items',
+    statusLabelDraft: 'Draft',
+    statusLabelPublished: 'Published'
   },
   dashboard: {
     cpu: {

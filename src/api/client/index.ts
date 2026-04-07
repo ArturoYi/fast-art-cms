@@ -12,9 +12,40 @@ import FetchRequest from '@/api/index';
 import { ApiContentType, FetchClientError, type RequestConfig } from '@/api/feachHook/types';
 import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
-import type { LoginDTO } from './DTO/loginDTO';
+import type { CaptchaResponseDTO, LoginDTO } from './DTO/loginDTO';
 import type { BaseDTO } from './DTO/baseDTO';
 import type { ServerInfoDTO } from './DTO/serverInfoDTO';
+import type {
+  BlogCategoryDeleteDTO,
+  BlogCategoryDetailDTO,
+  BlogCategoryListDTO,
+  BlogCategoryMutationDTO,
+  BlogPostDeleteDTO,
+  BlogPostDetailDTO,
+  BlogPostListDTO,
+  BlogPostListQuery,
+  BlogPostMutationDTO,
+  BlogTagDeleteDTO,
+  BlogTagDetailDTO,
+  BlogTagListDTO,
+  BlogTagMutationDTO,
+  CreateBlogCategoryBody,
+  CreateBlogPostBody,
+  CreateBlogTagBody,
+  UpdateBlogCategoryBody,
+  UpdateBlogPostBody,
+  UpdateBlogTagBody
+} from './DTO/blogDTO';
+export { BlogPostStatus } from './DTO/blogDTO';
+export type {
+  BlogCategory,
+  BlogPost,
+  BlogPostListQuery,
+  BlogPostListResult,
+  BlogTag,
+  CreateBlogPostBody,
+  UpdateBlogPostBody
+} from './DTO/blogDTO';
 import { router } from '@/router';
 import { RoutesAlias } from '@/router/router';
 import { AUTH_ERROR_CODES, FORBIDDEN_ERROR_CODES, BusinessErrorCode } from './errorCodes';
@@ -276,6 +307,14 @@ export const loginService = (data: any) => {
   });
 };
 
+/** 获取登录验证码（SVG） */
+export const getCaptchaService = () => {
+  return request.request<CaptchaResponseDTO>({
+    url: RequestUrl.captcha,
+    method: 'GET'
+  });
+};
+
 /**
  * 获取服务器信息
  */
@@ -283,5 +322,132 @@ export const getUserInfoService = () => {
   return request.request<ServerInfoDTO>({
     url: RequestUrl.getServerInfo,
     method: 'GET'
+  });
+};
+
+/** 博客分类列表 */
+export const getBlogCategoryListService = () => {
+  return request.request<BlogCategoryListDTO>({
+    url: RequestUrl.blogCategoryList,
+    method: 'GET'
+  });
+};
+
+/** 博客分类详情 */
+export const getBlogCategoryDetailService = (id: number) => {
+  return request.request<BlogCategoryDetailDTO>({
+    url: RequestUrl.blogCategoryDetail(id),
+    method: 'GET'
+  });
+};
+
+/** 创建分类 */
+export const createBlogCategoryService = (data: CreateBlogCategoryBody) => {
+  return request.request<BlogCategoryMutationDTO>({
+    url: RequestUrl.blogCategoryCreate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 更新分类 */
+export const updateBlogCategoryService = (data: UpdateBlogCategoryBody) => {
+  return request.request<BlogCategoryMutationDTO>({
+    url: RequestUrl.blogCategoryUpdate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 删除分类 */
+export const deleteBlogCategoryService = (id: number) => {
+  return request.request<BlogCategoryDeleteDTO>({
+    url: RequestUrl.blogCategoryDelete(id),
+    method: 'POST'
+  });
+};
+
+/** 博客标签列表 */
+export const getBlogTagListService = () => {
+  return request.request<BlogTagListDTO>({
+    url: RequestUrl.blogTagList,
+    method: 'GET'
+  });
+};
+
+/** 博客标签详情 */
+export const getBlogTagDetailService = (id: number) => {
+  return request.request<BlogTagDetailDTO>({
+    url: RequestUrl.blogTagDetail(id),
+    method: 'GET'
+  });
+};
+
+/** 创建标签 */
+export const createBlogTagService = (data: CreateBlogTagBody) => {
+  return request.request<BlogTagMutationDTO>({
+    url: RequestUrl.blogTagCreate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 更新标签 */
+export const updateBlogTagService = (data: UpdateBlogTagBody) => {
+  return request.request<BlogTagMutationDTO>({
+    url: RequestUrl.blogTagUpdate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 删除标签 */
+export const deleteBlogTagService = (id: number) => {
+  return request.request<BlogTagDeleteDTO>({
+    url: RequestUrl.blogTagDelete(id),
+    method: 'POST'
+  });
+};
+
+/** 文章列表（支持 query 筛选分页） */
+export const getBlogPostListService = (params?: BlogPostListQuery) => {
+  return request.request<BlogPostListDTO>({
+    url: RequestUrl.blogPostList,
+    method: 'GET',
+    params
+  });
+};
+
+/** 文章详情 */
+export const getBlogPostDetailService = (id: number) => {
+  return request.request<BlogPostDetailDTO>({
+    url: RequestUrl.blogPostDetail(id),
+    method: 'GET'
+  });
+};
+
+/** 创建文章 */
+export const createBlogPostService = (data: CreateBlogPostBody) => {
+  return request.request<BlogPostMutationDTO>({
+    url: RequestUrl.blogPostCreate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 更新文章 */
+export const updateBlogPostService = (data: UpdateBlogPostBody) => {
+  return request.request<BlogPostMutationDTO>({
+    url: RequestUrl.blogPostUpdate,
+    method: 'POST',
+    data
+  });
+};
+
+/** 删除文章 */
+export const deleteBlogPostService = (id: number) => {
+  return request.request<BlogPostDeleteDTO>({
+    url: RequestUrl.blogPostDelete(id),
+    method: 'POST'
   });
 };

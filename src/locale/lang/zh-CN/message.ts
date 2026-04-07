@@ -27,7 +27,12 @@ export default {
     usernameLength: '用户名长度应在 3-20 个字符之间',
     passwordRequired: '请输入密码',
     passwordLength: '密码长度应在 6-20 个字符之间',
-    loginSuccess: '登录成功: '
+    loginSuccess: '登录成功: ',
+    verifyCode: '验证码',
+    verifyCodeRequired: '请输入验证码',
+    verifyCodeLength: '验证码为 4 位',
+    captchaMissing: '验证码未就绪，请点击刷新',
+    captchaRefresh: '换一张'
   },
   error: {
     networkError: '网络错误',
@@ -49,7 +54,38 @@ export default {
   blog: {
     preview: '预览',
     exitPreview: '返回编辑',
-    emptyPreview: '暂无正文，请在编辑模式下输入内容'
+    emptyPreview: '暂无正文，请在编辑模式下输入内容',
+    editorPlaceholder: '请输入内容',
+    title: '标题',
+    titlePlaceholder: '请输入文章标题',
+    titleRequired: '请输入标题',
+    category: '分类',
+    categoryPlaceholder: '请选择分类',
+    categoryRequired: '请选择分类',
+    tags: '标签',
+    tagsPlaceholder: '可选，多选',
+    summary: '摘要',
+    summaryPlaceholder: '可选，列表摘要',
+    coverImage: '封面图',
+    coverPlaceholder: '可选，须为带 http(s) 的完整 URL',
+    status: '状态',
+    statusDraft: '草稿',
+    statusPublished: '已发布',
+    pinned: '置顶',
+    publish: '发布',
+    publishSuccess: '文章已提交',
+    contentRequired: '正文不能为空',
+    listTitle: '标题',
+    listCategory: '分类',
+    listStatus: '状态',
+    listCreatedAt: '创建时间',
+    listActions: '操作',
+    listKeyword: '关键词',
+    listSearch: '搜索',
+    listRefresh: '刷新',
+    listTotal: '共 {n} 条',
+    statusLabelDraft: '草稿',
+    statusLabelPublished: '已发布'
   },
   dashboard: {
     cpu: {

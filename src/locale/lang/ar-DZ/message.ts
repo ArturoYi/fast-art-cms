@@ -27,7 +27,12 @@ export default {
     usernameLength: 'يجب أن يكون طول اسم المستخدم بين 3-20 حرفاً',
     passwordRequired: 'يرجى إدخال كلمة المرور',
     passwordLength: 'يجب أن يكون طول كلمة المرور بين 6-20 حرفاً',
-    loginSuccess: 'تم تسجيل الدخول بنجاح: '
+    loginSuccess: 'تم تسجيل الدخول بنجاح: ',
+    verifyCode: 'رمز التحقق',
+    verifyCodeRequired: 'يرجى إدخال رمز التحقق',
+    verifyCodeLength: 'يجب أن يكون الرمز 4 أحرف',
+    captchaMissing: 'الرمز غير جاهز، اضغط تحديث',
+    captchaRefresh: 'تحديث'
   },
   error: {
     networkError: 'خطأ في الشبكة',
@@ -49,7 +54,38 @@ export default {
   blog: {
     preview: 'معاينة',
     exitPreview: 'العودة إلى التحرير',
-    emptyPreview: 'لا يوجد محتوى بعد. انتقل إلى وضع التحرير للكتابة.'
+    emptyPreview: 'لا يوجد محتوى بعد. انتقل إلى وضع التحرير للكتابة.',
+    editorPlaceholder: 'أدخل المحتوى',
+    title: 'العنوان',
+    titlePlaceholder: 'عنوان المقال',
+    titleRequired: 'العنوان مطلوب',
+    category: 'التصنيف',
+    categoryPlaceholder: 'اختر تصنيفًا',
+    categoryRequired: 'يرجى اختيار تصنيف',
+    tags: 'الوسوم',
+    tagsPlaceholder: 'اختياري، متعدد',
+    summary: 'ملخص',
+    summaryPlaceholder: 'ملخص اختياري',
+    coverImage: 'صورة الغلاف',
+    coverPlaceholder: 'رابط كامل بـ http(s) (اختياري)',
+    status: 'الحالة',
+    statusDraft: 'مسودة',
+    statusPublished: 'منشور',
+    pinned: 'تثبيت',
+    publish: 'نشر',
+    publishSuccess: 'تم إرسال المقال',
+    contentRequired: 'المحتوى لا يمكن أن يكون فارغًا',
+    listTitle: 'العنوان',
+    listCategory: 'التصنيف',
+    listStatus: 'الحالة',
+    listCreatedAt: 'تاريخ الإنشاء',
+    listActions: 'إجراءات',
+    listKeyword: 'كلمة مفتاحية',
+    listSearch: 'بحث',
+    listRefresh: 'تحديث',
+    listTotal: '{n} عنصر',
+    statusLabelDraft: 'مسودة',
+    statusLabelPublished: 'منشور'
   },
   dashboard: {
     cpu: {
