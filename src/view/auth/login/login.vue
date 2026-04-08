@@ -10,7 +10,7 @@ import {
 } from "naive-ui";
 import { UserCircle, ShieldLock, Refresh } from "@vicons/tabler";
 import AuthBackground from "@/view/auth/components/AuthBackground.vue";
-import { ref, reactive, watch, onMounted, onUnmounted } from "vue";
+import { ref, reactive, watch, computed, onMounted, onUnmounted } from "vue";
 import ChangeLang from "@/components/change-lang/ChangeLang.vue";
 import ChangeTheme from "@/components/change-theme/ChangeTheme.vue";
 import { useRequest } from "@/api/feachHook/useRequest";
@@ -40,6 +40,20 @@ const loginForm = reactive({
 
 const captchaSvg = ref("");
 const captchaLoading = ref(false);
+
+/** 将接口返回的 SVG 或 data URL 转为 <img> 可用的 src，避免 v-html 插入 DOM */
+function captchaImageToDataUrl(image: string): string {
+  const t = image.trim();
+  if (!t) return "";
+  if (t.startsWith("data:")) return t;
+  if (/^https?:\/\//i.test(t) || t.startsWith("/")) return t;
+  if (/<\s*svg[\s>]/i.test(t)) {
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(image)}`;
+  }
+  return `data:image/svg+xml;base64,${t.replace(/\s/g, "")}`;
+}
+
+const captchaImageSrc = computed(() => captchaImageToDataUrl(captchaSvg.value));
 let captchaExpiryTimer: ReturnType<typeof setTimeout> | null = null;
 
 function clearCaptchaExpiryTimer() {
@@ -210,6 +224,7 @@ const handleLogin = async (e: MouseEvent) => {
           :label="$t('login.username')"
           path="username">
           <NInput
+            size="large"
             clearable
             v-model:value="loginForm.username">
             <template #prefix>
@@ -224,6 +239,7 @@ const handleLogin = async (e: MouseEvent) => {
           :label="$t('login.password')"
           path="password">
           <NInput
+            size="large"
             :input-props="{
             autocomplete: 'password',
           }"
@@ -244,19 +260,32 @@ const handleLogin = async (e: MouseEvent) => {
           path="verifyCode">
           <div
             flex
-            flex-col
-            gap-2>
+            w-full
+            gap-2
+            items-center>
+            <div
+              flex-1
+              min-w-0>
+              <NInput
+                size="large"
+                w-full
+                v-model:value="loginForm.verifyCode"
+                :maxlength="4"
+                clearable
+                :placeholder="$t('login.verifyCode')" />
+            </div>
             <div
               flex
-              gap-2
+              shrink-0
+              gap-1
               items-center>
               <NSpin
                 :show="captchaLoading"
                 size="small">
                 <div
                   class="captcha-svg-box"
-                  min-h-10
-                  min-w-32
+                  h-9
+                  min-w-28
                   flex
                   items-center
                   justify-center
@@ -268,11 +297,18 @@ const handleLogin = async (e: MouseEvent) => {
                   overflow-hidden
                   bg-white
                   dark:bg-neutral-900
-                  px-2
-                  py-1
-                  v-html="captchaSvg" />
+                  px-2>
+                  <img
+                    v-if="captchaImageSrc"
+                    class="max-h-full max-w-full w-auto object-contain select-none"
+                    alt=""
+                    role="presentation"
+                    draggable="false"
+                    :src="captchaImageSrc" />
+                </div>
               </NSpin>
               <NButton
+                size="large"
                 quaternary
                 circle
                 type="primary"
@@ -286,11 +322,6 @@ const handleLogin = async (e: MouseEvent) => {
                 </template>
               </NButton>
             </div>
-            <NInput
-              v-model:value="loginForm.verifyCode"
-              :maxlength="4"
-              clearable
-              :placeholder="$t('login.verifyCode')" />
           </div>
         </NFormItem>
         <!-- 去注册，忘记密码 -->
@@ -313,6 +344,7 @@ const handleLogin = async (e: MouseEvent) => {
         </div>
         <NButton
           attr-type="button"
+          size="large"
           :loading="loading"
           mt-4
           block
