@@ -41,7 +41,12 @@ export default {
     timeoutError: 'Request Timeout',
     abortError: 'Request Cancelled',
     securityError: 'Authentication Failed',
-    otherError: 'Network Error'
+    otherError: 'Network Error',
+    authSessionExpired: 'Session expired. Please sign in again.',
+    forbidden: 'You do not have permission to access this resource.',
+    httpRequestFailed: 'Request failed ({status})',
+    serveStatEmptyBody: 'Could not read the server status stream.',
+    serveStatNotLoggedIn: 'Not signed in; unable to load server status.'
   },
   route: {
     dashboard: 'Dashboard',

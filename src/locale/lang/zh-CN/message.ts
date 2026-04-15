@@ -41,7 +41,12 @@ export default {
     timeoutError: '请求超时',
     abortError: '请求取消',
     securityError: '身份认证失败',
-    otherError: '网络错误'
+    otherError: '网络错误',
+    authSessionExpired: '登录已失效，请重新登录',
+    forbidden: '权限不足，无法访问',
+    httpRequestFailed: '请求失败（{status}）',
+    serveStatEmptyBody: '无法读取服务器状态流',
+    serveStatNotLoggedIn: '未登录，无法获取服务器状态'
   },
   route: {
     dashboard: '仪表盘',

@@ -41,7 +41,12 @@ export default {
     timeoutError: 'انتهت مهلة الطلب',
     abortError: 'تم إلغاء الطلب',
     securityError: 'فشل في المصادقة',
-    otherError: 'خطأ في الشبكة'
+    otherError: 'خطأ في الشبكة',
+    authSessionExpired: 'انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى.',
+    forbidden: 'ليس لديك صلاحية للوصول إلى هذا المورد.',
+    httpRequestFailed: 'فشل الطلب ({status})',
+    serveStatEmptyBody: 'تعذّر قراءة تدفق حالة الخادم.',
+    serveStatNotLoggedIn: 'غير مسجّل الدخول؛ تعذّر تحميل حالة الخادم.'
   },
   route: {
     dashboard: 'لوحة التحكم',

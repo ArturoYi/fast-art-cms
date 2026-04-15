@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { useRequest } from '@/api/feachHook/useRequest';
 import { NScrollbar } from 'naive-ui';
-import { getUserInfoService } from '@/api/client';
 import { computed } from 'vue';
 import { useInjection } from '@/hook/useInjection';
+import { useServeStatSse } from '@/hook/useServeStatSse';
 import { mediaQueryInjectionKey } from '@/injection';
 import CpuComponent from './components/cpu.vue';
 import DiskComponent from './components/disk.vue';
@@ -12,8 +11,9 @@ import MemoryComponent from './components/memory.vue';
 // 获取媒体查询信息，用于判断屏幕尺寸
 const { isMaxLg } = useInjection(mediaQueryInjectionKey);
 
-const { data: serverInfo, loading: serverInfoLoading,error: serverInfoError  } = useRequest(getUserInfoService,{
-  cacheKey: 'serverInfo',
+/** 服务器状态经 SSE（事件 stat）持续推送，默认约 3s 一条 */
+const { data: serverInfo, loading: serverInfoLoading, error: serverInfoError } = useServeStatSse({
+  intervalMs: 3000
 });
 
 /**

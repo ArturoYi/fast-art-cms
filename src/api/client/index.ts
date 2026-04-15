@@ -14,7 +14,6 @@ import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
 import type { CaptchaResponseDTO, LoginDTO } from './DTO/loginDTO';
 import type { BaseDTO } from './DTO/baseDTO';
-import type { ServerInfoDTO } from './DTO/serverInfoDTO';
 import type {
   BlogCategoryDeleteDTO,
   BlogCategoryDetailDTO,
@@ -311,16 +310,6 @@ export const loginService = (data: any) => {
 export const getCaptchaService = () => {
   return request.request<CaptchaResponseDTO>({
     url: RequestUrl.captcha,
-    method: 'GET'
-  });
-};
-
-/**
- * 获取服务器信息
- */
-export const getUserInfoService = () => {
-  return request.request<ServerInfoDTO>({
-    url: RequestUrl.getServerInfo,
     method: 'GET'
   });
 };
