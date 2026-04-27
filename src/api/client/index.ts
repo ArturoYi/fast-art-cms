@@ -49,6 +49,7 @@ import { router } from '@/router';
 import { RoutesAlias } from '@/router/router';
 import { AUTH_ERROR_CODES, FORBIDDEN_ERROR_CODES, BusinessErrorCode } from './errorCodes';
 import { showErrorMessage } from '@/utils/message';
+import { normalizeAcceptLanguage, normalizeBearerToken } from './headerSanitizer';
 
 /**
  * 处理错误响应
@@ -222,7 +223,7 @@ const request = new FetchRequest(
       // 添加语言请求头
       (config: RequestConfig): RequestConfig => {
         const userStore = useUserStore();
-        const currentLocale = userStore.getCurrentLocale;
+        const currentLocale = normalizeAcceptLanguage(userStore.getCurrentLocale);
         config.headers = {
           ...config.headers,
           'Accept-Language': currentLocale
@@ -239,14 +240,17 @@ const request = new FetchRequest(
         if (!tokenlessRequest) {
           // 需要token,设置token
           const userStore = useUserStore();
-          const accessToken = userStore.getAccessToken;
+          let accessToken = userStore.getAccessToken;
           if (userStore.isLogin) {
             try {
+              accessToken = normalizeBearerToken(accessToken);
               config.headers = {
                 ...config.headers,
                 Authorization: `Bearer ${accessToken}`
               };
             } catch (e) {
+              // token 异常时直接清理登录态，避免后续请求持续报错
+              userStore.logout();
               throw new FetchClientError(
                 'OTHER_ERROR',
                 'Token parse error' + (e instanceof Error && e.message ? `: ${e.message}` : '')

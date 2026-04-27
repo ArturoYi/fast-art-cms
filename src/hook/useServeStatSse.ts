@@ -7,6 +7,7 @@ import { useUserStore } from '@/store/modules/user';
 import { router } from '@/router';
 import { showErrorMessage } from '@/utils/message';
 import { onMounted, onUnmounted, ref, type Ref } from 'vue';
+import { normalizeAcceptLanguage, normalizeBearerToken } from '@/api/client/headerSanitizer';
 
 const DEFAULT_INTERVAL_MS = 3000;
 
@@ -174,11 +175,23 @@ export function useServeStatSse(options: UseServeStatSseOptions = {}): UseServeS
       }
 
       try {
+        let token = userStore.getAccessToken;
+        try {
+          token = normalizeBearerToken(token);
+        } catch {
+          // token 异常时直接清理登录态，避免 fetch 在 headers 阶段直接抛错
+          userStore.logout();
+          loading.value = false;
+          error.value = new FetchClientError('HANDLED_ERROR', '');
+          showErrorMessage($t('error.authSessionExpired'));
+          return;
+        }
+
         const res = await fetch(resolveServeStatUrl(intervalMs), {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${userStore.getAccessToken}`,
-            'Accept-Language': userStore.getCurrentLocale,
+            Authorization: `Bearer ${token}`,
+            'Accept-Language': normalizeAcceptLanguage(userStore.getCurrentLocale),
             Accept: 'text/event-stream'
           },
           signal: abortController.signal

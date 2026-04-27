@@ -32,8 +32,8 @@ watch(getCurrentLocale, (_) => {
 
 // 表单数据（captchaId 来自 GET /api/auth/captcha，verifyCode 为用户输入 4 位）
 const loginForm = reactive({
-  username: "chenyiren",
-  password: "cyr68611",
+  username: "",
+  password: "",
   captchaId: "",
   verifyCode: "",
 });
@@ -351,7 +351,7 @@ const handleLogin = async (e: MouseEvent) => {
           type="primary"
           @click.native="handleLogin"
           >{{
-          $t("common.login") }}</NButton
+            $t("common.login") }}</NButton
         >
       </NForm>
     </NCard>
