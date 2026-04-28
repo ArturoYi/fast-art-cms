@@ -17,6 +17,12 @@ class RequestUrl {
   /** 登录验证码 */
   static readonly captcha: string = '/api/auth/captcha';
 
+  /** 注册接口 */
+  static readonly register: string = '/api/auth/register';
+
+  /** 当前登录用户更新个人资料 */
+  static readonly userUpdate: string = '/api/users/update';
+
   /**
    * 获取服务器信息接口
    * @returns {string} 获取服务器信息接口
@@ -59,7 +65,7 @@ class RequestUrl {
   /**
    * 无需 token 的接口
    */
-  static readonly tokenlessRequestUrls: string[] = [RequestUrl.login, RequestUrl.captcha];
+  static readonly tokenlessRequestUrls: string[] = [RequestUrl.login, RequestUrl.captcha, RequestUrl.register];
 }
 
 export default RequestUrl;

@@ -31,8 +31,16 @@ export default {
     verifyCode: '验证码',
     verifyCodeRequired: '请输入验证码',
     verifyCodeLength: '验证码为 4 位',
-    captchaMissing: '验证码未就绪，请点击刷新',
-    captchaRefresh: '换一张'
+    captchaMissing: '验证码未就绪，请点击获取',
+    captchaRefresh: '换一张',
+    captchaGet: '获取验证码'
+  },
+  register: {
+    confirmPassword: '确认密码',
+    confirmPasswordRequired: '请再次输入密码',
+    confirmPasswordNotMatch: '两次输入密码不一致',
+    backToLogin: '已有账号？去登录',
+    submitTip: '注册接口暂未接入，当前为页面演示'
   },
   error: {
     networkError: '网络错误',

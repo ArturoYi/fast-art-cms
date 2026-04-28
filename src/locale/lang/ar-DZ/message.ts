@@ -31,8 +31,16 @@ export default {
     verifyCode: 'رمز التحقق',
     verifyCodeRequired: 'يرجى إدخال رمز التحقق',
     verifyCodeLength: 'يجب أن يكون الرمز 4 أحرف',
-    captchaMissing: 'الرمز غير جاهز، اضغط تحديث',
-    captchaRefresh: 'تحديث'
+    captchaMissing: 'الرمز غير جاهز، اضغط للحصول عليه',
+    captchaRefresh: 'تحديث',
+    captchaGet: 'الحصول على الرمز'
+  },
+  register: {
+    confirmPassword: 'تأكيد كلمة المرور',
+    confirmPasswordRequired: 'يرجى إعادة إدخال كلمة المرور',
+    confirmPasswordNotMatch: 'كلمتا المرور غير متطابقتين',
+    backToLogin: 'لديك حساب بالفعل؟ سجّل الدخول',
+    submitTip: 'واجهة التسجيل جاهزة لكن واجهة API غير موصولة بعد.'
   },
   error: {
     networkError: 'خطأ في الشبكة',

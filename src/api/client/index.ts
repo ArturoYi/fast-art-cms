@@ -13,6 +13,8 @@ import { ApiContentType, FetchClientError, type RequestConfig } from '@/api/feac
 import RequestUrl from './url';
 import { useUserStore } from '@/store/modules/user';
 import type { CaptchaResponseDTO, LoginDTO } from './DTO/loginDTO';
+import type { RegisterDTO, RegisterParams } from './DTO/registerDTO';
+import type { UserUpdateDTO, UserUpdateParams } from './DTO/userDTO';
 import type { BaseDTO } from './DTO/baseDTO';
 import type {
   BlogCategoryDeleteDTO,
@@ -315,6 +317,28 @@ export const getCaptchaService = () => {
   return request.request<CaptchaResponseDTO>({
     url: RequestUrl.captcha,
     method: 'GET'
+  });
+};
+
+/**
+ * 注册服务
+ */
+export const registerService = (data: RegisterParams) => {
+  return request.request<RegisterDTO>({
+    url: RequestUrl.register,
+    method: 'POST',
+    data
+  });
+};
+
+/**
+ * 当前登录用户更新个人资料
+ */
+export const updateUserProfileService = (data: UserUpdateParams) => {
+  return request.request<UserUpdateDTO>({
+    url: RequestUrl.userUpdate,
+    method: 'POST',
+    data
   });
 };
 

@@ -31,8 +31,16 @@ export default {
     verifyCode: 'Verification code',
     verifyCodeRequired: 'Please enter the verification code',
     verifyCodeLength: 'The code must be 4 characters',
-    captchaMissing: 'Captcha not ready, tap refresh',
-    captchaRefresh: 'Refresh'
+    captchaMissing: 'Captcha not ready, tap "Get Captcha"',
+    captchaRefresh: 'Refresh',
+    captchaGet: 'Get Captcha'
+  },
+  register: {
+    confirmPassword: 'Confirm password',
+    confirmPasswordRequired: 'Please confirm your password',
+    confirmPasswordNotMatch: 'Passwords do not match',
+    backToLogin: 'Already have an account? Sign in',
+    submitTip: 'Registration API is not connected yet. This is a UI demo.'
   },
   error: {
     networkError: 'Network Error',
