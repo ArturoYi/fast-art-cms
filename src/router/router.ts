@@ -7,7 +7,9 @@ import type { RouteRecordRaw } from 'vue-router';
  */
 export enum RoutesAlias {
   Layout = '/index/index', // 布局容器
-  Login = '/auth/login' // 登录页
+  Login = '/auth/login', // 登录页
+  /** 无权限落点（静态页） */
+  Forbidden = '/403'
 }
 
 /** 扩展的路由配置类型 */
@@ -34,6 +36,14 @@ export interface RouteMeta extends Record<string | number | symbol, unknown> {
   affix?: boolean;
   /** 是否为iframe嵌套 */
   iframe?: boolean;
+  /**
+   * 进入该路由所需权限码；空/未设置表示不校验（在已登录且动态路由已注册的前提下仍可由按钮级权限约束操作）
+   */
+  permissions?: string[];
+  /**
+   * permissions 的匹配方式；默认 any（任一即可）
+   */
+  permissionMode?: 'any' | 'all';
 }
 
 /**

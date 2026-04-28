@@ -130,6 +130,7 @@ export class StorageConfig {
    * 一些key值
    */
   static readonly USER_KEY = this.getStorageKey('user');
+  static readonly PERMISSION_KEY = this.getStorageKey('permission');
 
   static initialize(): void {
     //  不做迁移，删除旧存储内容

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "pnpm build:prod",
+    "build:prod": "vue-tsc -b && vite build --mode production",
+    "build:dev": "vue-tsc -b && vite build --mode development",
     "preview": "vite preview",
     "lint": "oxlint src --fix-suggestions",
     "format": "oxfmt src",

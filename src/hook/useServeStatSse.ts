@@ -108,7 +108,7 @@ function tHttpRequestFailed(status: number): string {
 }
 
 /**
- * 订阅服务器状态 SSE（`GET .../serve/start`，事件名 `stat`），需 Bearer JWT。
+ * 订阅服务器状态 SSE（`GET .../system/serve/start`，事件名 `stat`），需 Bearer JWT。
  * 浏览器无法用 EventSource 带 Authorization，故使用 fetch 流式解析。
  *
  * **失败重试**：仅针对建立连接阶段（`fetch` 抛错或返回可重试的 5xx）；默认不重试。

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useLanguage } from '@/hook/useLanguage';
 import { $t } from '@/locale';
 import { showInfoMessage } from '@/utils/message';
@@ -82,6 +82,11 @@ async function loadCaptcha() {
     captchaLoading.value = false;
   }
 }
+
+onMounted(() => {
+  // 进入注册面板时预拉一次验证码，避免首次提交缺少 captchaId
+  loadCaptcha();
+});
 
 onUnmounted(() => {
   clearCaptchaCountdownTimer();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, onUnmounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useRequest } from '@/api/feachHook/useRequest';
-import { getCaptchaService, loginService } from '@/api/client';
+import { getCaptchaService, loginService } from '@/api/client/index';
 import { useLanguage } from '@/hook/useLanguage';
 import { $t } from '@/locale';
 import { useUserStore } from '@/store/modules/user';
@@ -31,6 +31,11 @@ const formRef = ref<InstanceType<typeof NForm>>();
 
 watch(getCurrentLocale, () => {
   formRef.value?.restoreValidation();
+});
+
+onMounted(() => {
+  // 进入注册面板时预拉一次验证码，避免首次提交缺少 captchaId
+  loadCaptcha();
 });
 
 function captchaImageToDataUrl(image: string): string {
@@ -157,12 +162,18 @@ const { run, loading } = useRequest(loginService, {
   manual: true,
   defaultParams: [loginForm],
   loadingKeep: 1000,
-  onSuccess: (data) => {
+  onSuccess: async (data: any) => {
     const token = data?.data?.token;
     if (token) {
-      store.setAccessToken(token);
-      const redirect = route.query.redirect as string;
-      router.push(redirect || '/');
+      try {
+        store.setAccessToken(token);
+        await store.initPermissions();
+        const redirect = route.query.redirect as string;
+        router.push(redirect || '/');
+      } catch (e) {
+        store.logout();
+        throw e;
+      }
     }
   },
   onError: (error) => {

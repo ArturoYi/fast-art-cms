@@ -13,20 +13,43 @@ export const blogRoutes: AppRouteRecord = {
     {
       meta: {
         title: 'route.blogList',
-        icon: FileText
+        icon: FileText,
+        permissions: ['blog_post:list']
       },
-      path: '/list',
+      path: '/blog/list',
       name: 'BlogList',
       component: () => import('@/view/blog/List.vue')
     },
     {
       meta: {
         title: 'route.blogWrite',
-        icon: Pencil
+        icon: Pencil,
+        permissions: ['blog_post:create', 'blog_post:update'],
+        permissionMode: 'any'
       },
-      path: '/write',
+      path: '/blog/write',
       name: 'BlogWrite',
       component: () => import('@/view/blog/Write.vue')
+    },
+    {
+      meta: {
+        title: 'route.blogCategory',
+        icon: FileText,
+        permissions: ['blog_category:list']
+      },
+      path: '/blog/category',
+      name: 'BlogCategory',
+      component: () => import('@/view/blog/category/List.vue')
+    },
+    {
+      meta: {
+        title: 'route.blogTag',
+        icon: FileText,
+        permissions: ['blog_tag:list']
+      },
+      path: '/blog/tag',
+      name: 'BlogTag',
+      component: () => import('@/view/blog/tag/List.vue')
     }
   ]
 };

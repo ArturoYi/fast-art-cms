@@ -62,7 +62,9 @@ export default {
     error: 'Error',
     blog: 'Blog',
     blogWrite: 'Write Blog',
-    blogList: 'All Blog Posts'
+    blogList: 'All Blog Posts',
+    blogCategory: 'Categories',
+    blogTag: 'Tags'
   },
   blog: {
     preview: 'Preview',

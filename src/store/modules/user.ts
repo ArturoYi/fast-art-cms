@@ -1,8 +1,10 @@
 import { LANGUAGE } from '@/locale';
+import { getUserPermissionsService } from '@/api/client';
 import { router } from '@/router';
 import { MenuProcessor } from '@/router/core/MenuProcessor';
 import { RouteRegistry } from '@/router/core/RouteRegistry';
 import { RoutesAlias } from '@/router/router';
+import { usePermissionStore } from '@/store/modules/permission';
 import { ThemeEnum } from '@/theme/index';
 import { StorageConfig } from '@/utils';
 import { useLocalStorage } from '@vueuse/core';
@@ -34,6 +36,12 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
     setAccessToken(accessToken: string) {
       this._accessToken = accessToken;
     },
+    async initPermissions(): Promise<void> {
+      const permissionStore = usePermissionStore();
+      const res = await getUserPermissionsService();
+      const perms = (res?.data ?? []) as string[];
+      permissionStore.setPermissions(perms);
+    },
     setCurrentTheme(theme: ThemeEnum) {
       this._currentTheme = theme;
     },
@@ -47,10 +55,12 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
      *  退出登录
      */
     logout() {
+      const permissionStore = usePermissionStore();
       this._accessToken = '';
       this._currentTheme = ThemeEnum.LIGHT;
       this._currentThemeModel = ThemeEnum.SYSTEM;
       this._currentLocale = LANGUAGE.ZH_CN;
+      permissionStore.resetPermissions();
       RouteRegistry.getInstance(router).unregisterRoutes();
       MenuProcessor.getInstance().unregisterMenuList();
       router.replace({ path: RoutesAlias.Login });

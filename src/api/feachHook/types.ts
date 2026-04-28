@@ -26,6 +26,11 @@ export interface RequestConfig extends RequestInit {
   abortController?: AbortController;
   // 标记是否需要 token，默认为 true，可以在 specific request 中覆盖
   needToken?: boolean;
+  /**
+   * 为 true 时：不走统一 `{code,message,data}` 的响应拦截（用于 SSE /push 等 Bypass 或原始 JSON）
+   * 200 时直接 `response.json()`（无 JSON 时返回 `null`）
+   */
+  skipEnvelopeParse?: boolean;
 }
 
 /**

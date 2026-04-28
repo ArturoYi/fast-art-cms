@@ -62,7 +62,9 @@ export default {
     error: '错误',
     blog: '博客',
     blogWrite: '写博客',
-    blogList: '所有博客文章'
+    blogList: '所有博客文章',
+    blogCategory: '分类',
+    blogTag: '标签'
   },
   blog: {
     preview: '预览',

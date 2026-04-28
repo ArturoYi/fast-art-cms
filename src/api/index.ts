@@ -19,6 +19,26 @@ import {
   type FetchResult
 } from '@/api/feachHook/types';
 
+function toFetchClientError(e: unknown): FetchClientError {
+  if (e instanceof FetchClientError) return e;
+
+  // fetch 网络层常见错误：
+  // - AbortController.abort(): DOMException name=AbortError（或用户自定义 reason）
+  // - 断网/跨域等：TypeError: Failed to fetch
+  if (e && typeof e === 'object') {
+    const name = (e as { name?: unknown }).name;
+    if (name === 'AbortError') {
+      return new FetchClientError('ABORT_ERROR');
+    }
+  }
+
+  if (e instanceof TypeError) {
+    return new FetchClientError('NETWORK_ERROR', e.message);
+  }
+
+  return new FetchClientError('OTHER_ERROR', e instanceof Error ? e.message : '');
+}
+
 class FetchRequest {
   private config: RequestConfig;
   private interceptors?: FetchInterceptors;
@@ -42,10 +62,7 @@ class FetchRequest {
       const data = await this.request<T>(config);
       return { data, error: null, success: true };
     } catch (error) {
-      const fetchError =
-        error instanceof FetchClientError
-          ? error
-          : new FetchClientError('OTHER_ERROR', error instanceof Error ? error.message : '');
+      const fetchError = toFetchClientError(error);
       return { data: null, error: fetchError, success: false };
     }
   }
@@ -77,6 +94,26 @@ class FetchRequest {
       // 5. 发起请求
       const response = await fetch(url, mergedConfig);
 
+      // 5.1 跳过统一包体解析（如 SSE 模块 push、或上游返回非 ResOp 的 200 JSON）
+      if (mergedConfig.skipEnvelopeParse) {
+        if (!response.ok) {
+          // Bypass 仅跳过“成功响应”的统一包体解析，但错误仍需走拦截器统一处理
+          // 这样可复用业务错误码 + HTTP 状态码映射（401/403/404/409/5xx 等）
+          const processedResponse = await this.invokeResponseInterceptors(response);
+          // 若拦截器未抛出（未处理），则回退到默认错误处理
+          throw await this.handleError(processedResponse, mergedConfig);
+        }
+        const text = await response.text();
+        if (!text.trim()) {
+          return null as T;
+        }
+        try {
+          return JSON.parse(text) as T;
+        } catch {
+          return null as T;
+        }
+      }
+
       // 6. 执行响应拦截器链（无论 response.ok 是否为 true，都执行拦截器）
       // 这样拦截器可以根据 HTTP 状态码和业务错误码进行统一处理
       const processedResponse = await this.invokeResponseInterceptors(response);
@@ -89,11 +126,7 @@ class FetchRequest {
         throw await this.handleError(processedResponse, mergedConfig);
       }
     } catch (e) {
-      if (e instanceof FetchClientError) {
-        throw e;
-      } else {
-        throw new FetchClientError('OTHER_ERROR', e instanceof Error ? e.message : '');
-      }
+      throw toFetchClientError(e);
     } finally {
       // 清理超时定时器
       if (timeoutId !== undefined) {
@@ -157,7 +190,14 @@ class FetchRequest {
         return new FetchClientError('SERVER_ERROR');
       }
     } catch (error) {
-      return new FetchClientError('OTHER_ERROR', error instanceof Error ? error.message : '');
+      // JSON 解析失败时也保留 HTTP 语义：优先按状态码区分
+      if (errorResponse.status >= 500) {
+        return new FetchClientError('SERVER_ERROR');
+      }
+      if (errorResponse.status >= 400) {
+        return new FetchClientError('CLIENT_ERROR');
+      }
+      return toFetchClientError(error);
     }
   }
 

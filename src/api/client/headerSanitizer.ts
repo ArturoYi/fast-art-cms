@@ -38,8 +38,14 @@ export function normalizeAcceptLanguage(value: unknown): LANGUAGE {
  * 若检测到会导致 fetch 构造 headers 失败的字符，则抛出错误（上层应清理登录态）。
  */
 export function normalizeBearerToken(value: unknown): string {
-  const token = String(value ?? '').trim();
+  let token = String(value ?? '').trim();
   if (!token) return '';
+
+  // 容错：后端/网关有时直接返回 "Bearer xxx"
+  // 统一只保留裸 token，避免 "Bearer Bearer xxx" 导致 401
+  if (/^bearer\s+/i.test(token)) {
+    token = token.replace(/^bearer\s+/i, '').trim();
+  }
 
   // 关键：浏览器 fetch 的 header value 不能包含超出 Latin-1 的码点
   if (hasNonLatin1CodePoint(token)) {
