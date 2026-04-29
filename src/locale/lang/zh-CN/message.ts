@@ -40,7 +40,7 @@ export default {
     confirmPasswordRequired: '请再次输入密码',
     confirmPasswordNotMatch: '两次输入密码不一致',
     backToLogin: '已有账号？去登录',
-    submitTip: '注册接口暂未接入，当前为页面演示'
+    registerSuccess: '注册成功，请登录'
   },
   error: {
     networkError: '网络错误',

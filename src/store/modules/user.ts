@@ -60,6 +60,10 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
       this._currentTheme = ThemeEnum.LIGHT;
       this._currentThemeModel = ThemeEnum.SYSTEM;
       this._currentLocale = LANGUAGE.ZH_CN;
+      if (typeof document !== 'undefined') {
+        // 与 store 同步：否则 data-theme 仍为登出前暗色，页面背景为暗而 Naive 从 store 已切到浅色
+        document.documentElement.setAttribute('data-theme', ThemeEnum.LIGHT);
+      }
       permissionStore.resetPermissions();
       RouteRegistry.getInstance(router).unregisterRoutes();
       MenuProcessor.getInstance().unregisterMenuList();

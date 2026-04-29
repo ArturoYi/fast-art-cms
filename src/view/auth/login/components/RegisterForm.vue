@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { useLanguage } from '@/hook/useLanguage';
 import { $t } from '@/locale';
-import { showInfoMessage } from '@/utils/message';
+import { showSuccessMessage } from '@/utils/message';
 import { getCaptchaService, registerService } from '@/api/client';
 import { useRequest } from '@/api/feachHook/useRequest';
 import { useUserStore } from '@/store/modules/user';
@@ -161,7 +161,7 @@ const formRules = {
 const { run, loading } = useRequest(registerService, {
   manual: true,
   onSuccess: () => {
-    showInfoMessage($t('register.submitTip'));
+    showSuccessMessage($t('register.registerSuccess'));
     emit('switchMode', 'login');
   },
   onError: (error) => {

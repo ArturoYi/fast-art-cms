@@ -40,7 +40,7 @@ export default {
     confirmPasswordRequired: 'Please confirm your password',
     confirmPasswordNotMatch: 'Passwords do not match',
     backToLogin: 'Already have an account? Sign in',
-    submitTip: 'Registration API is not connected yet. This is a UI demo.'
+    registerSuccess: 'Registration successful. Please sign in.'
   },
   error: {
     networkError: 'Network Error',

@@ -40,7 +40,7 @@ export default {
     confirmPasswordRequired: 'يرجى إعادة إدخال كلمة المرور',
     confirmPasswordNotMatch: 'كلمتا المرور غير متطابقتين',
     backToLogin: 'لديك حساب بالفعل؟ سجّل الدخول',
-    submitTip: 'واجهة التسجيل جاهزة لكن واجهة API غير موصولة بعد.'
+    registerSuccess: 'تم التسجيل بنجاح. يرجى تسجيل الدخول.'
   },
   error: {
     networkError: 'خطأ في الشبكة',
