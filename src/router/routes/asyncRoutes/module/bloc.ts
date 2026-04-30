@@ -29,7 +29,7 @@ export const blogRoutes: AppRouteRecord = {
       },
       path: '/blog/write',
       name: 'BlogWrite',
-      component: () => import('@/view/blog/Write.vue')
+      component: () => import('@/view/blog/write/index.vue')
     },
     {
       meta: {

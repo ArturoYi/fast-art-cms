@@ -56,6 +56,15 @@ export default {
     serveStatEmptyBody: '无法读取服务器状态流',
     serveStatNotLoggedIn: '未登录，无法获取服务器状态'
   },
+  exception: {
+    notFoundHeading: '页面未找到',
+    notFoundDesc: '404 表示服务器找不到您请求的地址。可能是链接写错、页面已删除或移动，请检查网址或返回首页。',
+    forbiddenHeading: '无权访问',
+    forbiddenDesc:
+      '403 表示服务器理解您的请求，但拒绝执行。您可能没有查看该资源的权限；若认为有误，可联系管理员或返回其他页面。',
+    backHome: '返回首页',
+    goBack: '返回上一页'
+  },
   route: {
     dashboard: '仪表盘',
     about: '关于',
@@ -64,7 +73,42 @@ export default {
     blogWrite: '写博客',
     blogList: '所有博客文章',
     blogCategory: '分类',
-    blogTag: '标签'
+    blogTag: '标签',
+    profile: '个人中心',
+    profileInfo: '个人信息',
+    profilePassword: '修改密码'
+  },
+  profile: {
+    infoDesc: '查看与维护您的基本资料。',
+    fieldUsername: '用户名',
+    fieldAvatar: '头像',
+    avatarReadonly: '仅展示，暂不支持更换',
+    fieldNickname: '昵称',
+    fieldEmail: '邮箱',
+    fieldPhone: '手机',
+    fieldQq: 'QQ',
+    fieldRemark: '备注',
+    save: '保存',
+    updateSuccess: '资料已更新',
+    emailInvalid: '邮箱格式不正确',
+    passwordDesc: '定期修改密码有助于账号安全。',
+    currentPassword: '当前密码',
+    currentPasswordPlaceholder: '请输入当前密码',
+    currentPasswordRequired: '请输入当前密码',
+    newPassword: '新密码',
+    newPasswordPlaceholder: '请输入新密码',
+    newPasswordRequired: '请输入新密码',
+    confirmPassword: '确认新密码',
+    confirmPasswordPlaceholder: '请再次输入新密码',
+    confirmPasswordRequired: '请再次输入新密码',
+    confirmPasswordNotMatch: '两次输入的新密码不一致',
+    passwordChangeSuccess: '密码已修改',
+    deleteAccount: '注销账户',
+    deleteAccountTitle: '注销账户',
+    deleteAccountWarning:
+      '注销账户为不可逆操作，相关数据可能无法恢复。请谨慎确认。若您仍要注销，请点击下方按钮；如误点请取消。',
+    deleteAccountConfirm: '确认注销',
+    deleteAccountNotSupported: '当前暂不支持账户注销，请联系管理员或留意后续版本。'
   },
   blog: {
     preview: '预览',
@@ -90,6 +134,9 @@ export default {
     publish: '发布',
     publishSuccess: '文章已提交',
     contentRequired: '正文不能为空',
+    nextStep: '下一步',
+    prevStep: '上一步',
+    confirmContentPreview: '正文预览',
     listTitle: '标题',
     listCategory: '分类',
     listStatus: '状态',
@@ -101,6 +148,41 @@ export default {
     listTotal: '共 {n} 条',
     statusLabelDraft: '草稿',
     statusLabelPublished: '已发布'
+  },
+  aboutPage: {
+    pageLead: '关于本站',
+    siteTitle: '站点说明',
+    siteBody:
+      '本站是一套个人 CMS 与线上写作空间，初衷是在快节奏的信息流里留一块自留地：内容归自己、版式归自己、节奏也归自己。这里不追逐热点，更偏向长期沉淀与可追溯的笔记与作品归档。',
+    directionTitle: '内容方向',
+    directionEssay: '随笔与思考',
+    directionTech: '技术笔记与踩坑记录',
+    directionWorks: '作品与设计节选',
+    directionLife: '轻量生活记录（旅行、阅读、日常）',
+    buildTitle: '建站信息公示',
+    buildStack: '前端',
+    buildStackValue: 'Vue 3、TypeScript、Vite、Naive UI 等（以仓库实际依赖为准）。',
+    buildTheme: '主题与界面',
+    buildThemeValue: '随系统/应用内主题切换，追求阅读友好与后台操作清晰。',
+    buildHosting: '部署与服务器',
+    buildHostingValue: '就普通便宜的云服务器',
+    buildSince: '建站时间',
+    buildSinceValue: '2021-04-05',
+    buildPhilosophy: '更新理念',
+    buildPhilosophyValue: '小步迭代、可回滚；优先保证可读与可维护；有想法就记一笔，不追求日更压力。',
+    contactTitle: '交流与联系',
+    contactIntro: '暂无公开更多信息',
+    contactEmail: '邮箱',
+    contactGithub: 'GitHub',
+    contactWechat: '微信 / 手机',
+    contactQq: 'QQ',
+    contactNone: '暂无公开更多信息',
+    legalTitle: '声明与合规',
+    legalBody:
+      '本站为个人非商业性质的内容分享与知识归档，所发文字、图片与代码片段版权归原作者或标注来源方所有；如有侵权或争议，请通过联系方式告知，将及时核查处理。',
+    historyTitle: '历程与归档',
+    historyBody: '按时间记录站点的改版与重要节点，便于回顾与归档。',
+    historyEmpty: '暂无历程记录。'
   },
   dashboard: {
     cpu: {

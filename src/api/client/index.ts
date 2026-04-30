@@ -106,6 +106,14 @@ export const getUserPermissionsService = () => {
   });
 };
 
+/** 当前登录用户信息（`GET /users/me`） */
+export const getCurrentUserService = () => {
+  return request.request<UserDetailDTO>({
+    url: RequestUrl.userMe,
+    method: 'GET'
+  });
+};
+
 export const updateUserPasswordService = (data: UserPasswordParams) => {
   return request.request<UserPasswordDTO>({
     url: RequestUrl.userPassword,

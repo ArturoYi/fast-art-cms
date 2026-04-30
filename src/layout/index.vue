@@ -19,8 +19,8 @@ import Footer from "@/layout/footer/index.vue";
           <Header />
         </NLayoutHeader>
         <NLayoutContent
-          class="flex-1"
-          content-style="overflow: hidden;">
+          class="min-h-0 flex-1"
+          content-style="overflow: hidden; min-height: 0;">
           <RouterView />
         </NLayoutContent>
         <NLayoutFooter bordered>

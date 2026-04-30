@@ -57,8 +57,12 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
     logout() {
       const permissionStore = usePermissionStore();
       this._accessToken = '';
-      this._currentTheme = ThemeEnum.LIGHT;
-      this._currentThemeModel = ThemeEnum.SYSTEM;
+      // 回到登录页时使用固定暗色，不跟随系统
+      this._currentTheme = ThemeEnum.DARK;
+      this._currentThemeModel = ThemeEnum.DARK;
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', ThemeEnum.DARK);
+      }
       this._currentLocale = LANGUAGE.ZH_CN;
       if (typeof document !== 'undefined') {
         // 与 store 同步：否则 data-theme 仍为登出前暗色，页面背景为暗而 Naive 从 store 已切到浅色

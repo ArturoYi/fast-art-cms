@@ -1,0 +1,18 @@
+/*
+ * 与 Naive UI 结构配合的全局布局修正（避免在各页 scoped 中重复 :deep）
+ */
+
+/* 个人资料：NSpin 内容区参与 flex，NScrollbar 才能在溢出时出现滚动条 */
+.profile-info-spin .n-spin-container,
+.profile-info-spin .n-spin-body,
+.profile-info-spin .n-spin-content {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* 两列表单：用网格 gap 控制间距，去掉表单项默认下边距 */
+.profile-form-grid .n-form-item {
+  margin-bottom: 0;
+}

@@ -1,0 +1,98 @@
+/*
+ * 品牌 / 联系渠道色板（关于页图标底等可复用表面）
+ * 形状与排版由 UnoCSS 负责，此处仅颜色与需穿透 SVG 的绘制修正
+ */
+
+:root[data-theme='light'] {
+  --brand-contact-email-bg: color-mix(in srgb, #2563eb 20%, transparent);
+  --brand-contact-email-fg: #1d4ed8;
+  --brand-contact-email-border: color-mix(in srgb, #2563eb 58%, transparent);
+  --brand-contact-email-inset: rgb(255 255 255 / 0.35);
+
+  --brand-contact-github-bg: color-mix(in srgb, #f6f8fa 88%, #24292f 12%);
+  --brand-contact-github-fg: #24292f;
+  --brand-contact-github-border: color-mix(in srgb, #24292f 35%, #d0d7de 65%);
+  --brand-contact-github-inset: rgb(255 255 255 / 0.75);
+
+  --brand-contact-wechat-bg: color-mix(in srgb, #07c160 22%, transparent);
+  --brand-contact-wechat-fg: #059652;
+  --brand-contact-wechat-border: color-mix(in srgb, #07c160 55%, transparent);
+  --brand-contact-wechat-inset: rgb(255 255 255 / 0.35);
+
+  --brand-contact-qq-bg: color-mix(in srgb, #12b7f5 22%, transparent);
+  --brand-contact-qq-fg: #0284c7;
+  --brand-contact-qq-border: color-mix(in srgb, #0ea5e9 52%, transparent);
+  --brand-contact-qq-inset: rgb(255 255 255 / 0.32);
+}
+
+:root[data-theme='dark'] {
+  --brand-contact-email-bg: color-mix(in srgb, #60a5fa 22%, transparent);
+  --brand-contact-email-fg: #93c5fd;
+  --brand-contact-email-border: color-mix(in srgb, #93c5fd 42%, transparent);
+  --brand-contact-email-inset: rgb(255 255 255 / 0.08);
+
+  --brand-contact-github-bg: #21262d;
+  --brand-contact-github-fg: #f0f6fc;
+  --brand-contact-github-border: #484f58;
+  --brand-contact-github-inset: rgb(255 255 255 / 0.06);
+
+  --brand-contact-wechat-bg: color-mix(in srgb, #34d399 18%, transparent);
+  --brand-contact-wechat-fg: #6ee7b7;
+  --brand-contact-wechat-border: color-mix(in srgb, #6ee7b7 38%, transparent);
+  --brand-contact-wechat-inset: rgb(255 255 255 / 0.08);
+
+  --brand-contact-qq-bg: color-mix(in srgb, #38bdf8 18%, transparent);
+  --brand-contact-qq-fg: #7dd3fc;
+  --brand-contact-qq-border: color-mix(in srgb, #7dd3fc 38%, transparent);
+  --brand-contact-qq-inset: rgb(255 255 255 / 0.08);
+}
+
+.brand-contact-chip--email {
+  background: var(--brand-contact-email-bg);
+  color: var(--brand-contact-email-fg);
+  border-color: var(--brand-contact-email-border);
+  box-shadow: inset 0 1px 0 var(--brand-contact-email-inset);
+}
+
+.brand-contact-chip--github {
+  background: var(--brand-contact-github-bg);
+  color: var(--brand-contact-github-fg);
+  border-color: var(--brand-contact-github-border);
+  box-shadow: inset 0 1px 0 var(--brand-contact-github-inset);
+}
+
+.brand-contact-chip--wechat {
+  background: var(--brand-contact-wechat-bg);
+  color: var(--brand-contact-wechat-fg);
+  border-color: var(--brand-contact-wechat-border);
+  box-shadow: inset 0 1px 0 var(--brand-contact-wechat-inset);
+}
+
+.brand-contact-chip--qq {
+  background: var(--brand-contact-qq-bg);
+  color: var(--brand-contact-qq-fg);
+  border-color: var(--brand-contact-qq-border);
+  box-shadow: inset 0 1px 0 var(--brand-contact-qq-inset);
+}
+
+/* Tabler stroke 图标：略加线宽与细描边（GitHub Octocat 为纯描边） */
+.brand-contact-icon svg {
+  stroke-width: 2.35;
+  filter: drop-shadow(0 0 0.4px rgb(0 0 0 / 0.22));
+}
+
+.brand-contact-icon svg path {
+  fill: none;
+}
+
+:root[data-theme='dark'] .about-view .brand-contact-icon svg {
+  filter: drop-shadow(0 0 0.45px rgb(255 255 255 / 0.28));
+}
+
+.brand-contact-chip--github .brand-contact-icon svg {
+  filter: drop-shadow(0 0 0.55px currentColor);
+}
+
+:root[data-theme='dark'] .about-view .brand-contact-chip--github .brand-contact-icon svg {
+  filter: drop-shadow(0 0 0.6px rgb(0 0 0 / 0.45));
+}
