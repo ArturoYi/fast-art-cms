@@ -57,8 +57,12 @@ export const useUserStore = defineStore(StorageConfig.USER_KEY, {
     logout() {
       const permissionStore = usePermissionStore();
       this._accessToken = '';
-      this._currentTheme = ThemeEnum.LIGHT;
-      this._currentThemeModel = ThemeEnum.SYSTEM;
+      // 回到登录页时使用固定暗色，不跟随系统
+      this._currentTheme = ThemeEnum.DARK;
+      this._currentThemeModel = ThemeEnum.DARK;
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', ThemeEnum.DARK);
+      }
       this._currentLocale = LANGUAGE.ZH_CN;
       permissionStore.resetPermissions();
       RouteRegistry.getInstance(router).unregisterRoutes();

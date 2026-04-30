@@ -1,6 +1,12 @@
 import { defineConfig, presetAttributify, presetWind, presetTypography } from 'unocss';
 
 export default defineConfig({
+  shortcuts: {
+    /** 后台内容区通用外壳（个人中心等） */
+    'cms-page': 'box-border flex h-full min-h-0 flex-col overflow-hidden p-6',
+    'cms-page-title': 'm-0 text-lg font-semibold text-[var(--n-text-color)]',
+    'cms-page-desc': 'mt-1 mb-0 text-sm text-[var(--n-text-color-3)]'
+  },
   presets: [
     presetWind(),
     presetAttributify({

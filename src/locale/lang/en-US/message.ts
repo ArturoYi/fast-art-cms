@@ -56,6 +56,16 @@ export default {
     serveStatEmptyBody: 'Could not read the server status stream.',
     serveStatNotLoggedIn: 'Not signed in; unable to load server status.'
   },
+  exception: {
+    notFoundHeading: 'Page not found',
+    notFoundDesc:
+      '404 means the server could not find this address. The link may be wrong, or the page was removed or moved. Check the URL or go back home.',
+    forbiddenHeading: 'Access denied',
+    forbiddenDesc:
+      '403 means the server understood your request but refuses to fulfill it. You may lack permission to view this resource. Contact an administrator if you think this is a mistake, or go elsewhere.',
+    backHome: 'Back to home',
+    goBack: 'Go back'
+  },
   route: {
     dashboard: 'Dashboard',
     about: 'About',
@@ -64,7 +74,42 @@ export default {
     blogWrite: 'Write Blog',
     blogList: 'All Blog Posts',
     blogCategory: 'Categories',
-    blogTag: 'Tags'
+    blogTag: 'Tags',
+    profile: 'Account',
+    profileInfo: 'Profile',
+    profilePassword: 'Change password'
+  },
+  profile: {
+    infoDesc: 'View and update your basic profile.',
+    fieldUsername: 'Username',
+    fieldAvatar: 'Avatar',
+    avatarReadonly: 'Display only; upload coming later',
+    fieldNickname: 'Nickname',
+    fieldEmail: 'Email',
+    fieldPhone: 'Phone',
+    fieldQq: 'QQ',
+    fieldRemark: 'Remark',
+    save: 'Save',
+    updateSuccess: 'Profile updated',
+    emailInvalid: 'Invalid email format',
+    passwordDesc: 'Changing your password regularly helps keep your account secure.',
+    currentPassword: 'Current password',
+    currentPasswordPlaceholder: 'Enter current password',
+    currentPasswordRequired: 'Current password is required',
+    newPassword: 'New password',
+    newPasswordPlaceholder: 'Enter new password',
+    newPasswordRequired: 'New password is required',
+    confirmPassword: 'Confirm new password',
+    confirmPasswordPlaceholder: 'Re-enter new password',
+    confirmPasswordRequired: 'Please confirm the new password',
+    confirmPasswordNotMatch: 'Passwords do not match',
+    passwordChangeSuccess: 'Password updated',
+    deleteAccount: 'Delete account',
+    deleteAccountTitle: 'Delete account',
+    deleteAccountWarning:
+      'Deleting your account cannot be undone and you may lose access to your data. If you still want to proceed, confirm below; otherwise cancel.',
+    deleteAccountConfirm: 'Delete account',
+    deleteAccountNotSupported: 'Account deletion is not available yet. Please contact an admin or check back later.'
   },
   blog: {
     preview: 'Preview',
@@ -101,6 +146,42 @@ export default {
     listTotal: '{n} items',
     statusLabelDraft: 'Draft',
     statusLabelPublished: 'Published'
+  },
+  aboutPage: {
+    pageLead: 'About this site',
+    siteTitle: 'What this site is',
+    siteBody:
+      'This is a personal CMS and writing space—a small corner that is not driven by feeds or algorithms. The goal is long-term notes, essays, and a traceable archive of work and life snippets.',
+    directionTitle: 'Content focus',
+    directionEssay: 'Essays and reflections',
+    directionTech: 'Technical notes and debugging logs',
+    directionWorks: 'Selected work and design',
+    directionLife: 'Light life notes (travel, reading, everyday)',
+    buildTitle: 'Public site build information',
+    buildStack: 'Frontend',
+    buildStackValue: 'Vue 3, TypeScript, Vite, Naive UI, and more (exact dependencies per the repository).',
+    buildTheme: 'Theme & UI',
+    buildThemeValue: 'Follows system or in-app theme switching; reader-friendly layout and clear admin workflows.',
+    buildHosting: 'Deployment & server',
+    buildHostingValue: 'A plain, budget-friendly cloud VPS.',
+    buildSince: 'Site launch date',
+    buildSinceValue: '2021-04-05',
+    buildPhilosophy: 'Update philosophy',
+    buildPhilosophyValue:
+      'Small, reversible steps; readability and maintainability first; jot things down when inspired—no pressure to post every day.',
+    contactTitle: 'Get in touch',
+    contactIntro: 'No further public information at the moment.',
+    contactEmail: 'Email',
+    contactGithub: 'GitHub',
+    contactWechat: 'WeChat / phone',
+    contactQq: 'QQ',
+    contactNone: 'No further public information at the moment.',
+    legalTitle: 'Statement & compliance',
+    legalBody:
+      'This site is personal and non-commercial, for sharing content and archiving knowledge. Text, images, and code snippets belong to their authors or credited sources. If you believe anything infringes your rights or wish to raise a concern, please use the contact methods provided and I will review promptly.',
+    historyTitle: 'History & archive',
+    historyBody: 'Site redesigns and milestones are recorded in chronological order for review and archiving.',
+    historyEmpty: 'No history entries yet.'
   },
   dashboard: {
     cpu: {

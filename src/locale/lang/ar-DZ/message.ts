@@ -56,13 +56,59 @@ export default {
     serveStatEmptyBody: 'تعذّر قراءة تدفق حالة الخادم.',
     serveStatNotLoggedIn: 'غير مسجّل الدخول؛ تعذّر تحميل حالة الخادم.'
   },
+  exception: {
+    notFoundHeading: 'الصفحة غير موجودة',
+    notFoundDesc:
+      'رمز 404 يعني أن الخادم لم يعثر على العنوان المطلوب. قد يكون الرابط خاطئًا أو أن الصفحة حُذفت أو نُقلت. تحقق من الرابط أو عد إلى الصفحة الرئيسية.',
+    forbiddenHeading: 'الوصول مرفوض',
+    forbiddenDesc:
+      'رمز 403 يعني أن الخادم فهم الطلب لكنه يرفض تنفيذه. قد لا تملك صلاحية عرض هذا المورد. تواصل مع المسؤول إن كان ذلك خطأ، أو انتقل إلى صفحة أخرى.',
+    backHome: 'الصفحة الرئيسية',
+    goBack: 'رجوع'
+  },
   route: {
     dashboard: 'لوحة التحكم',
     about: 'حول',
     error: 'خطأ',
     blog: 'مدونة',
     blogWrite: 'كتابة مدونة',
-    blogList: 'كل مقالات المدونة'
+    blogList: 'كل مقالات المدونة',
+    blogCategory: 'التصنيفات',
+    blogTag: 'الوسوم',
+    profile: 'الحساب',
+    profileInfo: 'الملف الشخصي',
+    profilePassword: 'تغيير كلمة المرور'
+  },
+  profile: {
+    infoDesc: 'عرض وتحديث ملفك الأساسي.',
+    fieldUsername: 'اسم المستخدم',
+    fieldAvatar: 'الصورة',
+    avatarReadonly: 'عرض فقط؛ التغيير لاحقًا',
+    fieldNickname: 'اللقب',
+    fieldEmail: 'البريد',
+    fieldPhone: 'الهاتف',
+    fieldQq: 'QQ',
+    fieldRemark: 'ملاحظة',
+    save: 'حفظ',
+    updateSuccess: 'تم تحديث الملف',
+    emailInvalid: 'صيغة البريد غير صالحة',
+    passwordDesc: 'يُنصح بتغيير كلمة المرور بانتظام.',
+    currentPassword: 'كلمة المرور الحالية',
+    currentPasswordPlaceholder: 'أدخل كلمة المرور الحالية',
+    currentPasswordRequired: 'كلمة المرور الحالية مطلوبة',
+    newPassword: 'كلمة المرور الجديدة',
+    newPasswordPlaceholder: 'أدخل كلمة المرور الجديدة',
+    newPasswordRequired: 'كلمة المرور الجديدة مطلوبة',
+    confirmPassword: 'تأكيد كلمة المرور',
+    confirmPasswordPlaceholder: 'أعد إدخال كلمة المرور',
+    confirmPasswordRequired: 'يرجى تأكيد كلمة المرور',
+    confirmPasswordNotMatch: 'كلمتا المرور غير متطابقتين',
+    passwordChangeSuccess: 'تم تغيير كلمة المرور',
+    deleteAccount: 'حذف الحساب',
+    deleteAccountTitle: 'حذف الحساب',
+    deleteAccountWarning: 'حذف الحساب عملية لا رجعة فيها وقد تفقد بياناتك. إذا كنت متأكدًا، أكد أدناه؛ وإلا اضغط إلغاء.',
+    deleteAccountConfirm: 'تأكيد الحذف',
+    deleteAccountNotSupported: 'حذف الحساب غير متاح حاليًا. تواصل مع المسؤول أو تابع التحديثات لاحقًا.'
   },
   blog: {
     preview: 'معاينة',
@@ -99,6 +145,42 @@ export default {
     listTotal: '{n} عنصر',
     statusLabelDraft: 'مسودة',
     statusLabelPublished: 'منشور'
+  },
+  aboutPage: {
+    pageLead: 'حول الموقع',
+    siteTitle: 'ما هو هذا الموقع',
+    siteBody:
+      'مساحة شخصية لإدارة المحتوى والكتابة—زاوية هادئة بعيدًا عن الخوارزميات. الهدف تدوين طويل الأمد وملاحظات تقنية وأرشيف يمكن تتبعه.',
+    directionTitle: 'اتجاه المحتوى',
+    directionEssay: 'مقالات وتأملات',
+    directionTech: 'ملاحظات تقنية وسجلات أخطاء',
+    directionWorks: 'أعمال وتصميم مختار',
+    directionLife: 'لقطات حياة خفيفة (سفر، قراءة، يومي)',
+    buildTitle: 'إفصاح معلومات إنشاء الموقع',
+    buildStack: 'الواجهة',
+    buildStackValue: 'Vue 3 و TypeScript و Vite و Naive UI وغيرها (الاعتماديات الفعلية حسب المستودع).',
+    buildTheme: 'السمة والواجهة',
+    buildThemeValue: 'يتبع سمة النظام أو السمة داخل التطبيق؛ وضوح القراءة وواجهة إدارة سهلة.',
+    buildHosting: 'النشر والخادم',
+    buildHostingValue: 'خادم سحابي عادي وبسيط التكلفة.',
+    buildSince: 'تاريخ إنشاء الموقع',
+    buildSinceValue: '2021-04-05',
+    buildPhilosophy: 'فلسفة التحديث',
+    buildPhilosophyValue:
+      'خطوات صغيرة قابلة للتراجع؛ القراءة والصيانة أولًا؛ تدوين الأفكار عند الحاجة دون ضغط النشر اليومي.',
+    contactTitle: 'التواصل',
+    contactIntro: 'لا معلومات عامة إضافية حاليًا.',
+    contactEmail: 'البريد',
+    contactGithub: 'GitHub',
+    contactWechat: 'WeChat / هاتف',
+    contactQq: 'QQ',
+    contactNone: 'لا معلومات عامة إضافية حاليًا.',
+    legalTitle: 'البيان والامتثال',
+    legalBody:
+      'الموقع شخصي وغير تجاري، للمشاركة والأرشفة المعرفية. النصوص والصور ومقاطع الكود لأصحابها أو المصادر المذكورة. في حال وجود انتهاك أو خلاف، يُرجى التواصل عبر وسائل الاتصال المعروضة وسأراجع الأمر فورًا.',
+    historyTitle: 'المسار والأرشيف',
+    historyBody: 'تُسجَّل إعادة تصميم الموقع والمحطات المهمة زمنيًا للمراجعة والأرشفة.',
+    historyEmpty: 'لا سجلات مسار بعد.'
   },
   dashboard: {
     cpu: {

@@ -15,6 +15,7 @@ class RequestUrl {
   static readonly register: string = '/api/auth/register';
 
   /** 4.3 Users */
+  static readonly userMe: string = '/api/users/me';
   static readonly userUpdate: string = '/api/users/update';
   static readonly userPassword: string = '/api/users/password';
   static readonly userPermissions: string = '/api/users/permissions';

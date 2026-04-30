@@ -11,6 +11,14 @@ interface ImportMetaEnv {
   readonly VITE_OPEN: boolean; // 是否打开浏览器
   readonly VITE_REPORT: boolean; // 是否生成打包分析文件
   readonly VITE_VERSION: string; // 版本号
+  /** 关于页：邮箱（会出现在前端打包产物中） */
+  readonly VITE_ABOUT_EMAIL: string;
+  /** 关于页：GitHub 主页或仓库完整 URL */
+  readonly VITE_ABOUT_GITHUB: string;
+  /** 关于页：微信号、公众号名或手机号等 */
+  readonly VITE_ABOUT_WECHAT: string;
+  /** 关于页：QQ 号（仅展示；可选跳转临时会话链接） */
+  readonly VITE_ABOUT_QQ: string;
 }
 
 interface ImportMeta {

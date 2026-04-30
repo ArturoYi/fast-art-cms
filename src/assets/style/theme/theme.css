@@ -2,6 +2,8 @@
  * 主题颜色变量定义
  * 注意：这些 CSS 变量在 uno.config.ts 中被引用为 UnoCSS 颜色类
  * 如：bg-primary, text-primary-hover 等
+ *
+ * 扩展表面（品牌联系色等）见同目录 brand-contact.css
  */
 
 /* 亮色主题变量 (默认) */
